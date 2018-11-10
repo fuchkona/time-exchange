@@ -1,0 +1,41 @@
+@import '../base.scss';
+
+.login-screen {
+  background: url('../static/time-exchange-background.jpg');
+  min-height: 100vh;
+  min-width: 320px;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .login-screen__logo {
+    display: flex;
+    justify-content: center;
+
+    img {
+      height: 150px;
+    }
+  }
+
+  .login-screen__buttons {
+    display: flex;
+    justify-content: center;
+  }
+
+  .login-screen__buttons_login {
+    background: $blue;
+  }
+
+  .login-screen__buttons_register {
+    background: $orange;
+  }
+
+  .login-screen__buttons_login:hover {
+    background: lighten($blue, 10%);
+  }
+
+  .login-screen__buttons_register:hover {
+    background: lighten($orange, 10%);
+  }
+}
