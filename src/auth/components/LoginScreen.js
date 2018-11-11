@@ -7,7 +7,7 @@ import {
 } from "reactstrap";
 
 import './LoginScreen.scss';
-const logo = require('../static/time-exchange-logo.png');
+const logo = require('../../static/time-exchange-logo.png');
 
 class LoginScreen extends Component {
   render() {
@@ -24,8 +24,8 @@ class LoginScreen extends Component {
           <Row>
             <Col md="12">
               <div className="login-screen__buttons">
-                <Button className="m-2 px-4 login-screen__buttons_login" size="lg">Login</Button>
-                <Button className="m-2 px-4 login-screen__buttons_register" size="lg">Register</Button>
+                <Button className="m-2 px-4 login-screen__buttons_login" size="lg">Вход</Button>
+                <Button className="m-2 px-4 login-screen__buttons_register" size="lg">Регистрация</Button>
               </div>
             </Col>
           </Row>
