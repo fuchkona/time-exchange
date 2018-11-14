@@ -9,7 +9,7 @@
   flex-direction: column;
   justify-content: center;
 
-  .login-screen__logo {
+  &__logo {
     display: flex;
     justify-content: center;
 
@@ -18,24 +18,32 @@
     }
   }
 
-  .login-screen__buttons {
+  &__buttons {
     display: flex;
     justify-content: center;
   }
 
-  .login-screen__buttons_login {
+  &__buttons_login {
     background: $blue;
   }
 
-  .login-screen__buttons_register {
+  &__buttons_register {
     background: $orange;
   }
 
-  .login-screen__buttons_login:hover {
+  &__buttons_login:hover {
     background: lighten($blue, 10%);
   }
 
-  .login-screen__buttons_register:hover {
+  &__buttons_register:hover {
     background: lighten($orange, 10%);
+  }
+
+  &__title-card {
+    background-color: $blue;
+  }
+
+  &__info-card {
+    background-color: lighten($blue, 10%);
   }
 }
