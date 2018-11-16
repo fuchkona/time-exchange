@@ -27,8 +27,18 @@
     background: $blue;
   }
 
+  &__buttons_login_inactive {
+    color: $grey;
+    font-style: italic;
+  }
+
   &__buttons_register {
     background: $orange;
+  }
+
+  &__buttons_register_inactive {
+    color: $grey;
+    font-style: italic;
   }
 
   &__buttons_login:hover {
