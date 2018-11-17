@@ -17,7 +17,7 @@ import {
 import './LoginScreen.scss';
 import Login from './LoginScreenModals/Login';
 import Register from './LoginScreenModals/Register';
-const logo = require('../../static/time-exchange-logo.png');
+const logo = require('../../../static/time-exchange-logo.png');
 
 class LoginScreen extends Component {
   constructor(props) {

@@ -1,7 +1,7 @@
-@import '../../base.scss';
+@import '../../../base.scss';
 
 .login-screen {
-  background: url('../../static/time-exchange-background.jpg');
+  background: url('../../../static/time-exchange-background.jpg');
   min-height: 100vh;
   min-width: 320px;
   background-position: center;
@@ -27,18 +27,8 @@
     background: $blue;
   }
 
-  &__buttons_login_inactive {
-    color: $grey;
-    font-style: italic;
-  }
-
   &__buttons_register {
     background: $orange;
-  }
-
-  &__buttons_register_inactive {
-    color: $grey;
-    font-style: italic;
   }
 
   &__buttons_login:hover {

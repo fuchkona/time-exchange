@@ -1,4 +1,9 @@
 import React, { Component } from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+} from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { applyMiddleware, createStore, compose } from 'redux';
 import { createEpicMiddleware } from 'redux-observable';
@@ -8,7 +13,8 @@ import './rxjs';
 
 import { rootReducer, rootEpic } from './redux';
 
-import LoginScreen from './auth/components/LoginScreen';
+import LoginScreen from './auth/components/LoginScreen/LoginScreen';
+import TasksScreen from './main/components/TasksScreen/TasksScreen';
 
 const epicMiddleware = createEpicMiddleware();
 
@@ -31,9 +37,12 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <div className="app">
-          <LoginScreen />
-        </div>
+        <Router>
+          <Switch>
+            <Route path="/login" component={LoginScreen} />
+            <Route path="/" component={TasksScreen} />
+          </Switch>
+        </Router>
       </Provider>
     );
   }
