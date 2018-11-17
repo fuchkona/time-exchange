@@ -58,30 +58,30 @@ export default class Login extends Component {
             <div className="login-form">
               <Form>
                 <FormGroup>
-                  <Label for="userLogin">Login</Label>
+                  <Label for="userLogin">Логин</Label>
                   <Input
-                    id="userLogin" type="text" name="userLogin" placeholder="Your login" value={this.state.userLogin}
+                    id="userLogin" type="text" name="userLogin" placeholder="Введите ваш логин" value={this.state.userLogin}
                     autoFocus
                     invalid={this.state.userLoginError}
                     onChange={this.handleChange}
                   />
-                  <FormFeedback>User name doesn't exist!</FormFeedback>
+                  <FormFeedback>Такого логина не существует!</FormFeedback>
                 </FormGroup>
                 <FormGroup>
-                  <Label for="userPassword">Password</Label>
+                  <Label for="userPassword">Пароль</Label>
                   <Input
-                    id="userPassword" type="password" name="userPassword" placeholder="Your password" value={this.state.userPassword}
+                    id="userPassword" type="password" name="userPassword" placeholder="Введите ваш пароль" value={this.state.userPassword}
                     invalid={this.state.userPasswordError}
                     onChange={this.handleChange}
                   />
-                  <FormFeedback>Wrong password!</FormFeedback>
+                  <FormFeedback>Неверный пароль!</FormFeedback>
                 </FormGroup>
               </Form>
             </div>
           </ModalBody>
           <ModalFooter>
-            <Button onClick={this.handleLogin}>Login</Button>
-            <Button onClick={this.props.handleToggle}>Cancel</Button>
+            <Button onClick={this.handleLogin}>Вход</Button>
+            <Button onClick={this.props.handleToggle}>Отмена</Button>
           </ModalFooter>
         </Modal>
       </div>
