@@ -17,6 +17,18 @@ const defaultSignInState = {
 
 function signIn(state = defaultSignInState, action) {
   switch (action.type) {
+    case 'AUTHENTICATE':
+      return {
+        ...state,
+        auth: true,
+      };
+
+    case 'SIGNOUT':
+      return {
+        ...state,
+        auth: false,
+      };
+      
     default:
       return state;
   }

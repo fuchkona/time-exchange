@@ -1,5 +1,3 @@
-import './Login.scss';
-
 import React, { Component } from 'react';
 import {
   Button,
@@ -14,6 +12,7 @@ import {
   FormFeedback,
 } from 'reactstrap';
 
+import './Login.scss';
 
 export default class Login extends Component {
   constructor(props) {
@@ -35,7 +34,7 @@ export default class Login extends Component {
         userLogin: '',
         userPassword: '',
       });
-      // редирект на Layout
+      this.props.handleLogin();
     } else {
       this.setState({ userLoginError: true, userPasswordError: true });
       setTimeout(() => this.setState({ userLoginError: false, userPasswordError: false }), 2000);

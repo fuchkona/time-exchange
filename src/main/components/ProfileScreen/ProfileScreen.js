@@ -10,19 +10,19 @@ import {
   CardText,
 } from "reactstrap";
 
-import './TasksScreen.scss';
+import './ProfileScreen.scss';
 const logo = require('../../../static/time-exchange-logo.png');
 
-class TasksScreen extends Component {
+class ProfileScreen extends Component {
   render() {
     return (
-      <div className="tasks-screen">
+      <div className="profile-screen">
         <Container fluid>
           <Row className="m-5">
             <Col md="12">
-              <div className="tasks-screen__logo">
+              <div className="profile-screen__logo">
                 <img src={logo} alt="logo" />
-                <h1>TASKS SCREEN</h1>
+                <h1>PROFILE SCREEN</h1>
               </div>
               <div>
                 <Link to="/">
@@ -50,4 +50,4 @@ class TasksScreen extends Component {
   }
 }
 
-export default TasksScreen;
+export default ProfileScreen;

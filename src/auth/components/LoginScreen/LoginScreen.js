@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import {
   Container,
   Row,
@@ -17,6 +18,7 @@ import {
 import './LoginScreen.scss';
 import Login from './LoginScreenModals/Login';
 import Register from './LoginScreenModals/Register';
+import { fakeAuth } from '../../../utils/fakeAuth';
 const logo = require('../../../static/time-exchange-logo.png');
 
 class LoginScreen extends Component {
@@ -25,7 +27,14 @@ class LoginScreen extends Component {
     this.state = {
       modalLoginOpen: false,
       modalRegisterOpen: false,
+      redirectToReferrer: false,
     };
+  }
+
+  handleLogin = () => {
+    fakeAuth.authenticate(() => {
+      this.setState({ redirectToReferrer: true });
+    });
   }
 
   handleLoginToggle = () => {
@@ -55,6 +64,11 @@ class LoginScreen extends Component {
   };
 
   render() {
+    let { from } = this.props.location.state || { from: { pathname: "/" } };
+    let { redirectToReferrer } = this.state;
+
+    if (redirectToReferrer) return <Redirect to={from} />;
+
     return (
       <div className="login-screen">
         <Container>
@@ -94,6 +108,7 @@ class LoginScreen extends Component {
                 <Login
                   open={this.state.modalLoginOpen}
                   handleToggle={this.handleLoginToggle}
+                  handleLogin={this.handleLogin}
                 />
                 <Register
                   open={this.state.modalRegisterOpen}

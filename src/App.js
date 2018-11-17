@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
   Route,
-  Switch,
 } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { applyMiddleware, createStore, compose } from 'redux';
@@ -12,9 +11,10 @@ import './App.scss';
 import './rxjs';
 
 import { rootReducer, rootEpic } from './redux';
-
+import { PrivateRoute } from './PrivateRoute';
 import LoginScreen from './auth/components/LoginScreen/LoginScreen';
 import TasksScreen from './main/components/TasksScreen/TasksScreen';
+import ProfileScreen from './main/components/ProfileScreen/ProfileScreen';
 
 const epicMiddleware = createEpicMiddleware();
 
@@ -38,10 +38,11 @@ class App extends Component {
     return (
       <Provider store={store}>
         <Router>
-          <Switch>
+          <React.Fragment>
+            <PrivateRoute path="/" exact component={TasksScreen} />
+            <PrivateRoute path="/profile" exact component={ProfileScreen} />
             <Route path="/login" component={LoginScreen} />
-            <Route path="/" component={TasksScreen} />
-          </Switch>
+          </React.Fragment>
         </Router>
       </Provider>
     );
