@@ -117,8 +117,8 @@ export function signOutFailure() {
 // Function for epic
 async function userAuth(username, password) {
   try {
-    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-    const url = 'back-exchange.herokuapp.com/api/site/login'
+    const proxyUrl = ''; // 'https://cors-anywhere.herokuapp.com/';
+    const url = 'https://back-exchange.herokuapp.com/api/site/login'; // 'back-exchange.herokuapp.com/api/site/login'
     const body = {
       username,
       password,
