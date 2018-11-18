@@ -14,7 +14,13 @@ import './TasksScreen.scss';
 const logo = require('../../../static/time-exchange-logo.png');
 
 class TasksScreen extends Component {
+  handleSignOut = () => {
+    this.props.signOut();
+  };
+
   render() {
+    const { token } = this.props.signIn;
+
     return (
       <div className="tasks-screen">
         <Container fluid>
@@ -23,6 +29,9 @@ class TasksScreen extends Component {
               <div className="tasks-screen__logo">
                 <img src={logo} alt="logo" />
                 <h1>TASKS SCREEN</h1>
+              </div>
+              <div>
+                <h2>Auth token: {token}</h2>
               </div>
               <div>
                 <Link to="/">
@@ -42,6 +51,13 @@ class TasksScreen extends Component {
                   </Button>
                 </Link>
               </div>
+              <Button
+                className="m-2 px-4"
+                size="lg"
+                onClick={this.handleSignOut}
+              >
+                SIGNOUT
+              </Button>
             </Col>
           </Row>
         </Container>

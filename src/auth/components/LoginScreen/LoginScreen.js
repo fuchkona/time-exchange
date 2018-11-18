@@ -24,17 +24,19 @@ const logo = require('../../../static/time-exchange-logo.png');
 class LoginScreen extends Component {
   constructor(props) {
     super(props);
+    console.log(props);
     this.state = {
       modalLoginOpen: false,
       modalRegisterOpen: false,
-      redirectToReferrer: false,
+      // redirectToReferrer: false,
     };
   }
 
-  handleLogin = () => {
-    fakeAuth.authenticate(() => {
-      this.setState({ redirectToReferrer: true });
-    });
+  handleLogin = (username, password) => {
+    // fakeAuth.authenticate(() => {
+    //   this.setState({ redirectToReferrer: true });
+    // });
+    this.props.verifyUsernamePassword(username, password);
   }
 
   handleLoginToggle = () => {
@@ -64,8 +66,9 @@ class LoginScreen extends Component {
   };
 
   render() {
+    console.log(this.props);
     let { from } = this.props.location.state || { from: { pathname: "/" } };
-    let { redirectToReferrer } = this.state;
+    let redirectToReferrer = this.props.signIn.auth;
 
     if (redirectToReferrer) return <Redirect to={from} />;
 

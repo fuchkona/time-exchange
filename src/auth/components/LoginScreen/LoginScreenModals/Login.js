@@ -27,18 +27,21 @@ export default class Login extends Component {
 
   handleLogin = () => {
     const { userLogin, userPassword } = this.state;
-    if (userLogin === 'user' && userPassword === '1234') {
-      this.setState({
-        userLoginError: false,
-        userPasswordError: false,
-        userLogin: '',
-        userPassword: '',
-      });
-      this.props.handleLogin();
-    } else {
-      this.setState({ userLoginError: true, userPasswordError: true });
-      setTimeout(() => this.setState({ userLoginError: false, userPasswordError: false }), 2000);
-    }
+    // НИЖЕ - Предварительная проверка на фронте
+    // if (userLogin === 'user' && userPassword === '1234') {
+    //   this.setState({
+    //     userLoginError: false,
+    //     userPasswordError: false,
+    //     userLogin: '',
+    //     userPassword: '',
+    //   });
+    //   this.props.handleLogin();
+    // } else {
+    //   this.setState({ userLoginError: true, userPasswordError: true });
+    //   setTimeout(() => this.setState({ userLoginError: false, userPasswordError: false }), 2000);
+    // }
+    // ЕСЛИ ВСЕ ОК - то вызываем метод для работы с беком
+    this.props.handleLogin(userLogin, userPassword);
   }
 
   handleChange = (event) => {
@@ -59,7 +62,7 @@ export default class Login extends Component {
                 <FormGroup>
                   <Label for="userLogin">Логин</Label>
                   <Input
-                    id="userLogin" type="text" name="userLogin" placeholder="Введите ваш логин" value={this.state.userLogin}
+                    id="userLogin" type="text" name="userLogin" placeholder="Введите ваш логин (testuser)" value={this.state.userLogin}
                     autoFocus
                     invalid={this.state.userLoginError}
                     onChange={this.handleChange}
@@ -69,7 +72,7 @@ export default class Login extends Component {
                 <FormGroup>
                   <Label for="userPassword">Пароль</Label>
                   <Input
-                    id="userPassword" type="password" name="userPassword" placeholder="Введите ваш пароль" value={this.state.userPassword}
+                    id="userPassword" type="password" name="userPassword" placeholder="Введите ваш пароль (test1234)" value={this.state.userPassword}
                     invalid={this.state.userPasswordError}
                     onChange={this.handleChange}
                   />

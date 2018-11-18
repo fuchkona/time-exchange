@@ -14,7 +14,13 @@ import './ProfileScreen.scss';
 const logo = require('../../../static/time-exchange-logo.png');
 
 class ProfileScreen extends Component {
+  handleSignOut = () => {
+    this.props.signOut();
+  };
+
   render() {
+    const { token } = this.props.signIn;
+
     return (
       <div className="profile-screen">
         <Container fluid>
@@ -23,6 +29,9 @@ class ProfileScreen extends Component {
               <div className="profile-screen__logo">
                 <img src={logo} alt="logo" />
                 <h1>PROFILE SCREEN</h1>
+              </div>
+              <div>
+                <h2>Auth token: {token}</h2>
               </div>
               <div>
                 <Link to="/">
@@ -42,6 +51,13 @@ class ProfileScreen extends Component {
                   </Button>
                 </Link>
               </div>
+              <Button
+                className="m-2 px-4"
+                size="lg"
+                onClick={this.handleSignOut}
+              >
+                SIGNOUT
+              </Button>
             </Col>
           </Row>
         </Container>
