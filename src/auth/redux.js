@@ -66,6 +66,9 @@ function signIn(state = defaultSignInState, action) {
         auth: false,
       };
 
+    case 'SIGNOUT_FAILURE':
+      return state;
+
     default:
       return state;
   }
@@ -96,9 +99,10 @@ export function verifyUsernamePasswordFailure(response) {
   };
 }
 
-export function signOut() {
+export function signOut(token) {
   return {
     type: SIGNOUT,
+    payload: { token },
   };
 }
 
@@ -142,6 +146,31 @@ async function userAuth(username, password) {
   }
 }
 
+async function userLogout(token) {
+  try {
+    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+    const url = 'back-exchange.herokuapp.com/api/site/logout';
+    const params = {
+      method: 'get',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-type': 'application/json',
+        'Authorization': 'Bearer ' + token,
+      },
+    };
+
+    console.log(params);
+
+    const blob = await fetch(proxyUrl + url, params);
+    const data = await blob.json();
+
+    console.log(data);
+    return data;
+  } catch (e) {
+    throw e;
+  }
+}
+
 // Epics
 function verifyUsernamePasswordEpic(action$) {
   console.log(action$);
@@ -171,7 +200,19 @@ function signOutEpic(action$) {
     .ofType(SIGNOUT)
     .pipe(
       mergeMap((payload) => {
-        return [signOutSuccess()];
+        console.log(payload);
+        return from(userLogout(payload.payload.token));
+      }),
+      map(response => {
+        console.log(response);
+        if (response.success) {
+          return signOutSuccess();
+        } else {
+          return signOutFailure(response);
+        }
+      }),
+      catchError(error => {
+        return of(signOutFailure(error));
       })
     )
 }
