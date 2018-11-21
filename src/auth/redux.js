@@ -14,6 +14,10 @@ export const VERIFY_USERNAME_PASSWORD = 'VERIFY_USERNAME_PASSWORD';
 export const VERIFY_USERNAME_PASSWORD_SUCCESS = 'VERIFY_USERNAME_PASSWORD_SUCCESS';
 export const VERIFY_USERNAME_PASSWORD_FAILURE = 'VERIFY_USERNAME_PASSWORD_FAILURE';
 
+export const REGISTER_NEWUSER = 'REGISTER_NEWUSER';
+export const REGISTER_NEWUSER_SUCCESS = 'REGISTER_NEWUSER_SUCCESS';
+export const REGISTER_NEWUSER_FAILURE = 'REGISTER_NEWUSER_FAILURE';
+
 export const SIGNOUT = 'SIGNOUT';
 export const SIGNOUT_SUCCESS = 'SIGNOUT_SUCCESS';
 export const SIGNOUT_FAILURE = 'SIGNOUT_FAILURE';
@@ -47,6 +51,29 @@ function signIn(state = defaultSignInState, action) {
       };
 
     case 'VERIFY_USERNAME_PASSWORD_FAILURE':
+      return {
+        ...state,
+        status: action.payload.status,
+        verifying: false,
+        auth: false,
+      };
+
+    case 'REGISTER_NEWUSER':
+      return {
+        ...state,
+        verifying: true,
+      };
+
+    case 'REGISTER_NEWUSER_SUCCESS':
+      console.log(action.payload);
+      return {
+        ...state,
+        token: action.payload.token,
+        verifying: false,
+        auth: true,
+      };
+
+    case 'REGISTER_NEWUSER_FAILURE':
       return {
         ...state,
         status: action.payload.status,
@@ -99,6 +126,27 @@ export function verifyUsernamePasswordFailure(response) {
   };
 }
 
+export function registerNewUser(fullname, username, password, email) {
+  return {
+    type: REGISTER_NEWUSER,
+    payload: { fullname, username, password, email },
+  };
+}
+
+export function registerNewUserSuccess(token) {
+  return {
+    type: REGISTER_NEWUSER_SUCCESS,
+    payload: { token },
+  };
+}
+
+export function registerNewUserFailure(response) {
+  return {
+    type: REGISTER_NEWUSER_FAILURE,
+    payload: { status: response },
+  };
+}
+
 export function signOut(token) {
   return {
     type: SIGNOUT,
@@ -135,6 +183,37 @@ async function userAuth(username, password) {
       },
       body: JSON.stringify(body),
     };
+
+    const blob = await fetch(proxyUrl + url, params);
+    const data = await blob.json();
+
+    console.log(data);
+    return data;
+  } catch (e) {
+    throw e;
+  }
+}
+
+async function userRegister(fullname, username, password, email) {
+  try {
+    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+    const url = 'back-exchange.herokuapp.com/api/site/signup';
+    const body = {
+      full_name: fullname,
+      username,
+      password,
+      email,
+    };
+    const params = {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    };
+
+    console.log(params);
 
     const blob = await fetch(proxyUrl + url, params);
     const data = await blob.json();
@@ -195,6 +274,29 @@ function verifyUsernamePasswordEpic(action$) {
     )
 }
 
+function registerNewUserEpic(action$) {
+  console.log(action$);
+  return action$
+    .ofType(REGISTER_NEWUSER)
+    .pipe(
+      mergeMap((payload) => {
+        console.log(payload);
+        return from(userRegister(payload.payload.fullname, payload.payload.username, payload.payload.password, payload.payload.email))
+      }),
+      map(response => {
+        console.log(response);
+        if (response.success) {
+          return registerNewUserSuccess(response.data.token);
+        } else {
+          return registerNewUserFailure(response);
+        }
+      }),
+      catchError(error => {
+        return of(registerNewUserFailure(error));
+      })
+    )
+}
+
 function signOutEpic(action$) {
   return action$
     .ofType(SIGNOUT)
@@ -219,5 +321,6 @@ function signOutEpic(action$) {
 
 export const epics = combineEpics(
   verifyUsernamePasswordEpic,
+  registerNewUserEpic,
   signOutEpic,
 );

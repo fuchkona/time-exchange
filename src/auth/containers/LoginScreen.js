@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import LoginScreen from '../components/LoginScreen/LoginScreen';
-import { verifyUsernamePassword } from '../redux';
+import { verifyUsernamePassword, registerNewUser } from '../redux';
 
 function mapStateToProps(state) {
   return {
@@ -14,6 +14,7 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
       verifyUsernamePassword,
+      registerNewUser,
     },
     dispatch,
   );
