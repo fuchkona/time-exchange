@@ -149,7 +149,7 @@ async function userAuth(username, password) {
 async function userLogout(token) {
   try {
     const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-    const url = 'back-exchange.herokuapp.com/api/site/login-test';
+    const url = 'back-exchange.herokuapp.com/api/site/logout';
     const params = {
       method: 'get',
       headers: {
