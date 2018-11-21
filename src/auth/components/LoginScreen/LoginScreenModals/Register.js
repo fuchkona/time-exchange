@@ -33,8 +33,8 @@ export default class Register extends Component {
   }
 
   handleRegister = () => {
-    const { userLogin, userPassword } = this.state;
-    if (userLogin === 'newuser' && userPassword === '4321') {
+    const { userFullname, userLogin, userPassword, userPasswordCheck, userEmail } = this.state;
+    if (userFullname && userLogin && userPassword && userPassword === userPasswordCheck && userEmail ) {
       this.setState({
         userFullnameError: false,
         userLoginError: false,
@@ -48,12 +48,20 @@ export default class Register extends Component {
         userEmail: '',
       });
       // редирект на Layout
+      this.props.handleRegister(userFullname, userLogin, userPassword, userEmail);
     } else {
-      this.setState({ userLoginError: true, userPasswordError: true });
+      this.setState({
+        userFullnameError: true,
+        userLoginError: true,
+        userPasswordError: true,
+        userPasswordCheckError: true,
+        userEmailError: true,
+      });
       setTimeout(() => this.setState({
         userFullnameError: false,
         userLoginError: false,
         userPasswordError: false,
+        userPasswordCheckError: false,
         userEmailError: false,
       }), 2000);
     }
