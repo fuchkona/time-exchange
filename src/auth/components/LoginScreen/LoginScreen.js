@@ -39,6 +39,13 @@ class LoginScreen extends Component {
     this.props.verifyUsernamePassword(username, password);
   }
 
+  handleRegister = (fullname, username, password, email) => {
+    // fakeAuth.authenticate(() => {
+    //   this.setState({ redirectToReferrer: true });
+    // });
+    this.props.registerNewUser(fullname, username, password, email);
+  }
+
   handleLoginToggle = () => {
     if (this.state.modalRegisterOpen) {
       this.setState({
@@ -116,6 +123,7 @@ class LoginScreen extends Component {
                 <Register
                   open={this.state.modalRegisterOpen}
                   handleToggle={this.handleRegisterToggle}
+                  handleRegister={this.handleRegister}
                 />
               </div>
               <div className="login-screen__buttons">

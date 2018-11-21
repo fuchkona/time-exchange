@@ -15,7 +15,7 @@ const logo = require('../../../static/time-exchange-logo.png');
 
 class TasksScreen extends Component {
   handleSignOut = () => {
-    this.props.signOut();
+    this.props.signOut(this.props.signIn.token);
   };
 
   render() {
