@@ -18,6 +18,11 @@ class TasksScreen extends Component {
     this.props.signOut(this.props.signIn.token);
   };
 
+  componentDidMount() {
+    console.log('did mount');
+    this.props.fetchTasks(this.props.signIn.token);
+  }
+
   render() {
     const { token } = this.props.signIn;
 
