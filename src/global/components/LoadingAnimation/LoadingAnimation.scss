@@ -1,14 +1,22 @@
-@import '../../../base.scss';
+$translateStart: 25px;
+$translateEnd: 50px;
 
-body {
+$sideSize: 50px;
+
+.animation_holder{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  min-width: 200px;
+  margin: auto;
   perspective: 500px;
-
 }
 
 .cube3d {
   &__container, &__side{
-    width: 100px;
-    height: 100px;
+    width: $sideSize;
+    height: $sideSize;
   }
   &__container{
     animation: container-rotation 6s linear infinite;
@@ -19,10 +27,7 @@ body {
     justify-content: center;
     align-items: center;
     position: absolute;
-    border: 1px solid #000;
-    border-radius: 3%;
-    opacity: 0.7;
-    font-size: 18px;
+    border-radius: 50%;
     font-weight: bolder;
     background-image: url("../../../static/time-exchange-logo.png");
     background-size: contain;
@@ -47,55 +52,48 @@ body {
   }
 }
 
-.animation_holder{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 400px;
-}
-
 @keyframes container-rotation{
   100% {transform: rotateY(360deg) rotateZ(360deg); }
 }
 
 @keyframes pulse-left{
-  0% {transform: rotateY(90deg) translateZ(50px)}
-  33%{transform: rotateY(90deg) translateZ(100px)}
-  66%{transform: rotateY(90deg) translateZ(-100px)}
-  100% {transform: rotateY(90deg) translateZ(50px)}
+  0% {transform: rotateY(90deg) translateZ($translateStart)}
+  33%{transform: rotateY(90deg) translateZ($translateEnd)}
+  66%{transform: rotateY(90deg) translateZ(-$translateEnd)}
+  100% {transform: rotateY(90deg) translateZ($translateStart)}
 }
 
 @keyframes pulse-right{
-  0% {transform: rotateY(90deg) translateZ(-50px)}
-  33%{transform: rotateY(90deg) translateZ(-100px)}
-  66%{transform: rotateY(90deg) translateZ(100px)}
-  100% {transform: rotateY(90deg) translateZ(-50px)}
+  0% {transform: rotateY(90deg) translateZ(-$translateStart)}
+  33%{transform: rotateY(90deg) translateZ(-$translateEnd)}
+  66%{transform: rotateY(90deg) translateZ($translateEnd)}
+  100% {transform: rotateY(90deg) translateZ(-$translateStart)}
 }
 
 @keyframes pulse-bottom{
-  0% {transform:rotateX(90deg) translateZ(50px)}
-  33%{transform:rotateX(90deg) translateZ(100px)}
-  66%{transform:rotateX(90deg) translateZ(-100px)}
-  100% {transform:rotateX(90deg) translateZ(50px)}
+  0% {transform:rotateX(90deg) translateZ($translateStart)}
+  33%{transform:rotateX(90deg) translateZ($translateEnd)}
+  66%{transform:rotateX(90deg) translateZ(-$translateEnd)}
+  100% {transform:rotateX(90deg) translateZ($translateStart)}
 }
 
 @keyframes pulse-top{
-  0% {transform:rotateX(90deg) translateZ(-50px)}
-  33%{transform:rotateX(90deg) translateZ(-100px)}
-  66%{transform:rotateX(90deg) translateZ(100px)}
-  100% {transform:rotateX(90deg) translateZ(-50px)}
+  0% {transform:rotateX(90deg) translateZ(-$translateStart)}
+  33%{transform:rotateX(90deg) translateZ(-$translateEnd)}
+  66%{transform:rotateX(90deg) translateZ($translateEnd)}
+  100% {transform:rotateX(90deg) translateZ(-$translateStart)}
 }
 
 @keyframes pulse-front{
-  0% {transform:translateZ(50px)}
-  33%{transform:translateZ(100px)}
-  66%{transform:translateZ(-100px)}
-  100% {transform:translateZ(50px)}
+  0% {transform:translateZ($translateStart)}
+  33%{transform:translateZ($translateEnd)}
+  66%{transform:translateZ(-$translateEnd)}
+  100% {transform:translateZ($translateStart)}
 }
 
 @keyframes pulse-back{
-  0% {transform:translateZ(-50px)}
-  33%{transform:translateZ(-100px)}
-  66%{transform:translateZ(100px)}
-  100% {transform:translateZ(-50px)}
+  0% {transform:translateZ(-$translateStart)}
+  33%{transform:translateZ(-$translateEnd)}
+  66%{transform:translateZ($translateEnd)}
+  100% {transform:translateZ(-$translateStart)}
 }
