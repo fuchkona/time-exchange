@@ -11,6 +11,7 @@ import {
 } from "reactstrap";
 
 import './TasksScreen.scss';
+import LoadingAnimation from "../../../global/components/LoadingAnimation/LoadingAnimation";
 const logo = require('../../../static/time-exchange-logo.png');
 
 class TasksScreen extends Component {
@@ -59,6 +60,9 @@ class TasksScreen extends Component {
                 SIGNOUT
               </Button>
             </Col>
+          </Row>
+          <Row className="m-auto">
+            <LoadingAnimation/>
           </Row>
         </Container>
       </div>

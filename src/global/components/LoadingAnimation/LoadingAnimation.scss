@@ -1,0 +1,101 @@
+@import '../../../base.scss';
+
+body {
+  perspective: 500px;
+
+}
+
+.cube3d {
+  &__container, &__side{
+    width: 100px;
+    height: 100px;
+  }
+  &__container{
+    animation: container-rotation 6s linear infinite;
+    transform-style: preserve-3d;
+  }
+  &__side{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    border: 1px solid #000;
+    border-radius: 3%;
+    opacity: 0.7;
+    font-size: 18px;
+    font-weight: bolder;
+    background-image: url("../../../static/time-exchange-logo.png");
+    background-size: contain;
+  }
+  &__left{
+    animation: pulse-left 5s ease-in-out infinite;
+  }
+  &__right{
+    animation: pulse-right 5s ease-in-out infinite;
+  }
+  &__top{
+    animation: pulse-top 5s ease-in-out infinite;
+  }
+  &__bottom{
+    animation: pulse-bottom 5s ease-in-out infinite;
+  }
+  &__front{
+    animation: pulse-front 5s ease-in-out infinite;
+  }
+  &__back{
+    animation: pulse-back 5s ease-in-out infinite;
+  }
+}
+
+.animation_holder{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
+
+@keyframes container-rotation{
+  100% {transform: rotateY(360deg) rotateZ(360deg); }
+}
+
+@keyframes pulse-left{
+  0% {transform: rotateY(90deg) translateZ(50px)}
+  33%{transform: rotateY(90deg) translateZ(100px)}
+  66%{transform: rotateY(90deg) translateZ(-100px)}
+  100% {transform: rotateY(90deg) translateZ(50px)}
+}
+
+@keyframes pulse-right{
+  0% {transform: rotateY(90deg) translateZ(-50px)}
+  33%{transform: rotateY(90deg) translateZ(-100px)}
+  66%{transform: rotateY(90deg) translateZ(100px)}
+  100% {transform: rotateY(90deg) translateZ(-50px)}
+}
+
+@keyframes pulse-bottom{
+  0% {transform:rotateX(90deg) translateZ(50px)}
+  33%{transform:rotateX(90deg) translateZ(100px)}
+  66%{transform:rotateX(90deg) translateZ(-100px)}
+  100% {transform:rotateX(90deg) translateZ(50px)}
+}
+
+@keyframes pulse-top{
+  0% {transform:rotateX(90deg) translateZ(-50px)}
+  33%{transform:rotateX(90deg) translateZ(-100px)}
+  66%{transform:rotateX(90deg) translateZ(100px)}
+  100% {transform:rotateX(90deg) translateZ(-50px)}
+}
+
+@keyframes pulse-front{
+  0% {transform:translateZ(50px)}
+  33%{transform:translateZ(100px)}
+  66%{transform:translateZ(-100px)}
+  100% {transform:translateZ(50px)}
+}
+
+@keyframes pulse-back{
+  0% {transform:translateZ(-50px)}
+  33%{transform:translateZ(-100px)}
+  66%{transform:translateZ(100px)}
+  100% {transform:translateZ(-50px)}
+}
