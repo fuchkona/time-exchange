@@ -1,16 +1,24 @@
+@import '../../../base.scss';
+
 $translateStart: 25px;
 $translateEnd: 50px;
-
 $sideSize: 50px;
+
+$minWidthAnimationHolder: 200px;
+$minHeightAnimationHolder: 200px;
 
 .animation_holder{
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 200px;
-  min-width: 200px;
+  min-height: $minWidthAnimationHolder;
+  min-width: $minHeightAnimationHolder;
   margin: auto;
   perspective: 500px;
+  background-color: #ffffff;
+  border: 2px solid $blue;
+  border-radius: 5px;
+  opacity: .8;
 }
 
 .cube3d {
