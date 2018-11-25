@@ -1,0 +1,72 @@
+@import '../base.scss';
+
+.layout {
+  // background: url('../../../static/time-exchange-background.jpg');
+  min-height: 100vh;
+  min-width: 320px;
+  background-position: center;
+  // opacity: 0.3;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: relative;
+
+  &:after {
+    content: "";
+    background: url('../static/time-exchange-background.jpg');
+    background-position: center;
+    opacity: 0.3;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+  }
+
+  &__header {
+    background-color: lightblue;
+    // opacity: 0.3;
+  }
+
+  &__logo:hover, &__logo:active, &__logo:focus {
+    text-decoration: none;
+    color: $blue;
+  }
+
+  &__logo {
+    text-decoration: none;
+    color: $blue;
+    
+    &_details {
+      display: flex;
+      justify-content: flex-start;
+      
+      img {
+        height: 75px;
+      }
+  
+      div {
+        padding-top: 10px;
+        padding-left: 10px;
+        font-size: 35px;
+        font-weight: 600;
+        // text-decoration: none;
+      }
+    }
+  }
+
+  
+  
+
+  &__debug {
+    padding-top: 10px;
+
+    & > p {
+      font-size: 10px;
+      padding: 1px;
+      margin: 1px;
+    }
+  }
+    
+}

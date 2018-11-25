@@ -9,60 +9,62 @@ import {
   CardTitle,
   CardText,
 } from "reactstrap";
+import Pagination from "react-js-pagination";
 
+import Layout from '../../Layout';
+import BriefTask from '../BriefTask/BriefTask';
 import './TasksScreen.scss';
-import LoadingAnimation from "../../../global/components/LoadingAnimation/LoadingAnimation";
-const logo = require('../../../static/time-exchange-logo.png');
 
 class TasksScreen extends Component {
-  handleSignOut = () => {
-    this.props.signOut(this.props.signIn.token);
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      activePage: 1,
+    };
+  }
+
+  handlePageChange = (pageNumber) => {
+    console.log(`active page is ${pageNumber}`);
+    this.setState({ activePage: pageNumber });
+  }
+
+  componentDidMount() {
+    console.log('did mount');
+    this.props.fetchTasks(this.props.signIn.token);
+  }
 
   render() {
     const { token } = this.props.signIn;
+    const { tasks } = this.props.tasks;
+    const { totalTasks } = this.props.tasks;
+
+    console.log('component', tasks, totalTasks);
 
     return (
-      <div className="tasks-screen">
-        <Container fluid>
-          <Row className="m-5">
-            <Col md="12">
-              <div className="tasks-screen__logo">
-                <img src={logo} alt="logo" />
-                <h1>TASKS SCREEN</h1>
-              </div>
-              <div>
-                <h2>Auth token: {token}</h2>
-              </div>
-              <div>
-                <Link to="/">
-                  <Button
-                    className="m-2 px-4"
-                    size="lg"
-                  >
-                    Go to TASKS Screen
-                  </Button>
-                </Link>
-                <Link to="/profile">
-                  <Button
-                    className="m-2 px-4"
-                    size="lg"
-                  >
-                    Go to PROFILE Screen
-                  </Button>
-                </Link>
-              </div>
-              <Button
-                className="m-2 px-4"
-                size="lg"
-                onClick={this.handleSignOut}
-              >
-                SIGNOUT
-              </Button>
-            </Col>
-          </Row>
-        </Container>
-      </div>
+      <Layout
+        debugScreenName="Экран списка задач"
+        debugAuthToken={token}
+      >
+        <div className="tasks-screen">
+          <div className="tasks-screen__tasks">
+            {tasks.map((task) => <BriefTask key={task.id} {...task} />)}
+          </div>
+          <div className="tasks-screen__pagination">
+            <div className="tasks-screen__pagination_pages">
+              <Pagination
+                activePage={this.state.activePage}
+                totalItemsCount={totalTasks}
+                itemsCountPerPage={3}
+                pageRangeDisplayed={3}
+                onChange={this.handlePageChange}
+              />
+            </div>
+            <div className="tasks-screen__pagination_totals">
+              Показано задач: 3 из {totalTasks}
+            </div>
+          </div>
+        </div>
+      </Layout>
     );
   }
 }
