@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import {
   Container,
@@ -7,6 +9,7 @@ import {
   Button,
 } from "reactstrap";
 
+import { signOut } from '../auth/redux';
 import './Layout.scss';
 const logo = require('../static/time-exchange-logo.png');
 
@@ -17,7 +20,7 @@ class Layout extends Component {
   };
 
   handleSignOut = () => {
-    // this.props.signOut(this.props.signIn.token);
+    this.props.signOut(this.props.signIn.token);
   };
 
   render() {
@@ -72,4 +75,19 @@ class Layout extends Component {
   }
 }
 
-export default Layout;
+function mapStateToProps(state) {
+  return {
+    ...state.auth,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(
+    {
+      signOut,
+    },
+    dispatch,
+  );
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Layout);
