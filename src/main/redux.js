@@ -19,6 +19,7 @@ export const FETCH_TASKS_FAILURE = 'FETCH_TASKS_FAILURE';
 const defaultTasksState = {
   tasks: [],
   fetching: false,
+  totalTasks: 0,
 };
 
 function tasks(state = defaultTasksState, action) {
@@ -34,6 +35,7 @@ function tasks(state = defaultTasksState, action) {
       return {
         ...state,
         tasks: action.payload.tasks,
+        totalTasks: action.payload.totalTasks,
         fetching: false,
       };
 
@@ -59,10 +61,10 @@ export function fetchTasks(token) {
   };
 }
 
-export function fetchTasksSuccess(tasks) {
+export function fetchTasksSuccess(tasks, totalTasks) {
   return {
     type: FETCH_TASKS_SUCCESS,
-    payload: { tasks },
+    payload: { tasks, totalTasks },
   };
 }
 
@@ -77,7 +79,7 @@ export function fetchTasksFailure(response) {
 async function getAllTasks(token) {
   try {
     const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-    const url = 'back-exchange.herokuapp.com/api/tasks';
+    const url = 'back-exchange.herokuapp.com/api/tasks'; // ?page=1&per-page=1
     const params = {
       method: 'get',
       headers: {
@@ -90,6 +92,7 @@ async function getAllTasks(token) {
     const blob = await fetch(proxyUrl + url, params);
     const data = await blob.json();
 
+    data.totalTasks = blob.headers.get('X-Pagination-Total-Count');
     console.log(data);
     return data;
   } catch (e) {
@@ -111,7 +114,7 @@ function fetchTasksEpic(action$) {
       map(response => {
         console.log(response);
         if (response.success) {
-          return fetchTasksSuccess(response.data.tasks);
+          return fetchTasksSuccess(response.data, +response.totalTasks);
         } else {
           return fetchTasksFailure(response);
         }
