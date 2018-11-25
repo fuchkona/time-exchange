@@ -61,9 +61,6 @@ class TasksScreen extends Component {
               </Button>
             </Col>
           </Row>
-          <Row className="m-auto">
-            <LoadingAnimation/>
-          </Row>
         </Container>
       </div>
     );
