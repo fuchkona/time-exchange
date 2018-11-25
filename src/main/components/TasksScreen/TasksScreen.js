@@ -49,15 +49,17 @@ class TasksScreen extends Component {
           <div className="tasks-screen__tasks">
             {tasks.map((task) => <BriefTask key={task.id} {...task} />)}
           </div>
-          <div className="tasks_screen__pagination">
-            <Pagination
-              activePage={this.state.activePage}
-              totalItemsCount={totalTasks}
-              itemsCountPerPage={3}
-              pageRangeDisplayed={3}
-              onChange={this.handlePageChange}
-            />
-            <div>
+          <div className="tasks-screen__pagination">
+            <div className="tasks-screen__pagination_pages">
+              <Pagination
+                activePage={this.state.activePage}
+                totalItemsCount={totalTasks}
+                itemsCountPerPage={3}
+                pageRangeDisplayed={3}
+                onChange={this.handlePageChange}
+              />
+            </div>
+            <div className="tasks-screen__pagination_totals">
               Показано задач: 3 из {totalTasks}
             </div>
           </div>

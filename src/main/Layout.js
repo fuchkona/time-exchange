@@ -26,23 +26,26 @@ class Layout extends Component {
         <Container fluid>
           <Row className="layout__header m-0" justify="between">
             <Col md="3">
-              <div className="layout__logo">
-                <img src={logo} alt="logo" />
-                <div className="layout__logo_title">
-                  Time Exchange
+              <Link className="layout__logo" to="/">
+                <div className="layout__logo_details">
+                  <img src={logo} alt="logo" />
+                  <div>
+                    Time Exchange
                 </div>
-              </div>
+                </div>
+              </Link>
             </Col>
             <Col md="4">
             </Col>
             <Col md="2">
               <div className="layout__debug">
+                <p>Отладочная инфа</p>
                 <p>{this.props.debugScreenName}</p>
                 <p>{this.props.debugAuthToken}</p>
               </div>
             </Col>
             <Col md="3">
-              
+
               <Link to="/profile">
                 <Button
                   className="m-2 px-4"

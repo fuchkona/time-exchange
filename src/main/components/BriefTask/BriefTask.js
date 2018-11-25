@@ -8,6 +8,9 @@ import {
   Card,
   CardTitle,
   CardText,
+  CardBody,
+  CardHeader,
+  CardFooter,
 } from "reactstrap";
 
 import './BriefTask.scss';
@@ -18,14 +21,15 @@ class BriefTask extends Component {
     console.log('one task', task);
 
     return (
-        <div className="brief-task">
-          <div className="brief-task__header">
+      <div>
+        <Card className="brief-task m-2">
+          <CardHeader className="brief-task__header">
             <div>
               {task.title}
             </div>
             <div>
               <div>
-                Статус: {task.contract_time}
+                Статус: {(task.contract_time === null) ? 'Неясен' : task.contract_time}
               </div>
               <div>
                 Автор: {task.owner.full_name}
@@ -34,11 +38,14 @@ class BriefTask extends Component {
                 Исполнитель: {(task.worker === null) ? 'Не назначен' : task.worker.full_name}
               </div>
             </div>
-          </div>
-          <div className="brief-task__body">
-            {task.description}
-          </div>
-          <div className="brief-task__footer">
+          </CardHeader>
+
+          <CardBody className="brief-task__body">
+            <CardText>
+              {task.description}
+            </CardText>
+          </CardBody>
+          <CardFooter className="brief-task__footer">
             <div>
               <div>
                 Создана: {task.created_at}
@@ -48,12 +55,13 @@ class BriefTask extends Component {
               </div>
             </div>
             <div>
-              <Link to={`/task/${task.id}`}>
+              <Link to={`/tasks/${task.id}`}>
                 Перейти к задаче
               </Link>
             </div>
-          </div>
-        </div>
+          </CardFooter>
+        </Card>
+      </div>
     );
   }
 }

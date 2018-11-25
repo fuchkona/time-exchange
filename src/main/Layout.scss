@@ -29,27 +29,43 @@
     // opacity: 0.3;
   }
 
+  &__logo:hover, &__logo:active, &__logo:focus {
+    text-decoration: none;
+    color: $blue;
+  }
+
   &__logo {
-    display: flex;
-    justify-content: flex-start;
-
-    img {
-      height: 75px;
-    }
-
-    &_title {
-      padding-top: 10px;
-      padding-left: 10px;
-      font-size: 35px;
-      font-weight: 600;
+    text-decoration: none;
+    color: $blue;
+    
+    &_details {
+      display: flex;
+      justify-content: flex-start;
+      
+      img {
+        height: 75px;
+      }
+  
+      div {
+        padding-top: 10px;
+        padding-left: 10px;
+        font-size: 35px;
+        font-weight: 600;
+        // text-decoration: none;
+      }
     }
   }
 
+  
+  
+
   &__debug {
-    padding-top: 15px;
+    padding-top: 10px;
 
     & > p {
       font-size: 10px;
+      padding: 1px;
+      margin: 1px;
     }
   }
     
