@@ -17,6 +17,8 @@ import PrivateRoute from './PrivateRoute';
 import LoginScreen from './auth/containers/LoginScreen';
 import TasksScreen from './main/containers/TasksScreen';
 import ProfileScreen from './main/containers/ProfileScreen';
+import cookie from 'react-cookie';
+import { verifyUsernamePasswordSuccess } from './auth/redux';
 
 const epicMiddleware = createEpicMiddleware();
 
@@ -36,6 +38,14 @@ const store = createStore(
 epicMiddleware.run(rootEpic);
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    const cookieToken = cookie.load('time-exchange-token');
+    if (cookieToken) {
+      store.dispatch(verifyUsernamePasswordSuccess(cookieToken)); // не факт что верное решение
+    }
+  }
+
   render() {
     return (
       <Provider store={store}>
