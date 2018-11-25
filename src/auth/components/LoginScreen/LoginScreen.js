@@ -19,7 +19,7 @@ import './LoginScreen.scss';
 import Login from './LoginScreenModals/Login';
 import Register from './LoginScreenModals/Register';
 import { fakeAuth } from '../../../utils/fakeAuth';
-import LoadingAnimation from "../../../global/components/LoadingAnimation/LoadingAnimation";
+const logo = require('../../../static/time-exchange-logo.png');
 
 class LoginScreen extends Component {
   constructor(props) {
@@ -85,7 +85,7 @@ class LoginScreen extends Component {
           <Row className="m-5">
             <Col md="12">
               <div className="login-screen__logo">
-                <LoadingAnimation/>
+                <img src={logo} alt="logo" />
               </div>
             </Col>
           </Row>

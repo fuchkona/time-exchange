@@ -10,8 +10,8 @@ import {
   CardText,
 } from "reactstrap";
 
-import Layout from '../../Layout';
 import './ProfileScreen.scss';
+const logo = require('../../../static/time-exchange-logo.png');
 
 class ProfileScreen extends Component {
   handleSignOut = () => {
@@ -22,31 +22,46 @@ class ProfileScreen extends Component {
     const { token } = this.props.signIn;
 
     return (
-      <Layout
-        debugScreenName="Экран профиля пользователя"
-        debugAuthToken={token}
-      >
-        <div className="profile-screen">
-          <div>
-            <Link to="/">
+      <div className="profile-screen">
+        <Container fluid>
+          <Row className="m-5">
+            <Col md="12">
+              <div className="profile-screen__logo">
+                <img src={logo} alt="logo" />
+                <h1>PROFILE SCREEN</h1>
+              </div>
+              <div>
+                <h2>Auth token: {token}</h2>
+              </div>
+              <div>
+                <Link to="/">
+                  <Button
+                    className="m-2 px-4"
+                    size="lg"
+                  >
+                    Go to TASKS Screen
+                  </Button>
+                </Link>
+                <Link to="/profile">
+                  <Button
+                    className="m-2 px-4"
+                    size="lg"
+                  >
+                    Go to PROFILE Screen
+                  </Button>
+                </Link>
+              </div>
               <Button
                 className="m-2 px-4"
                 size="lg"
+                onClick={this.handleSignOut}
               >
-                Go to TASKS Screen
+                SIGNOUT
               </Button>
-            </Link>
-            <Link to="/profile">
-              <Button
-                className="m-2 px-4"
-                size="lg"
-              >
-                Go to PROFILE Screen
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </Layout>
+            </Col>
+          </Row>
+        </Container>
+      </div>
     );
   }
 }
