@@ -6,6 +6,7 @@ import {
   catchError,
 } from 'rxjs/operators';
 import { from, of } from 'rxjs';
+import cookie from 'react-cookie';
 
 
 // Actions
@@ -104,10 +105,10 @@ export const reducer = combineReducers({
   signIn,
 });
 
-export function verifyUsernamePassword(username, password) {
+export function verifyUsernamePassword(username, password, rememberMe = true) {   // TODO - передавать rememberMe из LoginScreen
   return {
     type: VERIFY_USERNAME_PASSWORD,
-    payload: { username, password },
+    payload: { username, password, rememberMe },
   };
 }
 
@@ -166,7 +167,7 @@ export function signOutFailure() {
 }
 
 // Function for epic
-async function userAuth(username, password) {
+async function userAuth(username, password, rememberMe) {
   try {
     const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
     const url = 'back-exchange.herokuapp.com/api/site/login';
@@ -185,6 +186,7 @@ async function userAuth(username, password) {
 
     const blob = await fetch(proxyUrl + url, params);
     const data = await blob.json();
+    data.rememberMe = rememberMe;
 
     console.log(data);
     return data;
@@ -257,11 +259,15 @@ function verifyUsernamePasswordEpic(action$) {
     .pipe(
       mergeMap((payload) => {
         console.log(payload);
-        return from(userAuth(payload.payload.username, payload.payload.password))
+        return from(userAuth(payload.payload.username, payload.payload.password, payload.payload.rememberMe))
       }),
       map(response => {
         console.log(response);
         if (response.success) {
+          console.log('from inside epic', response);
+          if (response.rememberMe) {
+            cookie.save('time-exchange-token', response.data.token, { path: '/', maxAge: 100 });
+          }
           return verifyUsernamePasswordSuccess(response.data.token);
         } else {
           return verifyUsernamePasswordFailure(response);
@@ -307,6 +313,7 @@ function signOutEpic(action$) {
       map(response => {
         console.log(response);
         if (response.success) {
+          cookie.remove('time-exchange-token');
           return signOutSuccess();
         } else {
           return signOutFailure(response);
