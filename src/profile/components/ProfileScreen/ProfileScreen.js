@@ -10,7 +10,7 @@ import {
   CardText,
 } from "reactstrap";
 
-import Layout from '../../Layout';
+import Layout from '../../../main/containers/Layout/Layout';
 import './ProfileScreen.scss';
 
 class ProfileScreen extends Component {

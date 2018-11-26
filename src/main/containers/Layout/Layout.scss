@@ -1,4 +1,4 @@
-@import '../base.scss';
+@import '../../../base.scss';
 
 .layout {
   // background: url('../../../static/time-exchange-background.jpg');
@@ -13,7 +13,7 @@
 
   &:after {
     content: "";
-    background: url('../static/time-exchange-background.jpg');
+    background: url('../../../static/time-exchange-background.jpg');
     background-position: center;
     opacity: 0.3;
     top: 0;

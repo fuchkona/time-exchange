@@ -11,7 +11,7 @@ import {
 } from "reactstrap";
 import Pagination from "react-js-pagination";
 
-import Layout from '../../Layout';
+import Layout from '../../containers/Layout/Layout';
 import BriefTask from '../BriefTask/BriefTask';
 import './TasksScreen.scss';
 

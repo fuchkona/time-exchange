@@ -2,8 +2,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import TasksScreen from '../components/TasksScreen/TasksScreen';
-import { signOut } from '../../auth/redux';
-import { fetchTasks } from '../redux';
+import { signOut } from '../../auth/actions';
+import { fetchTasks } from '../actions';
 
 function mapStateToProps(state) {
   return {

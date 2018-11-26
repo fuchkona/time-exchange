@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import ProfileScreen from '../components/ProfileScreen/ProfileScreen';
-import { signOut } from '../../auth/redux';
+import { signOut } from '../../auth/actions';
 
 function mapStateToProps(state) {
   return {
