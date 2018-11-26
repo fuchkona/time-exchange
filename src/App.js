@@ -16,9 +16,9 @@ import { rootReducer, rootEpic } from './redux';
 import PrivateRoute from './PrivateRoute';
 import LoginScreen from './auth/containers/LoginScreen';
 import TasksScreen from './main/containers/TasksScreen';
-import ProfileScreen from './main/containers/ProfileScreen';
+import ProfileScreen from './profile/containers/ProfileScreen';
 import cookie from 'react-cookie';
-import { verifyUsernamePasswordSuccess } from './auth/redux';
+import { verifyUsernamePasswordSuccess } from './auth/actions';
 
 const epicMiddleware = createEpicMiddleware();
 

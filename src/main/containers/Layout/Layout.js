@@ -9,9 +9,9 @@ import {
   Button,
 } from "reactstrap";
 
-import { signOut } from '../auth/redux';
+import { signOut } from '../../../auth/actions';
 import './Layout.scss';
-const logo = require('../static/time-exchange-logo.png');
+const logo = require('../../../static/time-exchange-logo.png');
 
 class Layout extends Component {
   static defaultProps = {

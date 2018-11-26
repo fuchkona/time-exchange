@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import LoginScreen from '../components/LoginScreen/LoginScreen';
-import { verifyUsernamePassword, registerNewUser } from '../redux';
+import { verifyUsernamePassword, registerNewUser } from '../actions';
 
 function mapStateToProps(state) {
   return {
