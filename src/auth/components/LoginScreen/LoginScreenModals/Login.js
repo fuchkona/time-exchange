@@ -20,13 +20,15 @@ export default class Login extends Component {
     this.state = {
       userLogin: '',
       userPassword: '',
+      rememberMe: false,
       userLoginError: false,
       userPasswordError: false,
     };
   }
 
   handleLogin = () => {
-    const { userLogin, userPassword } = this.state;
+    const { userLogin, userPassword, rememberMe } = this.state;
+    console.log(rememberMe);
     // НИЖЕ - Предварительная проверка на фронте
     // if (userLogin === 'user' && userPassword === '1234') {
     //   this.setState({
@@ -41,12 +43,18 @@ export default class Login extends Component {
     //   setTimeout(() => this.setState({ userLoginError: false, userPasswordError: false }), 2000);
     // }
     // ЕСЛИ ВСЕ ОК - то вызываем метод для работы с беком
-    this.props.handleLogin(userLogin, userPassword);
+    this.props.handleLogin(userLogin, userPassword, rememberMe);
   }
 
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
+    });
+  }
+
+  handleChangeCheckbox = (event) => {
+    this.setState({
+      [event.target.name]: event.target.checked,
     });
   }
 
@@ -77,6 +85,12 @@ export default class Login extends Component {
                     onChange={this.handleChange}
                   />
                   <FormFeedback>Неверный пароль!</FormFeedback>
+                </FormGroup>
+                <FormGroup check>
+                  <Label check>
+                    <Input type="checkbox" id="rememberMe" name="rememberMe" onChange={this.handleChangeCheckbox} />
+                    Запомнить меня
+                  </Label>
                 </FormGroup>
               </Form>
             </div>

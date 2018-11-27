@@ -18,6 +18,10 @@ class ProfileScreen extends Component {
     this.props.signOut();
   };
 
+  componentDidMount() {
+    console.log(this.props.match.params);
+  }
+
   render() {
     const { token } = this.props.signIn;
 
