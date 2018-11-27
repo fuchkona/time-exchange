@@ -32,11 +32,11 @@ class LoginScreen extends Component {
     };
   }
 
-  handleLogin = (username, password) => {
+  handleLogin = (username, password, rememberMe) => {
     // fakeAuth.authenticate(() => {
     //   this.setState({ redirectToReferrer: true });
     // });
-    this.props.verifyUsernamePassword(username, password);
+    this.props.verifyUsernamePassword(username, password, rememberMe);
   }
 
   handleRegister = (fullname, username, password, email) => {

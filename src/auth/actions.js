@@ -13,7 +13,7 @@ export const SIGNOUT_SUCCESS = `${MODULE_NAME}/SIGNOUT_SUCCESS`;
 export const SIGNOUT_FAILURE = `${MODULE_NAME}/SIGNOUT_FAILURE`;
 
 
-export function verifyUsernamePassword(username, password, rememberMe = true) {   // TODO - передавать rememberMe из LoginScreen
+export function verifyUsernamePassword(username, password, rememberMe = false) {   // TODO - передавать rememberMe из LoginScreen
   return {
     type: VERIFY_USERNAME_PASSWORD,
     payload: { username, password, rememberMe },
