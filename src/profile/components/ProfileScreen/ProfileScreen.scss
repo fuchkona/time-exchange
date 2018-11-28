@@ -1,5 +1,10 @@
 @import '../../../base.scss';
 
 .profile-screen {
-  
+  padding: 20px;
+  width: 100%;
+
+  &__info {
+    background-color: white;
+  }
 }
