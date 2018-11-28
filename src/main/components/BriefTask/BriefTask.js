@@ -51,10 +51,10 @@ class BriefTask extends Component {
           <CardFooter className="brief-task__footer">
             <div  className="brief-task__footer_info">
               <div>
-                Создана: {moment(task.created_at).format('Do MMMM YYYY')}
+                Создана: {moment(task.created_at * 1000).format('Do MMMM YYYY')}
               </div>
               <div>
-                Дедлайн: {moment(task.deadline).format('Do MMMM YYYY')}
+                Дедлайн: {moment(task.deadline * 1000).format('Do MMMM YYYY')}
               </div>
             </div>
             <div>
