@@ -112,7 +112,7 @@ function verifyUsernamePasswordEpic(action$) {
         if (response.success) {
           console.log('from inside epic', response);
           if (response.rememberMe) {
-            cookie.save('time-exchange-token', response.data.token, { path: '/', maxAge: 100 });
+            cookie.save('time-exchange-token', response.data.token, { path: '/', maxAge: 600 });
           }
           return verifyUsernamePasswordSuccess(response.data.token);
         } else {
