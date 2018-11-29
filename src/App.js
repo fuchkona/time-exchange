@@ -16,6 +16,7 @@ import { rootReducer, rootEpic } from './redux';
 import PrivateRoute from './PrivateRoute';
 import LoginScreen from './auth/containers/LoginScreen';
 import TasksScreen from './main/containers/TasksScreen';
+import TaskScreen from './main/containers/TaskScreen';
 import ProfileScreen from './profile/containers/ProfileScreen';
 import cookie from 'react-cookie';
 import { verifyUsernamePasswordSuccess } from './auth/actions';
@@ -55,6 +56,7 @@ class App extends Component {
         <Router>
           <Switch>
             <PrivateRoute path="/" exact component={TasksScreen} />
+            <PrivateRoute path="/task/:id" exact component={TaskScreen} />
             <PrivateRoute path="/profile/:id" exact component={ProfileScreen} />
             <Route path="/login" component={LoginScreen} />
           </Switch>

@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  Container,
-  Row,
-  Col,
   Button,
-  Card,
-  CardTitle,
-  CardText,
 } from "reactstrap";
 import Pagination from "react-js-pagination";
 
