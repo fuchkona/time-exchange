@@ -13,10 +13,6 @@ import LoadingAnimation from "../../../global/components/LoadingAnimation/Loadin
 
 class ProfileScreen extends Component {
 
-  handleSignOut = () => {
-    this.props.signOut();
-  };
-
   componentDidMount() {
     this.props.fetchProfile(this.props.signIn.token);
   }
@@ -24,7 +20,7 @@ class ProfileScreen extends Component {
   render() {
     const { token } = this.props.signIn;
 
-    let profile = this.props.profile;
+    const profile = this.props.profile;
 
     //Типо портфолио, для теста
     // const tasks = [

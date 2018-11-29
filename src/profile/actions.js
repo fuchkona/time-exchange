@@ -31,23 +31,23 @@ export function fetchProfileFailure(response) {
 }
 
 // actions profile tasks
-export function fetchProfileTasks(token, workerId) {
-  return {
-    type: FETCH_TASKS,
-    payload: { token, workerId },
-  };
-}
-
-export function fetchProfileTasksSuccess(tasks, totalTasks) {
-  return {
-    type: FETCH_TASKS_SUCCESS,
-    payload: { tasks, totalTasks },
-  };
-}
-
-export function fetchProfileTasksFailure(response) {
-  return {
-    type: FETCH_TASKS_FAILURE,
-    payload: { status: response },
-  };
-}
+// export function fetchProfileTasks(token, workerId) {
+//   return {
+//     type: FETCH_TASKS,
+//     payload: { token, workerId },
+//   };
+// }
+//
+// export function fetchProfileTasksSuccess(tasks, totalTasks) {
+//   return {
+//     type: FETCH_TASKS_SUCCESS,
+//     payload: { tasks, totalTasks },
+//   };
+// }
+//
+// export function fetchProfileTasksFailure(response) {
+//   return {
+//     type: FETCH_TASKS_FAILURE,
+//     payload: { status: response },
+//   };
+// }
