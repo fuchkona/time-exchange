@@ -57,7 +57,7 @@ class App extends Component {
           <Switch>
             <PrivateRoute path="/" exact component={TasksScreen} />
             <PrivateRoute path="/task/:id" exact component={TaskScreen} />
-            <PrivateRoute path="/profile/:id" exact component={ProfileScreen} />
+            <PrivateRoute path="/profile" exact component={ProfileScreen} />
             <Route path="/login" component={LoginScreen} />
           </Switch>
         </Router>
