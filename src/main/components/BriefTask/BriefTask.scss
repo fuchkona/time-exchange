@@ -2,18 +2,27 @@
 
 .brief-task {
 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
   &__header {
+    background-color: lighten($blue, $amount: 60%);
     font-weight: 600;
     font-size: 20px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 
-    & > div {
+    &_info {
       display: flex;
       flex-direction: row;
       justify-content: flex-start;
+
+      & > div {
+        margin-left: 8px;
+        margin-right: 8px;
+      }
     }
+
   }
 
   &__footer {
@@ -22,10 +31,15 @@
     flex-direction: row;
     justify-content: space-between;
 
-    & > div {
+    &_info {
       display: flex;
       flex-direction: row;
       justify-content: flex-start;
+
+      & > div {
+        margin-left: 8px;
+        margin-right: 8px;
+      }
     }
   }
 

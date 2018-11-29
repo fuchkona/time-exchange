@@ -19,7 +19,10 @@ import TasksScreen from './main/containers/TasksScreen';
 import ProfileScreen from './profile/containers/ProfileScreen';
 import cookie from 'react-cookie';
 import { verifyUsernamePasswordSuccess } from './auth/actions';
+import moment from 'moment';
+import 'moment/locale/ru';
 
+moment().locale('ru');
 const epicMiddleware = createEpicMiddleware();
 
 const composeEnhancers = (
