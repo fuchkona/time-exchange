@@ -49,7 +49,7 @@ class Layout extends Component {
             </Col>
             <Col md="3">
 
-              <Link to="/profile/1">
+              <Link to="/profile">
                 <Button
                   className="m-2 px-4"
                   size="lg"
