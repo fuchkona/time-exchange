@@ -1,5 +1,3 @@
-import {FETCH_TASKS, FETCH_TASKS_FAILURE, FETCH_TASKS_SUCCESS} from "../main/actions";
-
 const MODULE_NAME = 'PROFILE';
 
 export const FETCH_PROFILE = `${MODULE_NAME}/FETCH_PROFILE`;
