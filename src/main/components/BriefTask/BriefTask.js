@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  Container,
-  Row,
-  Col,
-  Button,
   Card,
-  CardTitle,
   CardText,
   CardBody,
   CardHeader,
@@ -58,7 +53,7 @@ class BriefTask extends Component {
               </div>
             </div>
             <div>
-              <Link to={`/tasks/${task.id}`}>
+              <Link to={`/task/${task.id}`}>
                 Перейти к задаче
               </Link>
             </div>

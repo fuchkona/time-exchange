@@ -8,17 +8,11 @@ import {
   Card,
   CardTitle,
   CardText,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  FormFeedback,
 } from "reactstrap";
 
 import './LoginScreen.scss';
 import Login from './LoginScreenModals/Login';
 import Register from './LoginScreenModals/Register';
-import { fakeAuth } from '../../../utils/fakeAuth';
 import LoadingAnimation from "../../../global/components/LoadingAnimation/LoadingAnimation";
 
 class LoginScreen extends Component {
