@@ -12,7 +12,6 @@ import {
 
 // Function for epics
 async function getProfile(token) {
-  console.log('getProfile')
   try {
     const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
     const url = 'back-exchange.herokuapp.com/api/user/profile?expand=time,status,created_at';
@@ -41,7 +40,7 @@ async function getAllProfileTasks(token, workerId, page = null, perPage = null) 
     let url = 'back-exchange.herokuapp.com/api/task/by-worker?worker_id=' + workerId;
 
     if(page != null && perPage != null){
-      url = url + '?page=' + page + '&per-page=' + perPage;
+      url = url + '&page=' + page + '&per-page=' + perPage;
     }
     const params = {
       method: 'get',

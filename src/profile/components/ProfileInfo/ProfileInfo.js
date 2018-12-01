@@ -34,7 +34,7 @@ class ProfileInfo extends Component {
             <ListGroupItem>Баланс: {profile.time}</ListGroupItem>
             <ListGroupItem>Зарегистрирован: {moment(profile.created_at * 1000).format('Do MMMM YYYY')}</ListGroupItem>
           </ListGroup>
-          <FormGroup>
+          <FormGroup className="m-2">
             <Button className="profile-screen__button_update">Редактировать</Button>
           </FormGroup>
         </CardBody>

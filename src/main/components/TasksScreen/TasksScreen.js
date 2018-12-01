@@ -5,6 +5,7 @@ import Pagination from "react-js-pagination";
 import Layout from '../../containers/Layout/Layout';
 import BriefTask from '../BriefTask/BriefTask';
 import './TasksScreen.scss';
+import TEPagination from "../../../global/components/TEPagination/TEPagination";
 
 class TasksScreen extends Component {
   constructor(props) {
@@ -42,7 +43,7 @@ class TasksScreen extends Component {
           </div>
           <div className="tasks-screen__pagination">
             <div className="tasks-screen__pagination_pages">
-              <Pagination
+              <TEPagination
                 activePage={this.state.activePage}
                 totalItemsCount={totalTasks}
                 itemsCountPerPage={3}
