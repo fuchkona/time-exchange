@@ -4,10 +4,11 @@ export const FETCH_TASKS = `${MODULE_NAME}/FETCH_TASKS`;
 export const FETCH_TASKS_SUCCESS = `${MODULE_NAME}/FETCH_TASKS_SUCCESS`;
 export const FETCH_TASKS_FAILURE = `${MODULE_NAME}/FETCH_TASKS_FAILURE`;
 
-export function fetchTasks(token) {
+
+export function fetchTasks(token, taskId = null) {
   return {
     type: FETCH_TASKS,
-    payload: { token },
+    payload: { token, taskId },
   };
 }
 

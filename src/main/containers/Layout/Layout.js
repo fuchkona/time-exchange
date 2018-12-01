@@ -8,6 +8,8 @@ import {
   Col,
   Button,
 } from "reactstrap";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 
 import { signOut } from '../../../auth/actions';
 import './Layout.scss';
@@ -33,7 +35,7 @@ class Layout extends Component {
                 <div className="layout__logo_details">
                   <img src={logo} alt="logo" />
                   <div>
-                    Time Exchange
+                    Time&nbsp;Exchange
                 </div>
                 </div>
               </Link>
@@ -47,22 +49,29 @@ class Layout extends Component {
                 <p>{this.props.debugAuthToken}</p>
               </div>
             </Col>
-            <Col md="3">
-
+            <Col md="3 pt-2">
+              <Link to="/create">
+                <Button
+                  className="m-1 px-1"
+                  size="md"
+                >
+                  Создать задачу
+                </Button>
+              </Link>
               <Link to="/profile">
                 <Button
-                  className="m-2 px-4"
-                  size="lg"
+                  className="m-1 px-1"
+                  size="md"
                 >
                   Профиль
                 </Button>
               </Link>
               <Button
-                className="m-2 px-4"
-                size="lg"
+                className="m-1 px-1"
+                size="md"
                 onClick={this.handleSignOut}
               >
-                ВЫХОД
+                <FontAwesomeIcon icon={faSignOutAlt} />
               </Button>
             </Col>
           </Row>

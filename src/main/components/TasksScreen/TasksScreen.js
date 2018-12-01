@@ -7,6 +7,8 @@ import Pagination from "react-js-pagination";
 
 import Layout from '../../containers/Layout/Layout';
 import BriefTask from '../BriefTask/BriefTask';
+import Filter from '../Filter/Filter';
+import { TASKS_FILTER } from '../../../constants';
 import './TasksScreen.scss';
 import TEPagination from "../../../global/components/TEPagination/TEPagination";
 
@@ -15,12 +17,33 @@ class TasksScreen extends Component {
     super(props);
     this.state = {
       activePage: 1,
+      filter: TASKS_FILTER.all,
     };
+  }
+
+  applyFilter = (tasks, filter) => {
+    switch (filter) {
+      case TASKS_FILTER.noWorker:
+        return tasks.filter((task) => !task.worker);
+
+      case TASKS_FILTER.userCreator:
+        return tasks.filter((task) => task.owner.id === this.props.signIn.id);
+
+      case TASKS_FILTER.userWorker:
+        return tasks.filter((task) => !!task.worker && task.worker.id === this.props.signIn.id);
+      
+      default:
+        return tasks;
+    }
   }
 
   handlePageChange = (pageNumber) => {
     console.log(`active page is ${pageNumber}`);
     this.setState({ activePage: pageNumber });
+  }
+
+  handleFilterChange = (filter) => {
+    this.setState({ filter });
   }
 
   componentDidMount() {
@@ -31,7 +54,20 @@ class TasksScreen extends Component {
   render() {
     const { token } = this.props.signIn;
     const { tasks } = this.props.tasks;
-    const { totalTasks } = this.props.tasks;
+    const FilterComponent = (
+      <Filter
+        filterItems={[
+          { label: 'Задачи', value: TASKS_FILTER.noWorker },
+          { label: 'Мои задачи', value: TASKS_FILTER.userCreator },
+          { label: 'Исполняемые задачи', value: TASKS_FILTER.userWorker },
+        ]}
+        activeFilter={this.state.filter}
+        onChange={this.handleFilterChange}
+      />
+    );
+
+    const filteredTasks = this.applyFilter(tasks, this.state.filter);
+    const totalTasks = filteredTasks.length;
 
     console.log('component', tasks, totalTasks);
 
@@ -39,10 +75,11 @@ class TasksScreen extends Component {
       <Layout
         debugScreenName="Экран списка задач"
         debugAuthToken={token}
+        filter={FilterComponent}
       >
         <div className="tasks-screen">
           <div className="tasks-screen__tasks">
-            {tasks.map((task) => <BriefTask key={task.id} {...task} />)}
+            {filteredTasks.map((task) => <BriefTask key={task.id} {...task} />)}
           </div>
           <div className="tasks-screen__pagination">
             <div className="tasks-screen__pagination_pages">

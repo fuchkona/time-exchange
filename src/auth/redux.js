@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import cookie from 'react-cookie';
 import {
   VERIFY_USERNAME_PASSWORD, VERIFY_USERNAME_PASSWORD_SUCCESS, VERIFY_USERNAME_PASSWORD_FAILURE,
   REGISTER_NEWUSER, REGISTER_NEWUSER_SUCCESS, REGISTER_NEWUSER_FAILURE,
@@ -10,12 +11,14 @@ import {
 
 
 // Reducers
+const cookieSignIn = cookie.load('time-exchange-signin');
+
 const defaultSignInState = {
-  token: '',
-  id: 0,
+  id: cookieSignIn ? cookieSignIn.id : null,
+  token: cookieSignIn ? cookieSignIn.token : null,
   errors: {},
   verifying: false,
-  auth: false,
+  auth: cookieSignIn ? true : false,
 };
 
 function signIn(state = defaultSignInState, action) {
@@ -29,6 +32,7 @@ function signIn(state = defaultSignInState, action) {
     case VERIFY_USERNAME_PASSWORD_SUCCESS:
       return {
         ...state,
+        id: action.payload.id,
         token: action.payload.token,
         id: action.payload.id,
         verifying: false,
@@ -53,6 +57,7 @@ function signIn(state = defaultSignInState, action) {
       console.log(action.payload);
       return {
         ...state,
+        id: action.payload.id,
         token: action.payload.token,
         verifying: false,
         auth: true,
@@ -74,8 +79,8 @@ function signIn(state = defaultSignInState, action) {
     case SIGNOUT_SUCCESS:
       return {
         ...state,
-        token: '',
-        id: '',
+        id: null,
+        token: null,
         auth: false,
       };
 
