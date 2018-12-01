@@ -45,7 +45,8 @@ class App extends Component {
     super(props);
     const cookieToken = cookie.load('time-exchange-token');
     const cookieUserId = cookie.load('time-exchange-id');
-    if (cookieToken) {
+
+    if (cookieToken && cookieUserId) {
       store.dispatch(verifyUsernamePasswordSuccess(cookieToken, cookieUserId)); // не факт что верное решение
     }
   }
