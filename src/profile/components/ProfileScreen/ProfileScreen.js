@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
   Row,
-  Col,
+  Col, CardHeader, CardBody, Card,
 } from "reactstrap";
 
 import Layout from '../../../main/containers/Layout/Layout';
@@ -57,11 +57,14 @@ class ProfileScreen extends Component {
             {this.props.profile.fetching ? <LoadingAnimation/> : <ProfileInfo {...profile}/>}
           </Col>
             <Col md="8">
-              <div className="profile-screen__portfolio">
+              <Card className="profile-screen__portfolio m-2">
+                <CardHeader>Выполненные задачи</CardHeader>
+                <CardBody>
                 {this.props.profileTasks.fetching ? <LoadingAnimation/> : tasks.map((task) => <BriefTask key={task.id} {...task} />)}
-              </div>
-              <div className="tasks-screen__pagination">
-                <div className="tasks-screen__pagination_pages">
+                </CardBody>
+              </Card>
+              <div className="profile-screen__pagination">
+                <div className="profile-screen__pagination_pages">
                   {this.props.profileTasks.fetching ?
                     null
                     :
@@ -73,7 +76,8 @@ class ProfileScreen extends Component {
                       onChange={this.handlePageChange}
                     />}
                 </div>
-                <div className="tasks-screen__pagination_totals">
+                <div className="profile-screen__pagination_totals">
+
                   {totalTasks ? 'Показана страница: ' + this.state.activePage + ' из ' + Math.ceil(totalTasks / this.defaultTaskPerPage) : null}
                 </div>
               </div>
