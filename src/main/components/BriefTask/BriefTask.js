@@ -25,7 +25,7 @@ class BriefTask extends Component {
             </div>
             <div className="brief-task__header_info">
               <div>
-                Статус: {(task.contract_time === null) ? 'Неясен' : task.contract_time}
+                Статус: {(task.currentStatus === null) ? 'null (fixme)' : task.currentStatus}
               </div>
               <div>
                 Автор: {task.owner.full_name}
