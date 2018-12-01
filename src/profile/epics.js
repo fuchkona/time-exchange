@@ -7,12 +7,11 @@ import {
 import { from, of } from 'rxjs';
 import {
   FETCH_PROFILE,
-  fetchProfileSuccess, fetchProfileFailure,
+  fetchProfileSuccess, fetchProfileFailure, FETCH_PROFILE_TASKS, fetchProfileTasksSuccess, fetchProfileTasksFailure,
 } from './actions';
 
 // Function for epics
 async function getProfile(token) {
-  console.log('getProfile')
   try {
     const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
     const url = 'back-exchange.herokuapp.com/api/user/profile?expand=time,status,created_at';
@@ -38,10 +37,10 @@ async function getProfile(token) {
 async function getAllProfileTasks(token, workerId, page = null, perPage = null) {
   try {
     const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-    let url = 'back-exchange.herokuapp.com/api/tasks/';
+    let url = 'back-exchange.herokuapp.com/api/task/by-worker?worker_id=' + workerId;
 
     if(page != null && perPage != null){
-      url = url + '?page=' + page + '&per-page=' + perPage;
+      url = url + '&page=' + page + '&per-page=' + perPage;
     }
     const params = {
       method: 'get',
@@ -71,7 +70,6 @@ function fetchProfileEpic(action$) {
     .ofType(FETCH_PROFILE)
     .pipe(
       mergeMap((payload) => {
-        console.log('fetch profile', payload);
         return from(getProfile(payload.payload.token))
       }),
       map(response => {
@@ -88,7 +86,35 @@ function fetchProfileEpic(action$) {
     )
 }
 
+function fetchProfileTasksEpic(action$) {
+  console.log(action$);
+  return action$
+    .ofType(FETCH_PROFILE_TASKS)
+    .pipe(
+      mergeMap((payload) => {
+        return from(getAllProfileTasks(
+          payload.payload.token,
+          payload.payload.workerId,
+          payload.payload.page,
+          payload.payload.perPage
+        ))
+      }),
+      map(response => {
+        console.log(response);
+        if(response.success) {
+          return fetchProfileTasksSuccess(response.data, +response.totalTasks);
+        } else {
+          return fetchProfileFailure(response);
+        }
+      }),
+      catchError(error => {
+        return of(fetchProfileTasksFailure(error));
+      })
+    )
+}
+
 
 export const epics = combineEpics(
   fetchProfileEpic,
+  fetchProfileTasksEpic
 );

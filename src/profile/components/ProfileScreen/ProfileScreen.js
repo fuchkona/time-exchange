@@ -1,50 +1,49 @@
 import React, { Component } from 'react';
 import {
   Row,
-  Col,
+  Col, CardHeader, CardBody, Card,
 } from "reactstrap";
 
 import Layout from '../../../main/containers/Layout/Layout';
 import './ProfileScreen.scss';
 import ProfileInfo from "../ProfileInfo/ProfileInfo";
 import LoadingAnimation from "../../../global/components/LoadingAnimation/LoadingAnimation";
-
+import BriefTask from "../../../main/components/BriefTask/BriefTask";
+import TEPagination from "../../../global/components/TEPagination/TEPagination";
 
 
 class ProfileScreen extends Component {
 
+  constructor(props) {
+    super(props);
+
+    this.defaultPage = 1;
+    this.defaultTaskPerPage = 5;
+
+    this.state = {
+      activePage: this.defaultPage,
+    };
+  }
+
+  handlePageChange = (pageNumber) => {
+    this.setState({ activePage: pageNumber });
+    this.props.fetchProfileTasks(this.props.signIn.token, this.props.signIn.id, pageNumber, this.defaultTaskPerPage);
+  };
+
   componentDidMount() {
     this.props.fetchProfile(this.props.signIn.token);
+    this.props.fetchProfileTasks(this.props.signIn.token, this.props.signIn.id, this.state.activePage, this.defaultTaskPerPage);
   }
 
   render() {
+
     const { token } = this.props.signIn;
 
     const profile = this.props.profile;
 
-    //Типо портфолио, для теста
-    // const tasks = [
-    //   {
-    //   title: 'TEST 1',
-    //   contact_time: 666,
-    //   worker: profile,
-    //   description: 'testDesc 1',
-    //   created_at: 123123213,
-    //   deadline: 123123213,
-    //   id: 1
-    // },
-    //   {
-    //     title: 'TEST 2',
-    //     contact_time: 666,
-    //     worker: profile,
-    //     description: 'testDesc 2',
-    //     created_at: 123123213,
-    //     deadline: 123123213,
-    //     id: 2
-    //   }
-    // ];
+    const tasks = this.props.profileTasks.profileTasks;
 
-
+    const totalTasks = this.props.profileTasks.totalTasks;
 
     return (
       <Layout
@@ -58,8 +57,29 @@ class ProfileScreen extends Component {
             {this.props.profile.fetching ? <LoadingAnimation/> : <ProfileInfo {...profile}/>}
           </Col>
             <Col md="8">
-              <div className="profile-screen__portfolio">
-                Список задач
+              <Card className="profile-screen__portfolio m-2">
+                <CardHeader>Выполненные задачи</CardHeader>
+                <CardBody>
+                {this.props.profileTasks.fetching ? <LoadingAnimation/> : tasks.map((task) => <BriefTask key={task.id} {...task} />)}
+                </CardBody>
+              </Card>
+              <div className="profile-screen__pagination">
+                <div className="profile-screen__pagination_pages">
+                  {this.props.profileTasks.fetching ?
+                    null
+                    :
+                    <TEPagination
+                      activePage={this.state.activePage}
+                      totalItemsCount={totalTasks}
+                      itemsCountPerPage={this.defaultTaskPerPage}
+                      pageRangeDisplayed={3}
+                      onChange={this.handlePageChange}
+                    />}
+                </div>
+                <div className="profile-screen__pagination_totals">
+
+                  {totalTasks ? 'Показана страница: ' + this.state.activePage + ' из ' + Math.ceil(totalTasks / this.defaultTaskPerPage) : null}
+                </div>
               </div>
             </Col>
           </Row>
