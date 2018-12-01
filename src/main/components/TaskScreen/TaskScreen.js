@@ -46,7 +46,7 @@ class TaskScreen extends Component {
         debugAuthToken={token}
       >
         <div className="task-screen">
-          <Row>
+          <Row className="px-5">
               {
                 task ? (
                   <div className="task-screen__task_header mb-5">
@@ -87,8 +87,8 @@ class TaskScreen extends Component {
               </div>
             </Col>
           </Row>
-          <Row>
-            <div className="task-screen__task_footer mt-5">
+          <Row className="px-5">
+            <div className="task-screen__task_footer mt-5 mb-2">
               <Button
                 className="m-2 px-4 task-screen__button_take"
                 size="lg"
@@ -98,7 +98,7 @@ class TaskScreen extends Component {
             </Button>
               {
                 task ? (
-                  <div>
+                  <div className="mt-3">
                     <div>
                       Создана: {moment(task.created_at * 1000).format('Do MMMM YYYY')}
                     </div>
