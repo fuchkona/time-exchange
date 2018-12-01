@@ -17,6 +17,7 @@ import PrivateRoute from './PrivateRoute';
 import LoginScreen from './auth/containers/LoginScreen';
 import TasksScreen from './main/containers/TasksScreen';
 import TaskScreen from './main/containers/TaskScreen';
+import NewTaskScreen from './main/containers/NewTaskScreen';
 import ProfileScreen from './profile/containers/ProfileScreen';
 import cookie from 'react-cookie';
 import { verifyUsernamePasswordSuccess } from './auth/actions';
@@ -58,6 +59,7 @@ class App extends Component {
             <PrivateRoute path="/" exact component={TasksScreen} />
             <PrivateRoute path="/task/:id" exact component={TaskScreen} />
             <PrivateRoute path="/profile" exact component={ProfileScreen} />
+            <PrivateRoute path="/create" exact component={NewTaskScreen} />
             <Route path="/login" component={LoginScreen} />
           </Switch>
         </Router>
