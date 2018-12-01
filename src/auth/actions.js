@@ -20,11 +20,10 @@ export function verifyUsernamePassword(username, password, rememberMe = false) {
   };
 }
 
-export function verifyUsernamePasswordSuccess(token, id) {
-  console.log('veryfy success', id);
+export function verifyUsernamePasswordSuccess(id, token) {
   return {
     type: VERIFY_USERNAME_PASSWORD_SUCCESS,
-    payload: { token, id },
+    payload: { id, token },
   };
 }
 
@@ -42,7 +41,7 @@ export function registerNewUser(fullname, username, password, email) {
   };
 }
 
-export function registerNewUserSuccess(token) {
+export function registerNewUserSuccess(id, token) {
   return {
     type: REGISTER_NEWUSER_SUCCESS,
     payload: { token },
