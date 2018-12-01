@@ -8,13 +8,16 @@ import Layout from '../../../main/containers/Layout/Layout';
 import './ProfileScreen.scss';
 import ProfileInfo from "../ProfileInfo/ProfileInfo";
 import LoadingAnimation from "../../../global/components/LoadingAnimation/LoadingAnimation";
+import BriefTask from "../../../main/components/BriefTask/BriefTask";
 
 
 
 class ProfileScreen extends Component {
 
+
   componentDidMount() {
     this.props.fetchProfile(this.props.signIn.token);
+    this.props.fetchProfileTasks(this.props.signIn.token, this.props.profile.profile.id);
   }
 
   render() {
@@ -22,29 +25,10 @@ class ProfileScreen extends Component {
 
     const profile = this.props.profile;
 
-    //Типо портфолио, для теста
-    // const tasks = [
-    //   {
-    //   title: 'TEST 1',
-    //   contact_time: 666,
-    //   worker: profile,
-    //   description: 'testDesc 1',
-    //   created_at: 123123213,
-    //   deadline: 123123213,
-    //   id: 1
-    // },
-    //   {
-    //     title: 'TEST 2',
-    //     contact_time: 666,
-    //     worker: profile,
-    //     description: 'testDesc 2',
-    //     created_at: 123123213,
-    //     deadline: 123123213,
-    //     id: 2
-    //   }
-    // ];
+    const tasks = this.props.profileTasks.profileTasks;
 
 
+    console.log('render Prof', tasks);
 
     return (
       <Layout
@@ -59,7 +43,7 @@ class ProfileScreen extends Component {
           </Col>
             <Col md="8">
               <div className="profile-screen__portfolio">
-                Список задач
+                {this.props.profile.fetching ? <LoadingAnimation/> : tasks.map((task) => <BriefTask key={task.id} {...task} />)}
               </div>
             </Col>
           </Row>
