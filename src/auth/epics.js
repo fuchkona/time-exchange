@@ -99,6 +99,9 @@ async function userLogout(token) {
 
 // Epics
 function verifyUsernamePasswordEpic(action$) {
+
+  const cookieLifeTime = 600;
+
   console.log(action$);
   return action$
     .ofType(VERIFY_USERNAME_PASSWORD)
@@ -112,9 +115,10 @@ function verifyUsernamePasswordEpic(action$) {
         if (response.success) {
           console.log('from inside epic', response);
           if (response.rememberMe) {
-            cookie.save('time-exchange-token', response.data.token, { path: '/', maxAge: 600 });
+            cookie.save('time-exchange-token', response.data.token, { path: '/', maxAge: cookieLifeTime });
+            cookie.save('time-exchange-id', response.data.id, { path: '/', maxAge: cookieLifeTime });
           }
-          return verifyUsernamePasswordSuccess(response.data.token);
+          return verifyUsernamePasswordSuccess(response.data.token, response.data.id);
         } else {
           return verifyUsernamePasswordFailure(response);
         }
@@ -160,6 +164,7 @@ function signOutEpic(action$) {
         console.log(response);
         if (response.success) {
           cookie.remove('time-exchange-token');
+          cookie.remove('time-exchange-id');
           return signOutSuccess();
         } else {
           return signOutFailure(response);

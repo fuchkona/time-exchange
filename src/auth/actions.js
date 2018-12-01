@@ -20,10 +20,11 @@ export function verifyUsernamePassword(username, password, rememberMe = false) {
   };
 }
 
-export function verifyUsernamePasswordSuccess(token) {
+export function verifyUsernamePasswordSuccess(token, id) {
+  console.log('veryfy success', id);
   return {
     type: VERIFY_USERNAME_PASSWORD_SUCCESS,
-    payload: { token },
+    payload: { token, id },
   };
 }
 

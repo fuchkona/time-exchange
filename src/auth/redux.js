@@ -12,6 +12,7 @@ import {
 // Reducers
 const defaultSignInState = {
   token: '',
+  id: 0,
   errors: {},
   verifying: false,
   auth: false,
@@ -26,10 +27,10 @@ function signIn(state = defaultSignInState, action) {
       };
 
     case VERIFY_USERNAME_PASSWORD_SUCCESS:
-      console.log(action.payload);
       return {
         ...state,
         token: action.payload.token,
+        id: action.payload.id,
         verifying: false,
         auth: true,
       };
@@ -74,6 +75,7 @@ function signIn(state = defaultSignInState, action) {
       return {
         ...state,
         token: '',
+        id: '',
         auth: false,
       };
 

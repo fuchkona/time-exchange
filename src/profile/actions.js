@@ -30,24 +30,24 @@ export function fetchProfileFailure(response) {
   };
 }
 
-// actions profile tasks
-// export function fetchProfileTasks(token, workerId) {
-//   return {
-//     type: FETCH_TASKS,
-//     payload: { token, workerId },
-//   };
-// }
-//
-// export function fetchProfileTasksSuccess(tasks, totalTasks) {
-//   return {
-//     type: FETCH_TASKS_SUCCESS,
-//     payload: { tasks, totalTasks },
-//   };
-// }
-//
-// export function fetchProfileTasksFailure(response) {
-//   return {
-//     type: FETCH_TASKS_FAILURE,
-//     payload: { status: response },
-//   };
-// }
+//actions profile tasks
+export function fetchProfileTasks(token, workerId, page, perPage) {
+  return {
+    type: FETCH_PROFILE_TASKS,
+    payload: { token, workerId, page, perPage },
+  };
+}
+
+export function fetchProfileTasksSuccess(profileTasks, totalTasks) {
+  return {
+    type: FETCH_PROFILE_TASKS_SUCCESS,
+    payload: { profileTasks, totalTasks },
+  };
+}
+
+export function fetchProfileTasksFailure(response) {
+  return {
+    type: FETCH_PROFILE_TASKS_FAILURE,
+    payload: { status: response },
+  };
+}
