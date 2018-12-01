@@ -40,7 +40,8 @@ class Layout extends Component {
                 </div>
               </Link>
             </Col>
-            <Col md="4">
+            <Col className="layout__filter pt-4" md="4">
+              {this.props.filter}
             </Col>
             <Col md="2">
               <div className="layout__debug">
