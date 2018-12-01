@@ -7,6 +7,7 @@ import Pagination from "react-js-pagination";
 
 import Layout from '../../containers/Layout/Layout';
 import BriefTask from '../BriefTask/BriefTask';
+import Filter from '../Filter/Filter';
 import { TASKS_FILTER } from '../../../constants';
 import './TasksScreen.scss';
 
@@ -22,7 +23,7 @@ class TasksScreen extends Component {
   applyFilter = (tasks, filter) => {
     switch (filter) {
       case TASKS_FILTER.noWorker:
-        return tasks.filter((task) => !!task.worker);
+        return tasks.filter((task) => !task.worker);
 
       case TASKS_FILTER.userCreator:
         return tasks.filter((task) => task.owner.id === this.props.signIn.id);
@@ -40,15 +41,29 @@ class TasksScreen extends Component {
     this.setState({ activePage: pageNumber });
   }
 
+  handleFilterChange = (filter) => {
+    this.setState({ filter });
+  }
+
   componentDidMount() {
     console.log('did mount');
-    this.props.fetchTasks(this.props.signIn.token); // FIXME - если перегружаем, то token в стейт сбрасывается
+    this.props.fetchTasks(this.props.signIn.token);
   }
 
   render() {
     const { token } = this.props.signIn;
     const { tasks } = this.props.tasks;
-    // const { totalTasks } = this.props.tasks;
+    const FilterComponent = (
+      <Filter
+        filterItems={[
+          { label: 'Задачи', value: TASKS_FILTER.noWorker },
+          { label: 'Мои задачи', value: TASKS_FILTER.userCreator },
+          { label: 'Исполняемые задачи', value: TASKS_FILTER.userWorker },
+        ]}
+        activeFilter={this.state.filter}
+        onChange={this.handleFilterChange}
+      />
+    );
 
     const filteredTasks = this.applyFilter(tasks, this.state.filter);
     const totalTasks = filteredTasks.length;
@@ -59,6 +74,7 @@ class TasksScreen extends Component {
       <Layout
         debugScreenName="Экран списка задач"
         debugAuthToken={token}
+        filter={FilterComponent}
       >
         <div className="tasks-screen">
           <div className="tasks-screen__tasks">
