@@ -15,8 +15,6 @@ class BriefTask extends Component {
   render() {
     const task = this.props;
     console.log('one task', task);
-    moment().locale('nl');
-    console.log(moment().locale());
 
     return (
       <div>
