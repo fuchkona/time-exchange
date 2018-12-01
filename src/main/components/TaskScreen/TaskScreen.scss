@@ -5,9 +5,16 @@
   width: 100%;
 
   &__task_header {
+    font-weight: 600;
+    font-size: 20px;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+
+    & > div {
+      margin-left: 8px;
+      margin-right: 8px;
+    }
   }
 
   &__task_footer {

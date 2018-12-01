@@ -16,15 +16,13 @@ import Register from './LoginScreenModals/Register';
 import LoadingAnimation from "../../../global/components/LoadingAnimation/LoadingAnimation";
 
 class LoginScreen extends Component {
-  constructor(props) {
-    super(props);
-    console.log(props);
-    this.state = {
-      modalLoginOpen: false,
-      modalRegisterOpen: false,
-      // redirectToReferrer: false,
-    };
-  }
+
+  state = {
+    modalLoginOpen: false,
+    modalRegisterOpen: false,
+    // redirectToReferrer: false,
+  };
+
 
   handleLogin = (username, password, rememberMe) => {
     // fakeAuth.authenticate(() => {
@@ -79,7 +77,7 @@ class LoginScreen extends Component {
           <Row className="m-5">
             <Col md="12">
               <div className="login-screen__logo">
-                <LoadingAnimation/>
+                <LoadingAnimation />
               </div>
             </Col>
           </Row>

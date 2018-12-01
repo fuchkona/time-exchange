@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 
 import { signOut } from '../../../auth/actions';
+import CreateTask from './LayoutModals/CreateTask';
 import './Layout.scss';
 const logo = require('../../../static/time-exchange-logo.png');
 
@@ -19,6 +20,24 @@ class Layout extends Component {
   static defaultProps = {
     debugScreenName: '',
     debugAuthToken: '',
+  };
+
+  state = {
+    modalCreateTaskOpen: false,
+  };
+
+  handleCreateTask = (taskTitle, taskDescription, taskContractTime, taskDeadline) => {
+    console.log('create task click', taskTitle, taskDescription, taskContractTime, taskDeadline);
+    // fakeAuth.authenticate(() => {
+    //   this.setState({ redirectToReferrer: true });
+    // });
+    // this.props.verifyUsernamePassword(username, password, rememberMe);
+  }
+
+  handleCreateTaskToggle = () => {
+    this.setState({
+      modalCreateTaskOpen: !this.state.modalCreateTaskOpen,
+    });
   };
 
   handleSignOut = () => {
@@ -40,7 +59,8 @@ class Layout extends Component {
                 </div>
               </Link>
             </Col>
-            <Col md="4">
+            <Col className="layout__filter pt-4" md="4">
+              {this.props.filter}
             </Col>
             <Col md="2">
               <div className="layout__debug">
@@ -50,14 +70,20 @@ class Layout extends Component {
               </div>
             </Col>
             <Col md="3 pt-2">
-              <Link to="/create">
-                <Button
-                  className="m-1 px-1"
-                  size="md"
-                >
-                  Создать задачу
-                </Button>
-              </Link>
+              <div className="layout__create-task-form">
+                <CreateTask
+                  open={this.state.modalCreateTaskOpen}
+                  handleToggle={this.handleCreateTaskToggle}
+                  handleCreateTask={this.handleCreateTask}
+                />
+              </div>
+              <Button
+                className="m-1 px-1"
+                size="md"
+                onClick={this.handleCreateTaskToggle}
+              >
+                Создать задачу
+              </Button>
               <Link to="/profile">
                 <Button
                   className="m-1 px-1"

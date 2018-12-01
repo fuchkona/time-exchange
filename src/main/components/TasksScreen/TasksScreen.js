@@ -43,6 +43,7 @@ class TasksScreen extends Component {
   }
 
   handleFilterChange = (filter) => {
+    console.log(filter);
     this.setState({ filter });
   }
 
@@ -57,9 +58,10 @@ class TasksScreen extends Component {
     const FilterComponent = (
       <Filter
         filterItems={[
-          { label: 'Задачи', value: TASKS_FILTER.noWorker },
-          { label: 'Мои задачи', value: TASKS_FILTER.userCreator },
-          { label: 'Исполняемые задачи', value: TASKS_FILTER.userWorker },
+          { label: 'Все задачи', value: TASKS_FILTER.all },
+          { label: 'Без исполнителя', value: TASKS_FILTER.noWorker },
+          { label: 'Я - заказчик', value: TASKS_FILTER.userCreator },
+          { label: 'Я - исполнитель', value: TASKS_FILTER.userWorker },
         ]}
         activeFilter={this.state.filter}
         onChange={this.handleFilterChange}
