@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './ProfileInfo.scss';
 
 import {
   CardBody,
@@ -22,7 +23,7 @@ class ProfileInfo extends Component {
     console.log('Profile', profile);
 
     return (
-      <Card>
+      <Card className="m-2 profile-screen__card">
         <CardHeader className="profile-screen__header">
           <div>Пользователь: {profile.username}</div>
         </CardHeader>

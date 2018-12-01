@@ -17,18 +17,16 @@ class ProfileScreen extends Component {
 
   componentDidMount() {
     this.props.fetchProfile(this.props.signIn.token);
-    this.props.fetchProfileTasks(this.props.signIn.token, this.props.profile.profile.id);
+    this.props.fetchProfileTasks(this.props.signIn.token, this.props.signIn.id);
   }
 
   render() {
+
     const { token } = this.props.signIn;
 
     const profile = this.props.profile;
 
     const tasks = this.props.profileTasks.profileTasks;
-
-
-    console.log('render Prof', tasks);
 
     return (
       <Layout
@@ -43,7 +41,7 @@ class ProfileScreen extends Component {
           </Col>
             <Col md="8">
               <div className="profile-screen__portfolio">
-                {this.props.profile.fetching ? <LoadingAnimation/> : tasks.map((task) => <BriefTask key={task.id} {...task} />)}
+                {this.props.profileTasks.fetching ? <LoadingAnimation/> : tasks.map((task) => <BriefTask key={task.id} {...task} />)}
               </div>
             </Col>
           </Row>
