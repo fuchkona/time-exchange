@@ -112,9 +112,9 @@ function verifyUsernamePasswordEpic(action$) {
         if (response.success) {
           console.log('from inside epic', response);
           if (response.rememberMe) {
-            cookie.save('time-exchange-token', response.data.token, { path: '/', maxAge: 600 });
+            cookie.save('time-exchange-signin', { id: response.data.id, token: response.data.token }, { path: '/', maxAge: 600 });
           }
-          return verifyUsernamePasswordSuccess(response.data.token);
+          return verifyUsernamePasswordSuccess(response.data.id, response.data.token);
         } else {
           return verifyUsernamePasswordFailure(response);
         }
@@ -137,7 +137,7 @@ function registerNewUserEpic(action$) {
       map(response => {
         console.log(response);
         if (response.success) {
-          return registerNewUserSuccess(response.data.token);
+          return registerNewUserSuccess(response.data.id, response.data.token);
         } else {
           return registerNewUserFailure(response);
         }
