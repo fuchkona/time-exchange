@@ -47,10 +47,9 @@ class TaskScreen extends Component {
       >
         <div className="task-screen">
           <Row>
-            <div className="task-screen__task_header">
               {
                 task ? (
-                  <div>
+                  <div className="task-screen__task_header mb-5">
                     <div>
                       Статус: {(task.contract_time === null) ? 'Неясен' : task.contract_time}
                     </div>
@@ -62,35 +61,34 @@ class TaskScreen extends Component {
                     </div>
                   </div>
                 ) : (
-                    <div>
+                    <div className="task-screen__task_header mb-5">
                     </div>
                   )
               }
-            </div>
           </Row>
           <Row>
             <Col md="9">
-              <div className="task-screen__task">
+              <div className="task-screen__task m-2">
                 {task ? <Task {...task} /> : null}
               </div>
-              <div className="task-screen__comments">
-                <div className="task-screen__comments_title">Комментарии</div>
-                {comments ? <Comments {...comments} /> : null}
+              <div className="task-screen__comments m-2">
+                <div className="task-screen__comments_title mb-2">Комментарии</div>
+                {(comments && task) ? <Comments {...comments} /> : null}
               </div>
             </Col>
             <Col md="3">
-              <div className="task-screen__files">
-                <div className="task-screen__files_title">Файлы</div>
-                {files ? <Files {...files} /> : null}
+              <div className="task-screen__files m-2">
+                <div className="task-screen__files_title mb-2">Файлы</div>
+                {(files && task) ? <Files {...files} /> : null}
               </div>
-              <div className="task-screen__requests">
-                <div className="task-screen__requests_title">Заявки на исполнение</div>
-                {requests ? <Requests {...requests} /> : null}
+              <div className="task-screen__requests m-2">
+                <div className="task-screen__requests_title mb-2">Заявки на исполнение</div>
+                {(requests && task) ? <Requests {...requests} /> : null}
               </div>
             </Col>
           </Row>
           <Row>
-            <div className="task-screen__task_footer">
+            <div className="task-screen__task_footer mt-5">
               <Button
                 className="m-2 px-4 task-screen__button_take"
                 size="lg"
