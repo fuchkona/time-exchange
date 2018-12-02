@@ -4,3 +4,5 @@ export const TASKS_FILTER = {
   userCreator: 'USER_CREATOR',
   userWorker: 'USER_WORKER',
 };
+
+export const COOKIE_LIFETIME = 600;

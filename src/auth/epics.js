@@ -12,6 +12,7 @@ import {
   registerNewUserSuccess, registerNewUserFailure,
   signOutSuccess, signOutFailure,
 } from './actions';
+import { COOKIE_LIFETIME } from '../constants';
 
 
 // Function for epic
@@ -99,10 +100,6 @@ async function userLogout(token) {
 
 // Epics
 function verifyUsernamePasswordEpic(action$) {
-
-  const cookieLifeTime = 600;
-
-  console.log(action$);
   return action$
     .ofType(VERIFY_USERNAME_PASSWORD)
     .pipe(
@@ -111,11 +108,10 @@ function verifyUsernamePasswordEpic(action$) {
         return from(userAuth(payload.payload.username, payload.payload.password, payload.payload.rememberMe))
       }),
       map(response => {
-        console.log(response);
         if (response.success) {
           console.log('from inside epic', response);
           if (response.rememberMe) {
-            cookie.save('time-exchange-signin', { id: response.data.id, token: response.data.token }, { path: '/', maxAge: 600 });
+            cookie.save('time-exchange-signin', { id: response.data.id, token: response.data.token }, { path: '/', maxAge: COOKIE_LIFETIME });
           }
           return verifyUsernamePasswordSuccess(response.data.id, response.data.token);
         } else {
