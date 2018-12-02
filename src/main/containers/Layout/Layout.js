@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 
 import { signOut } from '../../../auth/actions';
+import { createTask } from '../../actions';
 import CreateTask from './LayoutModals/CreateTask';
 import './Layout.scss';
 const logo = require('../../../static/time-exchange-logo.png');
@@ -26,12 +27,17 @@ class Layout extends Component {
     modalCreateTaskOpen: false,
   };
 
-  handleCreateTask = (taskTitle, taskDescription, taskContractTime, taskDeadline) => {
-    console.log('create task click', taskTitle, taskDescription, taskContractTime, taskDeadline);
-    // fakeAuth.authenticate(() => {
-    //   this.setState({ redirectToReferrer: true });
-    // });
-    // this.props.verifyUsernamePassword(username, password, rememberMe);
+  handleCreateTask = (title, description, contractTime, deadline) => {
+    const taskDetails = {
+      title,
+      description,
+      contractTime,
+      deadline,
+      userId: this.props.signIn.id,
+    };
+
+    console.log('create task click', taskDetails);
+    this.props.createTask(this.props.signIn.token, taskDetails);
   }
 
   handleCreateTaskToggle = () => {
@@ -113,6 +119,7 @@ class Layout extends Component {
 function mapStateToProps(state) {
   return {
     ...state.auth,
+    ...state.tasks,
   };
 }
 
@@ -120,6 +127,7 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
       signOut,
+      createTask,
     },
     dispatch,
   );

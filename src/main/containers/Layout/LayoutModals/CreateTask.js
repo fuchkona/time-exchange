@@ -22,7 +22,7 @@ export default class CreateTask extends Component {
       taskTitle: '',
       taskDescription: '',
       taskContractTime: 0,
-      taskDeadline: '2018-12-01',
+      taskDeadline: '',
       taskTitleError: false,
       taskDescriptionError: false,
       taskContractTimeError: false,
@@ -52,7 +52,7 @@ export default class CreateTask extends Component {
     }
     // ЕСЛИ ВСЕ ОК - то вызываем метод для работы с беком
     if (fieldsAreValid) {
-      this.props.handleCreateTask(taskTitle, taskDescription, taskContractTime, taskDeadline);
+      this.props.handleCreateTask(taskTitle, taskDescription, taskContractTime, moment(taskDeadline).unix());
     } else {
       setTimeout(() => this.setState({
         taskTitleError: false,

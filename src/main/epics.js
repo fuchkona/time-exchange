@@ -6,9 +6,11 @@ import {
 } from 'rxjs/operators';
 import { from, of } from 'rxjs';
 import {
-  FETCH_TASKS,
+  FETCH_TASKS, CREATE_TASK,
   fetchTasksSuccess, fetchTasksFailure,
+  createTaskSuccess, createTaskFailure,
 } from './actions';
+import { faUserInjured } from '@fortawesome/free-solid-svg-icons';
 
 // Function for epics
 async function fetchGetTasks(url, token) {
@@ -31,7 +33,7 @@ async function getAllTasks(token) {
     const response = await fetchGetTasks(url, token);
     const responseJson = await response.json();
 
-    responseJson.totalTasks = response.headers.get('X-Pagination-Total-Count');
+    // responseJson.totalTasks = response.headers.get('X-Pagination-Total-Count');
     console.log('getAllTasks', responseJson);
     return responseJson;
   } catch (e) {
@@ -46,10 +48,41 @@ async function getTaskById(token, taskId) {
     const response = await fetchGetTasks(url, token);
     const responseJson = await response.json();
 
-    responseJson.totalTasks = 1;
+    // responseJson.totalTasks = 1;
     responseJson.data = new Array(responseJson.data);
     console.log('getTaskById', responseJson);
     return responseJson;
+  } catch (e) {
+    throw e;
+  }
+}
+
+async function createTask(token, taskDetails) {
+  try {
+    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+    const url = 'back-exchange.herokuapp.com/api/task/create';
+    const body = {
+      title: taskDetails.title,
+      description: taskDetails.description,
+      contract_time: taskDetails.contractTime,
+      deadline: taskDetails.deadline,
+      owner_id: taskDetails.userId,
+    };
+    const params = {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-type': 'application/json',
+        'Authorization': 'Bearer ' + token,
+      },
+      body: JSON.stringify(body),
+    };
+
+    const response = await fetch(proxyUrl + url, params);
+    const data = await response.json();
+
+    console.log('createTask', data);
+    return data;
   } catch (e) {
     throw e;
   }
@@ -74,7 +107,7 @@ function fetchTasksEpic(action$) {
       map(response => {
         console.log(response);
         if (response.success) {
-          return fetchTasksSuccess(response.data, +response.totalTasks);
+          return fetchTasksSuccess(response.data); // , +response.totalTasks
         } else {
           return fetchTasksFailure(response);
         }
@@ -85,7 +118,32 @@ function fetchTasksEpic(action$) {
     )
 }
 
+function createTaskEpic(action$) {
+  console.log(action$);
+  return action$
+    .ofType(CREATE_TASK)
+    .pipe(
+      mergeMap((payload) => {
+        const { token, taskDetails } = payload.payload;
+        console.log('create task', token, taskDetails);
+        return from(createTask(token, taskDetails));
+      }),
+      map(response => {
+        console.log(response);
+        if (response.success) {
+          return createTaskSuccess(response.data);
+        } else {
+          return createTaskFailure(response);
+        }
+      }),
+      catchError(error => {
+        return of(createTaskFailure(error));
+      })
+    )
+}
+
 
 export const epics = combineEpics(
   fetchTasksEpic,
+  createTaskEpic,
 );

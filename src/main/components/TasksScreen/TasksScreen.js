@@ -70,7 +70,7 @@ class TasksScreen extends Component {
 
     const filteredTasks = this.applyFilter(tasks, this.state.filter);
     const totalTasks = filteredTasks.length;
-
+    const sortedTasks = filteredTasks.sort((taskA, taskB) => taskB.created_at - taskA.created_at)
     console.log('component', tasks, totalTasks);
 
     return (
@@ -81,7 +81,7 @@ class TasksScreen extends Component {
       >
         <div className="tasks-screen">
           <div className="tasks-screen__tasks">
-            {filteredTasks.map((task) => <BriefTask key={task.id} {...task} />)}
+            {sortedTasks.map((task) => <BriefTask key={task.id} {...task} />)}
           </div>
           <div className="tasks-screen__pagination">
             <div className="tasks-screen__pagination_pages">

@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import {
   FETCH_TASKS, FETCH_TASKS_SUCCESS, FETCH_TASKS_FAILURE,
+  CREATE_TASK, CREATE_TASK_SUCCESS, CREATE_TASK_FAILURE,
 } from './actions';
 
 // Function for reducer
@@ -10,11 +11,11 @@ import {
 const defaultTasksState = {
   tasks: [],
   fetching: false,
-  totalTasks: 0,
+  addingTask: false,
 };
 
 function tasks(state = defaultTasksState, action) {
-  switch(action.type) {
+  switch (action.type) {
     case FETCH_TASKS:
       return {
         ...state,
@@ -34,6 +35,26 @@ function tasks(state = defaultTasksState, action) {
       return {
         ...state,
         fetching: false,
+      };
+
+    case CREATE_TASK:
+      return {
+        ...state,
+        addingTask: true,
+      };
+
+    case CREATE_TASK_SUCCESS:
+      console.log(action.payload);
+      return {
+        ...state,
+        tasks: state.tasks.concat(action.payload.task),
+        addingTask: false,
+      };
+
+    case CREATE_TASK_FAILURE:
+      return {
+        ...state,
+        addingTask: false,
       };
 
     default:
