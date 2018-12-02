@@ -92,26 +92,19 @@ async function createTask(token, taskDetails) {
 async function deleteTask(token, taskId) {
   try {
     const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-    const url = `back-exchange.herokuapp.com/api/task/delete`;
-    const body = {
-      task_id: taskId,
-    };
+    const url = `back-exchange.herokuapp.com/api/task/delete?task_id=${taskId}`;
     const params = {
       method: 'delete',
       headers: {
         'Content-type': 'application/json',
         'Authorization': 'Bearer ' + token,
       },
-      body: JSON.stringify(body),
     };
 
     const response = await fetch(proxyUrl + url, params);
     const data = await response.json();
 
     console.log('deleteTask', data);
-    if (data.success) {
-      data.data = taskId; // TOFIX - надо просить чтобы бек отдавал taskId прямо при success delete
-    }
     return data;
   } catch (e) {
     throw e;
@@ -185,7 +178,7 @@ function deleteTaskEpic(action$) {
       map(response => {
         console.log(response);
         if (response.success) {
-          return deleteTaskSuccess(response.data);
+          return deleteTaskSuccess(+response.data.id);
         } else {
           return deleteTaskFailure(response.data);
         }

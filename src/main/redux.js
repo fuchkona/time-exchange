@@ -77,7 +77,7 @@ function tasks(state = defaultTasksState, action) {
       };
 
     case DELETE_TASK_SUCCESS:
-      console.log(action.payload);
+      console.log('delete task success', action.payload);
       return {
         ...state,
         tasks: state.tasks.filter((task) => task.id !== action.payload.taskId),
