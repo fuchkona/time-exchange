@@ -47,6 +47,11 @@ class TasksScreen extends Component {
     this.setState({ filter });
   }
 
+  handleTaskDelete = (taskId) => {
+    console.log('удаляем', taskId, this.props.signIn.id);
+    this.props.deleteTask(this.props.signIn.token, taskId);
+  }
+
   componentDidMount() {
     console.log('did mount');
     this.props.fetchTasks(this.props.signIn.token);
@@ -81,7 +86,13 @@ class TasksScreen extends Component {
       >
         <div className="tasks-screen">
           <div className="tasks-screen__tasks">
-            {sortedTasks.map((task) => <BriefTask key={task.id} {...task} />)}
+            {sortedTasks.map((task) => (
+              <BriefTask
+                key={task.id}
+                {...task} // TOFIX onDelete - а что если уже есть Requests на этот таск? как проверить и не удалять?
+                onDelete={(task.owner.id === this.props.signIn.id && !task.worker) ? this.handleTaskDelete : null}
+              />
+            ))}
           </div>
           <div className="tasks-screen__pagination">
             <div className="tasks-screen__pagination_pages">

@@ -9,6 +9,10 @@ export const CREATE_TASK = `${MODULE_NAME}/CREATE_TASK`;
 export const CREATE_TASK_SUCCESS = `${MODULE_NAME}/CREATE_TASK_SUCCESS`;
 export const CREATE_TASK_FAILURE = `${MODULE_NAME}/CREATE_TASK_FAILURE`;
 
+export const DELETE_TASK = `${MODULE_NAME}/DELETE_TASK`;
+export const DELETE_TASK_SUCCESS = `${MODULE_NAME}/DELETE_TASK_SUCCESS`;
+export const DELETE_TASK_FAILURE = `${MODULE_NAME}/DELETE_TASK_FAILURE`;
+
 export function fetchTasks(token, taskId = null) {
   return {
     type: FETCH_TASKS,
@@ -53,6 +57,27 @@ export function createTaskSuccess(task) {
 export function createTaskFailure(response) {
   return {
     type: CREATE_TASK_FAILURE,
+    payload: { errors: response },
+  };
+}
+
+export function deleteTask(token, taskId) {
+  return {
+    type: DELETE_TASK,
+    payload: { token, taskId },
+  };
+}
+
+export function deleteTaskSuccess(taskId) {
+  return {
+    type: DELETE_TASK_SUCCESS,
+    payload: { taskId },
+  };
+}
+
+export function deleteTaskFailure(response) {
+  return {
+    type: DELETE_TASK_FAILURE,
     payload: { errors: response },
   };
 }

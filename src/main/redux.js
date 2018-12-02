@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import {
   FETCH_TASKS, FETCH_TASKS_SUCCESS, FETCH_TASKS_FAILURE,
   CREATE_TASK_MODAL_TOGGLE, CREATE_TASK, CREATE_TASK_SUCCESS, CREATE_TASK_FAILURE,
+  DELETE_TASK, DELETE_TASK_SUCCESS, DELETE_TASK_FAILURE,
 } from './actions';
 
 // Function for reducer
@@ -12,6 +13,7 @@ const defaultTasksState = {
   tasks: [],
   fetching: false,
   addingTask: false,
+  deletingTask: false,
   errors: null,
   modalCreateTaskOpen: false,
 };
@@ -65,6 +67,27 @@ function tasks(state = defaultTasksState, action) {
       return {
         ...state,
         addingTask: false,
+        errors: action.payload.errors,
+      };
+
+    case DELETE_TASK:
+      return {
+        ...state,
+        deletingTask: true,
+      };
+
+    case DELETE_TASK_SUCCESS:
+      console.log(action.payload);
+      return {
+        ...state,
+        tasks: state.tasks.filter((task) => task.id !== action.payload.taskId),
+        deletingTask: false,
+      };
+
+    case DELETE_TASK_FAILURE:
+      return {
+        ...state,
+        deletingTask: false,
         errors: action.payload.errors,
       };
 
