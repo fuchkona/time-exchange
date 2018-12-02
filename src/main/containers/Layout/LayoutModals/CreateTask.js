@@ -12,6 +12,7 @@ import {
   FormFeedback,
 } from 'reactstrap';
 import moment from 'moment';
+import Datetime from 'react-datetime';
 
 import './CreateTask.scss';
 
@@ -20,7 +21,7 @@ export default class CreateTask extends Component {
     taskTitle: '',
     taskDescription: '',
     taskContractTime: 0,
-    taskDeadline: '',
+    taskDeadline: moment(),
     taskTitleError: false,
     taskDescriptionError: false,
     taskContractTimeError: false,
@@ -48,6 +49,7 @@ export default class CreateTask extends Component {
       fieldsAreValid = false;
     }
     // ЕСЛИ ВСЕ ОК - то вызываем метод для работы с беком
+    console.log(!taskDeadline);
     if (fieldsAreValid) {
       this.props.handleCreateTask(taskTitle, taskDescription, taskContractTime, moment(taskDeadline).unix());
     } else {
@@ -61,8 +63,16 @@ export default class CreateTask extends Component {
   }
 
   handleChange = (event) => {
+    console.log(this.state);
     this.setState({
       [event.target.name]: event.target.value,
+    });
+  }
+
+  handleDatetimeChange = (value) => {
+    console.log(value);
+    this.setState({
+      taskDeadline: value,
     });
   }
 
@@ -72,7 +82,7 @@ export default class CreateTask extends Component {
         taskTitle: '',
         taskDescription: '',
         taskContractTime: 0,
-        taskDeadline: '',
+        taskDeadline: moment(),
         taskTitleError: false,
         taskDescriptionError: false,
         taskContractTimeError: false,
@@ -119,10 +129,10 @@ export default class CreateTask extends Component {
               </FormGroup>
               <FormGroup>
                 <Label for="taskDeadline">Дедлайн</Label>
-                <Input
-                  id="taskDeadline" type="date" name="taskDeadline" value={this.state.taskDeadline}
-                  invalid={this.state.taskDeadlineError}
-                  onChange={this.handleChange}
+                <Datetime
+                  value={this.state.taskDeadline}
+                  onChange={this.handleDatetimeChange}
+                  inputProps={{ invalid: this.state.taskDeadlineError }} // TOFIX - invalid не работает
                 />
                 <FormFeedback>Дедлайн меньше чем текущее время!</FormFeedback>
               </FormGroup>

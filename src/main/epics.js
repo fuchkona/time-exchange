@@ -6,9 +6,10 @@ import {
 } from 'rxjs/operators';
 import { from, of } from 'rxjs';
 import {
-  FETCH_TASKS, CREATE_TASK,
+  FETCH_TASKS, CREATE_TASK, DELETE_TASK,
   fetchTasksSuccess, fetchTasksFailure,
   createTaskSuccess, createTaskFailure,
+  deleteTaskSuccess, deleteTaskFailure,
 } from './actions';
 import { faUserInjured } from '@fortawesome/free-solid-svg-icons';
 
@@ -88,6 +89,28 @@ async function createTask(token, taskDetails) {
   }
 }
 
+async function deleteTask(token, taskId) {
+  try {
+    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+    const url = `back-exchange.herokuapp.com/api/task/delete?task_id=${taskId}`;
+    const params = {
+      method: 'delete',
+      headers: {
+        'Content-type': 'application/json',
+        'Authorization': 'Bearer ' + token,
+      },
+    };
+
+    const response = await fetch(proxyUrl + url, params);
+    const data = await response.json();
+
+    console.log('deleteTask', data);
+    return data;
+  } catch (e) {
+    throw e;
+  }
+}
+
 
 // Epics
 function fetchTasksEpic(action$) {
@@ -142,8 +165,32 @@ function createTaskEpic(action$) {
     )
 }
 
+function deleteTaskEpic(action$) {
+  console.log(action$);
+  return action$
+    .ofType(DELETE_TASK)
+    .pipe(
+      mergeMap((payload) => {
+        const { token, taskId } = payload.payload;
+        console.log('delete task', token, taskId);
+        return from(deleteTask(token, taskId));
+      }),
+      map(response => {
+        console.log(response);
+        if (response.success) {
+          return deleteTaskSuccess(+response.data.id);
+        } else {
+          return deleteTaskFailure(response.data);
+        }
+      }),
+      catchError(error => {
+        return of(deleteTaskFailure(error));
+      })
+    )
+}
 
 export const epics = combineEpics(
   fetchTasksEpic,
   createTaskEpic,
+  deleteTaskEpic,
 );

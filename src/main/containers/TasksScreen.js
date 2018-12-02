@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 
 import TasksScreen from '../components/TasksScreen/TasksScreen';
 import { signOut } from '../../auth/actions';
-import { fetchTasks } from '../actions';
+import { fetchTasks, deleteTask } from '../actions';
 
 function mapStateToProps(state) {
   return {
@@ -17,6 +17,7 @@ function mapDispatchToProps(dispatch) {
     {
       signOut,
       fetchTasks,
+      deleteTask,
     },
     dispatch,
   );
