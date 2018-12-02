@@ -16,7 +16,7 @@ const cookieSignIn = cookie.load('time-exchange-signin');
 const defaultSignInState = {
   id: cookieSignIn ? cookieSignIn.id : null,
   token: cookieSignIn ? cookieSignIn.token : null,
-  errors: {},
+  errors: null,
   verifying: false,
   auth: cookieSignIn ? true : false,
 };
@@ -42,7 +42,7 @@ function signIn(state = defaultSignInState, action) {
     case VERIFY_USERNAME_PASSWORD_FAILURE:
       return {
         ...state,
-        status: action.payload.status,
+        errors: action.payload.errors,
         verifying: false,
         auth: false,
       };
@@ -66,7 +66,7 @@ function signIn(state = defaultSignInState, action) {
     case REGISTER_NEWUSER_FAILURE:
       return {
         ...state,
-        status: action.payload.status,
+        errors: action.payload.errors,
         verifying: false,
         auth: false,
       };

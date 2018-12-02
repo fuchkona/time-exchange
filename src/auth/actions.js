@@ -30,7 +30,7 @@ export function verifyUsernamePasswordSuccess(id, token) {
 export function verifyUsernamePasswordFailure(response) {
   return {
     type: VERIFY_USERNAME_PASSWORD_FAILURE,
-    payload: { status: response },
+    payload: { errors: response },
   };
 }
 
@@ -51,7 +51,7 @@ export function registerNewUserSuccess(id, token) {
 export function registerNewUserFailure(response) {
   return {
     type: REGISTER_NEWUSER_FAILURE,
-    payload: { status: response },
+    payload: { errors: response },
   };
 }
 
@@ -68,9 +68,10 @@ export function signOutSuccess() {
   };
 }
 
-export function signOutFailure() {
+export function signOutFailure(response) {
   return {
     type: SIGNOUT_FAILURE,
+    payload: { errors: response },
   };
 }
 

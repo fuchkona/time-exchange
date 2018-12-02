@@ -12,7 +12,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 
 import { signOut } from '../../../auth/actions';
-import { createTask } from '../../actions';
+import { createTask, createTaskModalToggle } from '../../actions';
 import CreateTask from './LayoutModals/CreateTask';
 import './Layout.scss';
 const logo = require('../../../static/time-exchange-logo.png');
@@ -21,10 +21,6 @@ class Layout extends Component {
   static defaultProps = {
     debugScreenName: '',
     debugAuthToken: '',
-  };
-
-  state = {
-    modalCreateTaskOpen: false,
   };
 
   handleCreateTask = (title, description, contractTime, deadline) => {
@@ -41,9 +37,7 @@ class Layout extends Component {
   }
 
   handleCreateTaskToggle = () => {
-    this.setState({
-      modalCreateTaskOpen: !this.state.modalCreateTaskOpen,
-    });
+    this.props.createTaskModalToggle();
   };
 
   handleSignOut = () => {
@@ -78,7 +72,7 @@ class Layout extends Component {
             <Col md="3 pt-2">
               <div className="layout__create-task-form">
                 <CreateTask
-                  open={this.state.modalCreateTaskOpen}
+                  open={this.props.tasks.modalCreateTaskOpen}
                   handleToggle={this.handleCreateTaskToggle}
                   handleCreateTask={this.handleCreateTask}
                 />
@@ -128,6 +122,7 @@ function mapDispatchToProps(dispatch) {
     {
       signOut,
       createTask,
+      createTaskModalToggle,
     },
     dispatch,
   );
