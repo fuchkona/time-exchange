@@ -109,7 +109,7 @@ function fetchTasksEpic(action$) {
         if (response.success) {
           return fetchTasksSuccess(response.data); // , +response.totalTasks
         } else {
-          return fetchTasksFailure(response);
+          return fetchTasksFailure(response.data);
         }
       }),
       catchError(error => {
@@ -133,7 +133,7 @@ function createTaskEpic(action$) {
         if (response.success) {
           return createTaskSuccess(response.data);
         } else {
-          return createTaskFailure(response);
+          return createTaskFailure(response.data);
         }
       }),
       catchError(error => {

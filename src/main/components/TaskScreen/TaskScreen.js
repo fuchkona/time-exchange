@@ -51,7 +51,7 @@ class TaskScreen extends Component {
                 task ? (
                   <div className="task-screen__task_header mb-5">
                     <div>
-                    Статус: {(task.currentStatus === null) ? 'null (fixme)' : task.currentStatus}
+                    Статус: {(task.currentStatus === null) ? 'null (fixme)' : task.currentStatus.title}
                     </div>
                     <div>
                       Автор: {task.owner.full_name}

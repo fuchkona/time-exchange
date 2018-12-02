@@ -16,19 +16,16 @@ import moment from 'moment';
 import './CreateTask.scss';
 
 export default class CreateTask extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      taskTitle: '',
-      taskDescription: '',
-      taskContractTime: 0,
-      taskDeadline: '',
-      taskTitleError: false,
-      taskDescriptionError: false,
-      taskContractTimeError: false,
-      taskDeadlineError: false,
-    };
-  }
+  state = {
+    taskTitle: '',
+    taskDescription: '',
+    taskContractTime: 0,
+    taskDeadline: '',
+    taskTitleError: false,
+    taskDescriptionError: false,
+    taskContractTimeError: false,
+    taskDeadlineError: false,
+  };
 
   handleCreateTask = () => {
     const { taskTitle, taskDescription, taskContractTime, taskDeadline } = this.state;
@@ -67,6 +64,21 @@ export default class CreateTask extends Component {
     this.setState({
       [event.target.name]: event.target.value,
     });
+  }
+
+  componentDidUpdate(nextProps) {
+    if (nextProps.open !== this.props.open && !this.props.open) {
+      this.setState({
+        taskTitle: '',
+        taskDescription: '',
+        taskContractTime: 0,
+        taskDeadline: '',
+        taskTitleError: false,
+        taskDescriptionError: false,
+        taskContractTimeError: false,
+        taskDeadlineError: false,
+      });
+    }
   }
 
   render() {

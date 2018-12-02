@@ -115,7 +115,7 @@ function verifyUsernamePasswordEpic(action$) {
           }
           return verifyUsernamePasswordSuccess(response.data.id, response.data.token);
         } else {
-          return verifyUsernamePasswordFailure(response);
+          return verifyUsernamePasswordFailure(response.data);
         }
       }),
       catchError(error => {
@@ -138,7 +138,7 @@ function registerNewUserEpic(action$) {
         if (response.success) {
           return registerNewUserSuccess(response.data.id, response.data.token);
         } else {
-          return registerNewUserFailure(response);
+          return registerNewUserFailure(response.data);
         }
       }),
       catchError(error => {
@@ -162,7 +162,7 @@ function signOutEpic(action$) {
           cookie.remove('time-exchange-id');
           return signOutSuccess();
         } else {
-          return signOutFailure(response);
+          return signOutFailure(response.data);
         }
       }),
       catchError(error => {
