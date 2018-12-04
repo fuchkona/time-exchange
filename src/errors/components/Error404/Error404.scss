@@ -1,0 +1,46 @@
+@import "../../../base.scss";
+
+.error{
+
+  &__container{
+    border: none !important;
+  }
+
+  &__hand{
+    background-image: url("../../../static/hands_PNG929.png");
+    width: 100%;
+    height: 853px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  &__header{
+    margin-top: 50px;
+    color: $orange;
+  }
+
+  &__info{
+    font-weight: bolder;
+    color: $blue;
+  }
+
+  &__span{
+    color: $orange;
+    text-transform: uppercase;
+  }
+
+  &__link{
+    color: $orange;
+  }
+
+  &__timer{
+    position: fixed;
+    top: 574px;
+    left: 58%;
+    font-size: 5vw;
+    color: #8cb856;
+    opacity: 0.8;
+    text-shadow: 0 5px 40px greenyellow;
+  }
+}
