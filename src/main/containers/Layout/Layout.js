@@ -23,11 +23,10 @@ class Layout extends Component {
     debugAuthToken: '',
   };
 
-  handleCreateTask = (title, description, contractTime, deadline) => {
+  handleCreateTask = (title, description, deadline) => {
     const taskDetails = {
       title,
       description,
-      contractTime,
       deadline,
       userId: this.props.signIn.id,
     };
