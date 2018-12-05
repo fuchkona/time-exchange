@@ -20,6 +20,7 @@ class Error404 extends Component{
       seconds: 30,
     };
 
+
     this.timerInterval = setInterval(this.tick, this.tickInterval);
   }
 
