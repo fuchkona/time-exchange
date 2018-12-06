@@ -13,9 +13,9 @@ import moment from 'moment';
 
 import Layout from '../../containers/Layout/Layout';
 import Task from '../Task/Task';
-import Comments from '../Comments/Comments';
-import Files from '../Files/Files';
-import Requests from '../Requests/Requests';
+import Comments from '../../../task/containers/Comments/Comments';
+import Files from '../../../task/containers/Files/Files';
+import Requests from '../../../task/containers/Requests/Requests';
 import './TaskScreen.scss';
 
 class TaskScreen extends Component {
@@ -73,17 +73,17 @@ class TaskScreen extends Component {
               </div>
               <div className="task-screen__comments m-2">
                 <div className="task-screen__comments_title mb-2">Комментарии</div>
-                {(comments && task) ? <Comments {...comments} /> : null}
+                <Comments token={token} taskId={id} />
               </div>
             </Col>
             <Col md="3">
               <div className="task-screen__files m-2">
                 <div className="task-screen__files_title mb-2">Файлы</div>
-                {(files && task) ? <Files {...files} /> : null}
+                <Files token={token} taskId={id} />
               </div>
               <div className="task-screen__requests m-2">
                 <div className="task-screen__requests_title mb-2">Заявки на исполнение</div>
-                {(requests && task) ? <Requests {...requests} /> : null}
+                <Requests token={token} taskId={id} />
               </div>
             </Col>
           </Row>
