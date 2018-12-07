@@ -12,7 +12,7 @@ import {
   FormFeedback,
 } from 'reactstrap';
 import moment from 'moment';
-import Datetime from 'react-datetime';
+import TEDatetime from '../../../../global/components/TEDatetime/TEDatetime';
 
 import './CreateTask.scss';
 
@@ -20,16 +20,14 @@ export default class CreateTask extends Component {
   state = {
     taskTitle: '',
     taskDescription: '',
-    taskContractTime: 0,
     taskDeadline: moment(),
     taskTitleError: false,
     taskDescriptionError: false,
-    taskContractTimeError: false,
     taskDeadlineError: false,
   };
 
   handleCreateTask = () => {
-    const { taskTitle, taskDescription, taskContractTime, taskDeadline } = this.state;
+    const { taskTitle, taskDescription, taskDeadline } = this.state;
     // НИЖЕ - Предварительная проверка на фронте
     let fieldsAreValid = true;
     if (!taskTitle) {
@@ -40,10 +38,6 @@ export default class CreateTask extends Component {
       this.setState({ taskDescriptionError: true });
       fieldsAreValid = false;
     }
-    if (taskContractTime <= 0) {
-      this.setState({ taskContractTimeError: true });
-      fieldsAreValid = false;
-    }
     if (!taskDeadline) { // TODO - сранивать в moment
       this.setState({ taskDeadlineError: true });
       fieldsAreValid = false;
@@ -51,26 +45,23 @@ export default class CreateTask extends Component {
     // ЕСЛИ ВСЕ ОК - то вызываем метод для работы с беком
     console.log(!taskDeadline);
     if (fieldsAreValid) {
-      this.props.handleCreateTask(taskTitle, taskDescription, taskContractTime, moment(taskDeadline).unix());
+      this.props.handleCreateTask(taskTitle, taskDescription, moment(taskDeadline).unix());
     } else {
       setTimeout(() => this.setState({
         taskTitleError: false,
         taskDescriptionError: false,
-        taskContractTimeError: false,
         taskDeadlineError: false,
       }), 2000);
     }
   }
 
   handleChange = (event) => {
-    console.log(this.state);
     this.setState({
       [event.target.name]: event.target.value,
     });
   }
 
   handleDatetimeChange = (value) => {
-    console.log(value);
     this.setState({
       taskDeadline: value,
     });
@@ -81,11 +72,9 @@ export default class CreateTask extends Component {
       this.setState({
         taskTitle: '',
         taskDescription: '',
-        taskContractTime: 0,
         taskDeadline: moment(),
         taskTitleError: false,
         taskDescriptionError: false,
-        taskContractTimeError: false,
         taskDeadlineError: false,
       });
     }
@@ -119,17 +108,8 @@ export default class CreateTask extends Component {
                 <FormFeedback>Заполните описание!</FormFeedback>
               </FormGroup>
               <FormGroup>
-                <Label for="taskContractTime">Предлагаемое к оплате время</Label>
-                <Input
-                  id="taskContractTime" type="number" name="taskContractTime" pvalue={this.state.taskContractTime}
-                  invalid={this.state.taskContractTimeError}
-                  onChange={this.handleChange}
-                />
-                <FormFeedback>Время должно быть больше 0!</FormFeedback>
-              </FormGroup>
-              <FormGroup>
                 <Label for="taskDeadline">Дедлайн</Label>
-                <Datetime
+                <TEDatetime
                   value={this.state.taskDeadline}
                   onChange={this.handleDatetimeChange}
                   inputProps={{ invalid: this.state.taskDeadlineError }} // TOFIX - invalid не работает

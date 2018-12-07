@@ -18,8 +18,10 @@ import LoginScreen from './auth/containers/LoginScreen';
 import TasksScreen from './main/containers/TasksScreen';
 import TaskScreen from './main/containers/TaskScreen';
 import ProfileScreen from './profile/containers/ProfileScreen';
+import Error404 from "./errors/components/Error404/Error404";
 import moment from 'moment';
 import 'moment/locale/ru';
+
 
 moment().locale('ru');
 const epicMiddleware = createEpicMiddleware();
@@ -49,6 +51,7 @@ class App extends Component {
             <PrivateRoute path="/task/:id" exact component={TaskScreen} />
             <PrivateRoute path="/profile" exact component={ProfileScreen} />
             <Route path="/login" component={LoginScreen} />
+            <Route path="*" component={ Error404 }/>
           </Switch>
         </Router>
       </Provider>

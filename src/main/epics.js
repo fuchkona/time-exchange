@@ -65,7 +65,6 @@ async function createTask(token, taskDetails) {
     const body = {
       title: taskDetails.title,
       description: taskDetails.description,
-      contract_time: taskDetails.contractTime,
       deadline: taskDetails.deadline,
       owner_id: taskDetails.userId,
     };

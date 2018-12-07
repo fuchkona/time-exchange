@@ -8,7 +8,11 @@ import Pagination from "react-js-pagination";
 import Layout from '../../containers/Layout/Layout';
 import BriefTask from '../BriefTask/BriefTask';
 import Filter from '../Filter/Filter';
-import { TASKS_FILTER } from '../../../constants';
+import {
+  TASKS_FILTER,
+  TASKS_DEFAULT_START_PAGE,
+  TASKS_DEFAULT_ITEMS_PER_PAGE
+} from '../../../constants';
 import './TasksScreen.scss';
 import TEPagination from "../../../global/components/TEPagination/TEPagination";
 
@@ -16,7 +20,7 @@ class TasksScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activePage: 1,
+      activePage: TASKS_DEFAULT_START_PAGE,
       filter: TASKS_FILTER.all,
     };
   }
@@ -35,6 +39,12 @@ class TasksScreen extends Component {
       default:
         return tasks;
     }
+  }
+
+  getItemsOnPage = (tasks) => {
+    const startIndex = (this.state.activePage - 1) * TASKS_DEFAULT_ITEMS_PER_PAGE;
+    const endIndex = startIndex + TASKS_DEFAULT_ITEMS_PER_PAGE;
+    return tasks.slice(startIndex, endIndex);
   }
 
   handlePageChange = (pageNumber) => {
@@ -77,6 +87,8 @@ class TasksScreen extends Component {
     const totalTasks = filteredTasks.length;
     const sortedTasks = filteredTasks.sort((taskA, taskB) => taskB.created_at - taskA.created_at)
     console.log('component', tasks, totalTasks);
+    const tasksToDisplay = this.getItemsOnPage(sortedTasks);
+    const tasksCountOnPage = tasksToDisplay ? tasksToDisplay.length : 0;
 
     return (
       <Layout
@@ -86,7 +98,7 @@ class TasksScreen extends Component {
       >
         <div className="tasks-screen">
           <div className="tasks-screen__tasks">
-            {sortedTasks.map((task) => (
+            {tasksToDisplay.map((task) => (
               <BriefTask
                 key={task.id}
                 {...task} // TOFIX onDelete - а что если уже есть Requests на этот таск? как проверить и не удалять?
@@ -99,13 +111,13 @@ class TasksScreen extends Component {
               <TEPagination
                 activePage={this.state.activePage}
                 totalItemsCount={totalTasks}
-                itemsCountPerPage={3}
-                pageRangeDisplayed={3}
+                itemsCountPerPage={TASKS_DEFAULT_ITEMS_PER_PAGE}
+                pageRangeDisplayed={5}
                 onChange={this.handlePageChange}
               />
             </div>
             <div className="tasks-screen__pagination_totals">
-              Показано задач: 3 из {totalTasks}
+              Показано задач: {tasksCountOnPage} из {totalTasks}
             </div>
           </div>
         </div>
