@@ -38,8 +38,9 @@
 
   &__comments {
     min-height: 300px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    background-color: white;
+    // box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    font-size: 14px;
+    background-color: $lightGrey;
 
     &_title {
       font-size: 22px;

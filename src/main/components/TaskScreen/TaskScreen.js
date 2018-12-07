@@ -31,12 +31,9 @@ class TaskScreen extends Component {
 
   render() {
     const { token } = this.props.signIn;
+    const userId = this.props.signIn.id;
     const { id } = this.props.match.params;
     const task = this.props.tasks.tasks[0];
-
-    let comments;
-    let files;
-    let requests;
 
     console.log('task id', id, task);
 
@@ -73,7 +70,7 @@ class TaskScreen extends Component {
               </div>
               <div className="task-screen__comments m-2">
                 <div className="task-screen__comments_title mb-2">Комментарии</div>
-                <Comments token={token} taskId={id} />
+                <Comments userId={userId} token={token} taskId={id} />
               </div>
             </Col>
             <Col md="3">
