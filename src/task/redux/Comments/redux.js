@@ -12,8 +12,8 @@ import {
 const defaultCommentsState = {
   comments: [],
   fetching: false,
-  addingComment: false,
-  deletingCommentk: false,
+  addingCommentText: '',
+  deletingComment: false,
   errors: null,
 };
 
@@ -43,7 +43,7 @@ function comments(state = defaultCommentsState, action) {
     case CREATE_COMMENT:
       return {
         ...state,
-        addingComment: true,
+        addingCommentText: action.payload.commentDetails.text,
       };
 
     case CREATE_COMMENT_SUCCESS:
@@ -51,13 +51,12 @@ function comments(state = defaultCommentsState, action) {
       return {
         ...state,
         comments: state.comments.concat(action.payload.comment),
-        addingComment: false,
+        addingCommentText: '',
       };
 
     case CREATE_COMMENT_FAILURE:
       return {
         ...state,
-        addingComment: false,
         errors: action.payload.errors,
       };
 

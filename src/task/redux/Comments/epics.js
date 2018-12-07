@@ -11,6 +11,7 @@ import {
   createCommentSuccess, createCommentFailure,
   deleteCommentSuccess, deleteCommentFailure,
 } from './actions';
+import { faAtlas } from '@fortawesome/free-solid-svg-icons';
 
 // Function for epics
 async function getTaskComments(token, taskId) {
@@ -27,7 +28,7 @@ async function getTaskComments(token, taskId) {
       },
     };
 
-    const response = fetch(proxyUrl + url, params);
+    const response = await fetch(proxyUrl + url, params);
     const responseJson = await response.json();
 
     return responseJson;
@@ -37,11 +38,57 @@ async function getTaskComments(token, taskId) {
 }
 
 async function createComment(token, commentDetails) {
-  console.log('createComment', token, commentDetails);
+  try {
+    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+    const url = 'back-exchange.herokuapp.com/api/comment/create';
+    const body = {
+      task_id: commentDetails.taskId,
+      author_id: commentDetails.authorId,
+      text: commentDetails.text,
+    };
+    const params = {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-type': 'application/json',
+        'Authorization': 'Bearer ' + token,
+      },
+      body: JSON.stringify(body),
+    };
+
+    const response = await fetch(proxyUrl + url, params);
+    const data = await response.json();
+
+    data.success = (Math.random() > 0.5) ? true : false; // TESTING!!!
+
+    console.log('createTask', data);
+    return data;
+  } catch (e) {
+    throw e;
+  }
 }
 
 async function deleteComment(token, commentId) {
-  console.log('deleteComment', token, commentId);
+  try {
+    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+    const url = `back-exchange.herokuapp.com/api/comment/delete?comment_id=${commentId}`;
+    const params = {
+      method: 'delete',
+      headers: {
+        'Content-type': 'application/json',
+        'Authorization': 'Bearer ' + token,
+      },
+    };
+
+    const response = await fetch(proxyUrl + url, params);
+    const data = await response.json();
+
+    console.log('deleteComment', data);
+    data.data.id = commentId;
+    return data;
+  } catch (e) {
+    throw e;
+  }
 }
 
 // Epics
