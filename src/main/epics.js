@@ -129,7 +129,6 @@ async function getFilesByTask(token, taskId) {
     return data;
   } catch (e) {
     throw e;
-
   }
 }
 
@@ -210,6 +209,8 @@ function deleteTaskEpic(action$) {
       })
     )
 }
+
+
 
 export const epics = combineEpics(
   fetchTasksEpic,
