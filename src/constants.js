@@ -6,3 +6,6 @@ export const TASKS_FILTER = {
 };
 
 export const COOKIE_LIFETIME = 600;
+
+export const TASKS_DEFAULT_START_PAGE = 1;
+export const TASKS_DEFAULT_ITEMS_PER_PAGE = 5;
