@@ -110,27 +110,6 @@ async function deleteTask(token, taskId) {
   }
 }
 
-async function getFilesByTask(token, taskId) {
-  try {
-    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-    const url = `back-exchange.herokuapp.com//api/file/files-by-task?=${taskId}`;
-    const params = {
-      method: 'delete',
-      headers: {
-        'Content-type': 'application/json',
-        'Authorization': 'Bearer ' + token,
-      }
-    };
-    const response = await fetch(proxyUrl + url, params);
-    const data = await response.json();
-
-    console.log('get files by task', data);
-    return data;
-  } catch (e) {
-    throw e;
-  }
-}
-
 
 // Epics
 function fetchTasksEpic(action$) {
