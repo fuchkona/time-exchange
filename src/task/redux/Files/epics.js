@@ -6,16 +6,17 @@ import {
 } from 'rxjs/operators';
 import { from, of } from 'rxjs';
 import {
-  FETCH_FILES, fetchFilesSuccess, fetchFilesFailure,
+  FETCH_FILES, fetchFilesSuccess, fetchFilesFailure, CREATE_FILE, createFileSuccess, createFileFailure,
 } from './actions';
+
 
 // Function for epics
 async function getFilesByTask(token, taskId) {
   try {
     const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-    const url = `back-exchange.herokuapp.com//api/file/files-by-task?=${taskId}`;
+    const url = `back-exchange.herokuapp.com/api/file/files-by-task?task_id=${taskId}`;
     const params = {
-      method: 'delete',
+      method: 'get',
       headers: {
         'Content-type': 'application/json',
         'Authorization': 'Bearer ' + token,
@@ -31,8 +32,34 @@ async function getFilesByTask(token, taskId) {
   }
 }
 
-async function createFile(token, file) {
-  console.log('createFile', token, file);
+async function createFile(token, fileDetails) {
+  try {
+    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+    const url = `back-exchange.herokuapp.com/api/file/create`;
+
+    console.log('createFile', token, fileDetails);
+
+    const body = {
+      task_id: fileDetails.taskId,
+      file: fileDetails.file,
+      user_id: fileDetails.userId,
+    };
+    const params = {
+      method: 'post',
+      headers: {
+        'Content-type': 'application/json',
+        'Authorization': 'Bearer ' + token,
+      },
+      body: JSON.stringify(body),
+    };
+    const response = await fetch(proxyUrl + url, params);
+    const data = await response.json();
+
+    console.log('create file by task', data);
+    return data;
+  } catch (e) {
+    throw e;
+  }
 }
 
 async function deleteFile(token, fileId) {
@@ -47,7 +74,7 @@ function fetchFilesEpic(action$) {
     .pipe(
       mergeMap((payload) => {
         const { token, taskId } = payload.payload;
-        console.log('fetch comments', token);
+        console.log('fetch files', token);
         return from(getFilesByTask(token, taskId));
       }),
       map(response => {
@@ -64,9 +91,34 @@ function fetchFilesEpic(action$) {
     )
 }
 
+function createFileEpic(action$) {
+  console.log(action$);
+  return action$
+    .ofType(CREATE_FILE)
+    .pipe(
+      mergeMap((payload) => {
+        const { token, fileDetails } = payload.payload;
+        console.log('create file', token, fileDetails);
+        return from(createFile(token, fileDetails));
+      }),
+      map(response => {
+        console.log(response);
+        if (response.success) {
+          return createFileSuccess(response.data);
+        } else {
+          return createFileFailure(response.data);
+        }
+      }),
+      catchError(error => {
+        return of(createFileFailure(error));
+      })
+    )
+}
+
 
 
 export const epics = combineEpics(
   fetchFilesEpic,
+  createFileEpic
 
 );

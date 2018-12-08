@@ -26,6 +26,7 @@ const defaultFilesState = {
 function files(state = defaultFilesState, action) {
   switch (action.type) {
     case FETCH_FILES:
+      console.log('redux fetch files');
       return {
         ...state,
         fetching: true,
