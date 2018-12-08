@@ -45,15 +45,9 @@ async function createFile(token, fileDetails) {
     formData.append('user_id', fileDetails.userId);
     formData.append('task_id', fileDetails.taskId);
 
-    const body = {
-      task_id: fileDetails.taskId,
-      file: formData.get('file'),
-      user_id: fileDetails.userId,
-    };
     const params = {
       method: 'post',
       headers: {
-        'Content-type': 'application/json',
         'Authorization': 'Bearer ' + token,
       },
       body: formData,

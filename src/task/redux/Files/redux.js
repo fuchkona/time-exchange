@@ -17,7 +17,7 @@ import {
 // Reducer
 const defaultFilesState = {
   comments: [],
-  fetching: false,
+  fetching: true,
   addingFile: false,
   deletingFile: false,
   errors: null,

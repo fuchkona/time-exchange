@@ -5,15 +5,22 @@
 
   }
 
+  &__one-file{
+    display: flex;
+    flex-wrap: wrap;
+
+    margin: 10px;
+  }
+
+  &__download{
+    color: #ffffff;
+  }
+
   &__drop-zone div {
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute !important;
-    top: 50% !important;
-    left: 0 !important;
-    min-height: 50% !important;
-    height: 0 !important;
+    height: 100px !important;
     width: 100% !important;
   }
   &__drop-zone p{
