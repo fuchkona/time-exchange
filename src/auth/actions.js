@@ -20,10 +20,10 @@ export function verifyUsernamePassword(username, password, rememberMe = false) {
   };
 }
 
-export function verifyUsernamePasswordSuccess(id, token) {
+export function verifyUsernamePasswordSuccess(id, token, username) {
   return {
     type: VERIFY_USERNAME_PASSWORD_SUCCESS,
-    payload: { id, token },
+    payload: { id, token, username },
   };
 }
 
@@ -41,10 +41,10 @@ export function registerNewUser(fullname, username, password, email) {
   };
 }
 
-export function registerNewUserSuccess(id, token) {
+export function registerNewUserSuccess(id, token, username) {
   return {
     type: REGISTER_NEWUSER_SUCCESS,
-    payload: { id, token },
+    payload: { id, token, username },
   };
 }
 

@@ -11,11 +11,15 @@ import { epics as profileEpic} from "./profile/epics";
 import { reducer as comments} from "./task/redux/Comments/redux";
 import { epics as commentsEpic} from "./task/redux/Comments/epics";
 
+import { reducer as requests} from "./task/redux/Requests/redux";
+import { epics as requestsEpic} from "./task/redux/Requests/epics";
+
 const rootReducer = combineReducers({
   auth,
   tasks,
   profile,
   comments,
+  requests,
 });
 
 const rootEpic = combineEpics(
@@ -23,6 +27,7 @@ const rootEpic = combineEpics(
   tasksEpic,
   profileEpic,
   commentsEpic,
+  requestsEpic,
 );
 
 export {

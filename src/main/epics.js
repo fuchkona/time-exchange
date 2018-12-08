@@ -11,11 +11,10 @@ import {
   createTaskSuccess, createTaskFailure,
   deleteTaskSuccess, deleteTaskFailure,
 } from './actions';
-import { faUserInjured } from '@fortawesome/free-solid-svg-icons';
+import { API_URL, NOCORS_URL } from '../constants';
 
 // Function for epics
 async function fetchGetTasks(url, token) {
-  const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
   const params = {
     method: 'get',
     headers: {
@@ -24,12 +23,12 @@ async function fetchGetTasks(url, token) {
       'Authorization': 'Bearer ' + token,
     },
   };
-  return await fetch(proxyUrl + url, params);
+  return await fetch(NOCORS_URL + url, params);
 }
 
 async function getAllTasks(token) {
   try {
-    const url = 'back-exchange.herokuapp.com/api/tasks'; // ?page=1&per-page=1
+    const url = `${API_URL}/api/tasks`; // ?page=1&per-page=1
 
     const response = await fetchGetTasks(url, token);
     const responseJson = await response.json();
@@ -44,7 +43,7 @@ async function getAllTasks(token) {
 
 async function getTaskById(token, taskId) {
   try {
-    const url = `back-exchange.herokuapp.com/api/tasks/${taskId}`;
+    const url = `${API_URL}/api/tasks/${taskId}`;
 
     const response = await fetchGetTasks(url, token);
     const responseJson = await response.json();
@@ -60,8 +59,7 @@ async function getTaskById(token, taskId) {
 
 async function createTask(token, taskDetails) {
   try {
-    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-    const url = 'back-exchange.herokuapp.com/api/task/create';
+    const url = `${API_URL}/api/task/create`;
     const body = {
       title: taskDetails.title,
       description: taskDetails.description,
@@ -78,7 +76,7 @@ async function createTask(token, taskDetails) {
       body: JSON.stringify(body),
     };
 
-    const response = await fetch(proxyUrl + url, params);
+    const response = await fetch(NOCORS_URL + url, params);
     const data = await response.json();
 
     console.log('createTask', data);
@@ -90,8 +88,7 @@ async function createTask(token, taskDetails) {
 
 async function deleteTask(token, taskId) {
   try {
-    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-    const url = `back-exchange.herokuapp.com/api/task/delete?task_id=${taskId}`;
+    const url = `${API_URL}/api/task/delete?task_id=${taskId}`;
     const params = {
       method: 'delete',
       headers: {
@@ -100,7 +97,7 @@ async function deleteTask(token, taskId) {
       },
     };
 
-    const response = await fetch(proxyUrl + url, params);
+    const response = await fetch(NOCORS_URL + url, params);
     const data = await response.json();
 
     console.log('deleteTask', data);

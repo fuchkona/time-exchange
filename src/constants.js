@@ -1,3 +1,6 @@
+export const API_URL = 'back-exchange.herokuapp.com';
+export const NOCORS_URL = 'https://cors-anywhere.herokuapp.com/';
+
 export const TASKS_FILTER = {
   all: 'ALL',
   noWorker: 'NO_WORKER',

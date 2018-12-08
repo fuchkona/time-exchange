@@ -11,14 +11,13 @@ import {
   createCommentSuccess, createCommentFailure,
   deleteCommentSuccess, deleteCommentFailure,
 } from './actions';
-import { faAtlas } from '@fortawesome/free-solid-svg-icons';
+import { API_URL, NOCORS_URL } from '../../../constants';
 
 // Function for epics
 async function getTaskComments(token, taskId) {
   try {
     console.log('getTaskComments', token, taskId);
-    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-    const url = `back-exchange.herokuapp.com/api/comment/by-task?task_id=${taskId}`;
+    const url = `${API_URL}/api/comment/by-task?task_id=${taskId}`;
     const params = {
       method: 'get',
       headers: {
@@ -28,7 +27,7 @@ async function getTaskComments(token, taskId) {
       },
     };
 
-    const response = await fetch(proxyUrl + url, params);
+    const response = await fetch(NOCORS_URL + url, params);
     const responseJson = await response.json();
 
     return responseJson;
@@ -39,8 +38,7 @@ async function getTaskComments(token, taskId) {
 
 async function createComment(token, commentDetails) {
   try {
-    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-    const url = 'back-exchange.herokuapp.com/api/comment/create';
+    const url = `${API_URL}/api/comment/create`;
     const body = {
       task_id: commentDetails.taskId,
       author_id: commentDetails.authorId,
@@ -56,7 +54,7 @@ async function createComment(token, commentDetails) {
       body: JSON.stringify(body),
     };
 
-    const response = await fetch(proxyUrl + url, params);
+    const response = await fetch(NOCORS_URL + url, params);
     const data = await response.json();
 
     data.success = (Math.random() > 0.5) ? true : false; // TESTING!!!
@@ -70,8 +68,7 @@ async function createComment(token, commentDetails) {
 
 async function deleteComment(token, commentId) {
   try {
-    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-    const url = `back-exchange.herokuapp.com/api/comment/delete?comment_id=${commentId}`;
+    const url = `${API_URL}/api/comment/delete?comment_id=${commentId}`;
     const params = {
       method: 'delete',
       headers: {
@@ -80,7 +77,7 @@ async function deleteComment(token, commentId) {
       },
     };
 
-    const response = await fetch(proxyUrl + url, params);
+    const response = await fetch(NOCORS_URL + url, params);
     const data = await response.json();
 
     console.log('deleteComment', data);

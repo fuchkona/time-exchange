@@ -70,7 +70,7 @@ export default class Login extends Component {
                 <FormGroup>
                   <Label for="userLogin">Логин</Label>
                   <Input
-                    id="userLogin" type="text" name="userLogin" placeholder="Введите ваш логин (testuser)" value={this.state.userLogin}
+                    id="userLogin" type="text" name="userLogin" placeholder="Введите ваш логин (testuser/alfauser/betauser)" value={this.state.userLogin}
                     autoFocus
                     invalid={this.state.userLoginError}
                     onChange={this.handleChange}
@@ -80,7 +80,7 @@ export default class Login extends Component {
                 <FormGroup>
                   <Label for="userPassword">Пароль</Label>
                   <Input
-                    id="userPassword" type="password" name="userPassword" placeholder="Введите ваш пароль (test1234)" value={this.state.userPassword}
+                    id="userPassword" type="password" name="userPassword" placeholder="Введите ваш пароль (test1234/alfa1234/beta1234)" value={this.state.userPassword}
                     invalid={this.state.userPasswordError}
                     onChange={this.handleChange}
                   />
