@@ -29,6 +29,7 @@ function files(state = defaultFilesState, action) {
       console.log('redux fetch files');
       return {
         ...state,
+        files: [],
         fetching: true,
       };
 
@@ -50,14 +51,14 @@ function files(state = defaultFilesState, action) {
     case CREATE_FILE:
       return {
         ...state,
-        addingFILE: true,
+        addingFile: true,
       };
 
     case CREATE_FILE_SUCCESS:
       console.log(action.payload);
       return {
         ...state,
-        files: state.files.concat(action.payload.files),
+        files: state.files.concat(action.payload.file),
         addingFile: false,
       };
 
