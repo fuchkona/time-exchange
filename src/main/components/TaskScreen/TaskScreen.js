@@ -37,6 +37,8 @@ class TaskScreen extends Component {
 
     console.log('task id', id, task);
 
+    const showMakeRequestButton = task && !task.worker && task.owner.id !== userId;
+    // TODO - подтягивать requester_id по данному task.id - и проверять userId не входит ли уже в requester_id's
     return (
       <Layout
         debugScreenName="Экран одной задачи"
@@ -65,11 +67,23 @@ class TaskScreen extends Component {
           </Row>
           <Row>
             <Col md="9">
-              <div className="task-screen__task m-2">
-                {task ? <Task {...task} /> : null}
-              </div>
-              <div className="task-screen__comments m-2">
-                <div className="task-screen__comments_title mb-2">Комментарии</div>
+            <div className="task-screen__task m-2">
+              {task ? <Task {...task} /> : null}
+            </div>
+              {showMakeRequestButton ? (
+                <Button
+                  className="m-2 px-4 task-screen__button_take"
+                  size="lg"
+                  onClick={this.handleTakeTask}
+                >
+                  Взять в работу
+                </Button>
+              ) : (
+                <div>
+                </div>
+              )}
+            <div className="task-screen__comments m-2">
+              <div className="task-screen__comments_title mb-2">Комментарии</div>
                 <Comments userId={userId} token={token} taskId={id} />
               </div>
             </Col>
@@ -86,28 +100,19 @@ class TaskScreen extends Component {
           </Row>
           <Row className="px-5">
             <div className="task-screen__task_footer mt-5 mb-2">
-              <Button
-                className="m-2 px-4 task-screen__button_take"
-                size="lg"
-                onClick={this.handleTakeTask}
-              >
-                Взять в работу
-            </Button>
-              {
-                task ? (
-                  <div className="mt-3">
-                    <div>
-                      Создана: {moment(task.created_at * 1000).format('Do MMMM YYYY')}
-                    </div>
-                    <div>
-                      Дедлайн: {moment(task.deadline * 1000).format('Do MMMM YYYY')}
-                    </div>
+              {task ? (
+                <div className="mt-3">
+                  <div>
+                    Создана: {moment(task.created_at * 1000).format('Do MMMM YYYY')}
                   </div>
-                ) : (
-                    <div>
-                    </div>
-                  )
-              }
+                  <div>
+                    Дедлайн: {moment(task.deadline * 1000).format('Do MMMM YYYY')}
+                  </div>
+                </div>
+              ) : (
+                <div>
+                </div>
+              )}
             </div>
           </Row>
         </div>
