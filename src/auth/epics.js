@@ -12,13 +12,12 @@ import {
   registerNewUserSuccess, registerNewUserFailure,
   signOutSuccess, signOutFailure,
 } from './actions';
-import {API_URL, COOKIE_LIFETIME} from '../constants';
+import { NOCORS_URL, API_URL, COOKIE_LIFETIME } from '../constants';
 
 
 // Function for epic
 async function userAuth(username, password, rememberMe) {
   try {
-    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
     const url = API_URL + '/api/site/login';
     const body = {
       username,
@@ -33,7 +32,7 @@ async function userAuth(username, password, rememberMe) {
       body: JSON.stringify(body),
     };
 
-    const response = await fetch(proxyUrl + url, params);
+    const response = await fetch(NOCORS_URL + url, params);
     const data = await response.json();
     data.rememberMe = rememberMe;
 
@@ -46,7 +45,6 @@ async function userAuth(username, password, rememberMe) {
 
 async function userRegister(fullname, username, password, email) {
   try {
-    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
     const url = API_URL + '/api/site/signup';
     const body = {
       full_name: fullname,
@@ -63,7 +61,7 @@ async function userRegister(fullname, username, password, email) {
       body: JSON.stringify(body),
     };
 
-    const response = await fetch(proxyUrl + url, params);
+    const response = await fetch(NOCORS_URL + url, params);
     const data = await response.json();
 
     console.log('userRegister', data);
@@ -75,7 +73,6 @@ async function userRegister(fullname, username, password, email) {
 
 async function userLogout(token) {
   try {
-    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
     const url = API_URL + '/api/site/logout';
     const params = {
       method: 'get',
@@ -88,7 +85,7 @@ async function userLogout(token) {
 
     console.log(params);
 
-    const response = await fetch(proxyUrl + url, params);
+    const response = await fetch(NOCORS_URL + url, params);
     const data = await response.json();
 
     console.log('userLogout', data);
@@ -111,9 +108,9 @@ function verifyUsernamePasswordEpic(action$) {
         if (response.success) {
           console.log('from inside epic', response);
           if (response.rememberMe) {
-            cookie.save('time-exchange-signin', { id: response.data.id, token: response.data.token }, { path: '/', maxAge: COOKIE_LIFETIME });
+            cookie.save('time-exchange-signin', { id: response.data.id, token: response.data.token, username: response.data.username }, { path: '/', maxAge: COOKIE_LIFETIME });
           }
-          return verifyUsernamePasswordSuccess(response.data.id, response.data.token);
+          return verifyUsernamePasswordSuccess(response.data.id, response.data.token, response.data.username);
         } else {
           return verifyUsernamePasswordFailure(response.data);
         }
@@ -136,7 +133,7 @@ function registerNewUserEpic(action$) {
       map(response => {
         console.log(response);
         if (response.success) {
-          return registerNewUserSuccess(response.data.id, response.data.token);
+          return registerNewUserSuccess(response.data.id, response.data.token, response.data.username);
         } else {
           return registerNewUserFailure(response.data);
         }
@@ -158,8 +155,7 @@ function signOutEpic(action$) {
       map(response => {
         console.log(response);
         if (response.success) {
-          cookie.remove('time-exchange-token');
-          cookie.remove('time-exchange-id');
+          cookie.remove('time-exchange-signin');
           return signOutSuccess();
         } else {
           return signOutFailure(response.data);

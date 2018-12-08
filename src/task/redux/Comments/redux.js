@@ -22,6 +22,7 @@ function comments(state = defaultCommentsState, action) {
     case FETCH_COMMENTS:
       return {
         ...state,
+        comments: [],
         fetching: true,
       };
 

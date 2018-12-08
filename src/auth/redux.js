@@ -16,6 +16,7 @@ const cookieSignIn = cookie.load('time-exchange-signin');
 const defaultSignInState = {
   id: cookieSignIn ? cookieSignIn.id : null,
   token: cookieSignIn ? cookieSignIn.token : null,
+  username: cookieSignIn ? cookieSignIn.username : null,
   errors: null,
   verifying: false,
   auth: cookieSignIn ? true : false,
@@ -34,7 +35,7 @@ function signIn(state = defaultSignInState, action) {
         ...state,
         id: action.payload.id,
         token: action.payload.token,
-        id: action.payload.id,
+        username: action.payload.username,
         verifying: false,
         auth: true,
       };
@@ -59,6 +60,7 @@ function signIn(state = defaultSignInState, action) {
         ...state,
         id: action.payload.id,
         token: action.payload.token,
+        username: action.payload.username,
         verifying: false,
         auth: true,
       };
@@ -81,6 +83,7 @@ function signIn(state = defaultSignInState, action) {
         ...state,
         id: null,
         token: null,
+        username: null,
         auth: false,
       };
 

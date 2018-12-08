@@ -6,17 +6,17 @@ import {
 } from 'rxjs/operators';
 import { from, of } from 'rxjs';
 import {
-  FETCH_COMMENTS, CREATE_COMMENT, DELETE_COMMENT,
-  fetchCommentsSuccess, fetchCommentsFailure,
-  createCommentSuccess, createCommentFailure,
-  deleteCommentSuccess, deleteCommentFailure,
+  FETCH_REQUESTS, CREATE_REQUEST, DELETE_REQUEST,
+  fetchRequestsSuccess, fetchRequestsFailure,
+  createRequestSuccess, createRequestFailure,
+  deleteRequestSuccess, deleteRequestFailure,
 } from './actions';
-import { NOCORS_URL, API_URL } from "../../../constants";
+import { API_URL, NOCORS_URL } from '../../../constants';
 
 // Function for epics
-async function getTaskComments(token, taskId) {
+async function getTaskRequests(token, taskId) {
   try {
-    const url = `${API_URL}/api/comment/by-task?task_id=${taskId}`;
+    const url = `${API_URL}/api/request/by-task?task_id=${taskId}`;
     const params = {
       method: 'get',
       headers: {
@@ -35,13 +35,14 @@ async function getTaskComments(token, taskId) {
   }
 }
 
-async function createComment(token, commentDetails) {
+async function createRequest(token, requestDetails) {
+  console.log('create request epic helper func');
   try {
-    const url = API_URL + '/api/comment/create';
+    const url = `${API_URL}/api/request/create`;
     const body = {
-      task_id: commentDetails.taskId,
-      author_id: commentDetails.authorId,
-      text: commentDetails.text,
+      task_id: requestDetails.taskId,
+      requester_id: requestDetails.userId,
+      need_time: requestDetails.needTime,
     };
     const params = {
       method: 'post',
@@ -56,7 +57,7 @@ async function createComment(token, commentDetails) {
     const response = await fetch(NOCORS_URL + url, params);
     const data = await response.json();
 
-    data.success = (Math.random() > 0.5) ? true : false; // TESTING!!!
+    // data.success = (Math.random() > 0.5) ? true : false; // TESTING!!!
 
     console.log('createTask', data);
     return data;
@@ -65,9 +66,10 @@ async function createComment(token, commentDetails) {
   }
 }
 
-async function deleteComment(token, commentId) {
+async function deleteRequest(token, requestId) {
+  console.log('delete request epic helper func');
   try {
-    const url = API_URL + `/api/comment/delete?comment_id=${commentId}`;
+    const url = `${API_URL}/api/request/delete?request_id=${requestId}`;
     const params = {
       method: 'delete',
       headers: {
@@ -79,8 +81,8 @@ async function deleteComment(token, commentId) {
     const response = await fetch(NOCORS_URL + url, params);
     const data = await response.json();
 
-    console.log('deleteComment', data);
-    data.data.id = commentId;
+    console.log('deleteRequest', data);
+    data.data.id = requestId;
     return data;
   } catch (e) {
     throw e;
@@ -88,81 +90,81 @@ async function deleteComment(token, commentId) {
 }
 
 // Epics
-function fetchCommentsEpic(action$) {
+function fetchRequestsEpic(action$) {
   console.log(action$);
   return action$
-    .ofType(FETCH_COMMENTS)
+    .ofType(FETCH_REQUESTS)
     .pipe(
       mergeMap((payload) => {
         const { token, taskId } = payload.payload;
-        console.log('fetch comments', token);
-        return from(getTaskComments(token, taskId));
+        console.log('fetch requests', token);
+        return from(getTaskRequests(token, taskId));
       }),
       map(response => {
         console.log(response);
         if (response.success) {
-          return fetchCommentsSuccess(response.data);
+          return fetchRequestsSuccess(response.data);
         } else {
-          return fetchCommentsFailure(response.data);
+          return fetchRequestsFailure(response.data);
         }
       }),
       catchError(error => {
-        return of(fetchCommentsFailure(error));
+        return of(fetchRequestsFailure(error));
       })
     )
 }
 
-function createCommentEpic(action$) {
+function createRequestEpic(action$) {
   console.log(action$);
   return action$
-    .ofType(CREATE_COMMENT)
+    .ofType(CREATE_REQUEST)
     .pipe(
       mergeMap((payload) => {
-        const { token, commentDetails } = payload.payload;
-        return from(createComment(token, commentDetails));
+        const { token, requestDetails } = payload.payload;
+        return from(createRequest(token, requestDetails));
       }),
       map(response => {
         console.log(response);
         if (response.success) {
-          console.log('create comment success');
-          return createCommentSuccess(response.data);
+          console.log('create request success');
+          return createRequestSuccess(response.data);
         } else {
-          console.log('create comment failed');
-          return createCommentFailure(response.data);
+          console.log('create request failed');
+          return createRequestFailure(response.data);
         }
       }),
       catchError(error => {
-        return of(createCommentFailure(error));
+        return of(createRequestFailure(error));
       })
     )
 }
 
-function deleteCommentEpic(action$) {
+function deleteRequestEpic(action$) {
   console.log(action$);
   return action$
-    .ofType(DELETE_COMMENT)
+    .ofType(DELETE_REQUEST)
     .pipe(
       mergeMap((payload) => {
-        const { token, commentId } = payload.payload;
-        console.log('delete comment', token, commentId);
-        return from(deleteComment(token, commentId));
+        const { token, requestId } = payload.payload;
+        console.log('delete request', token, requestId);
+        return from(deleteRequest(token, requestId));
       }),
       map(response => {
         console.log(response);
         if (response.success) {
-          return deleteCommentSuccess(+response.data.id);
+          return deleteRequestSuccess(+response.data.id);
         } else {
-          return deleteCommentFailure(response.data);
+          return deleteRequestFailure(response.data);
         }
       }),
       catchError(error => {
-        return of(deleteCommentFailure(error));
+        return of(deleteRequestFailure(error));
       })
     )
 }
 
 export const epics = combineEpics(
-  fetchCommentsEpic,
-  createCommentEpic,
-  deleteCommentEpic,
+  fetchRequestsEpic,
+  createRequestEpic,
+  deleteRequestEpic,
 );

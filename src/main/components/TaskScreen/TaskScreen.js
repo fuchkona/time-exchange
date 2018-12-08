@@ -16,13 +16,30 @@ import Task from '../Task/Task';
 import Comments from '../../../task/containers/Comments/Comments';
 import Files from '../../../task/containers/Files/Files';
 import Requests from '../../../task/containers/Requests/Requests';
+import CreateRequest from './TaskScreenModals/CreateRequest';
 import './TaskScreen.scss';
 
 class TaskScreen extends Component {
 
-  handleTakeTask = () => {
-    console.log('take task - click');
+  handleCreateRequest = (needTime) => {
+    console.log('create request to task - click');
+    const taskId = this.props.tasks.tasks[0] ? this.props.tasks.tasks[0].id : undefined;
+    if (taskId) {
+      const requestDetails = {
+        taskId,
+        needTime,
+        userId: this.props.signIn.id,
+      };
+      console.log(requestDetails);
+      this.props.createRequest(this.props.signIn.token, requestDetails);
+    } else {
+      console.log('no task on screen!!!'); // error
+    }
   }
+
+  handleCreateRequestToggle = () => {
+    this.props.createRequestModalToggle();
+  };
 
   componentDidMount() {
     console.log('did mount');
@@ -34,7 +51,7 @@ class TaskScreen extends Component {
     const userId = this.props.signIn.id;
     const { id } = this.props.match.params;
     const task = this.props.tasks.tasks[0];
-
+    const taskOwnerId = task ? task.owner.id : undefined;
     console.log('task id', id, task);
 
     const showMakeRequestButton = task && !task.worker && task.owner.id !== userId;
@@ -70,11 +87,18 @@ class TaskScreen extends Component {
             <div className="task-screen__task m-2">
               {task ? <Task {...task} /> : null}
             </div>
+              <div className="task-screen__create-request-form">
+                <CreateRequest
+                  open={this.props.requests.modalCreateRequestOpen}
+                  handleToggle={this.handleCreateRequestToggle}
+                  handleCreateRequest={this.handleCreateRequest}
+                />
+              </div>
               {showMakeRequestButton ? (
                 <Button
                   className="m-2 px-4 task-screen__button_take"
                   size="lg"
-                  onClick={this.handleTakeTask}
+                  onClick={this.handleCreateRequestToggle}
                 >
                   Взять в работу
                 </Button>
@@ -94,7 +118,7 @@ class TaskScreen extends Component {
               </div>
               <div className="task-screen__requests m-2">
                 <div className="task-screen__requests_title mb-2">Заявки на исполнение</div>
-                <Requests token={token} taskId={id} />
+                <Requests taskOwnerId={taskOwnerId} userId={userId} token={token} taskId={id} />
               </div>
             </Col>
           </Row>

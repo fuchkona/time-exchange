@@ -88,7 +88,7 @@ class Layout extends Component {
                   className="m-1 px-1"
                   size="md"
                 >
-                  Профиль
+                  {this.props.signIn.username}
                 </Button>
               </Link>
               <Button
