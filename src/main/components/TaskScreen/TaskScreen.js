@@ -90,7 +90,7 @@ class TaskScreen extends Component {
             <Col md="3">
               <div className="task-screen__files m-2">
                 <div className="task-screen__files_title mb-2">Файлы</div>
-                <Files token={token} taskId={id} />
+                <Files userId={userId} token={token} taskId={id} />
               </div>
               <div className="task-screen__requests m-2">
                 <div className="task-screen__requests_title mb-2">Заявки на исполнение</div>
