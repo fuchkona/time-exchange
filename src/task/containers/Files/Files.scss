@@ -1,5 +1,39 @@
 @import '../../../base.scss';
 
 .files {
+  &__drop-zone{
 
+  }
+
+  &__one-file{
+
+    margin: 10px;
+  }
+
+  &__list{
+    text-align: center;
+  }
+
+  &__button{
+    color: #ffffff;
+    &_orange{
+      background-color: $orange !important;
+    }
+  }
+
+  &__download{
+    color: #ffffff;
+  }
+
+  &__drop-zone > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px !important;
+    width: 100% !important;
+  }
+  &__drop-zone p{
+    margin-bottom: 0;
+  }
 }
+

@@ -12,13 +12,14 @@ import {
   registerNewUserSuccess, registerNewUserFailure,
   signOutSuccess, signOutFailure,
 } from './actions';
-import { COOKIE_LIFETIME, API_URL, NOCORS_URL } from '../constants';
+import {API_URL, COOKIE_LIFETIME} from '../constants';
 
 
 // Function for epic
 async function userAuth(username, password, rememberMe) {
   try {
-    const url = `${API_URL}/api/site/login`;
+    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+    const url = API_URL + '/api/site/login';
     const body = {
       username,
       password,
@@ -32,7 +33,7 @@ async function userAuth(username, password, rememberMe) {
       body: JSON.stringify(body),
     };
 
-    const response = await fetch(NOCORS_URL + url, params);
+    const response = await fetch(proxyUrl + url, params);
     const data = await response.json();
     data.rememberMe = rememberMe;
 
@@ -45,7 +46,8 @@ async function userAuth(username, password, rememberMe) {
 
 async function userRegister(fullname, username, password, email) {
   try {
-    const url = `${API_URL}/api/site/signup`;
+    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+    const url = API_URL + '/api/site/signup';
     const body = {
       full_name: fullname,
       username,
@@ -61,7 +63,7 @@ async function userRegister(fullname, username, password, email) {
       body: JSON.stringify(body),
     };
 
-    const response = await fetch(NOCORS_URL + url, params);
+    const response = await fetch(proxyUrl + url, params);
     const data = await response.json();
 
     console.log('userRegister', data);
@@ -73,7 +75,8 @@ async function userRegister(fullname, username, password, email) {
 
 async function userLogout(token) {
   try {
-    const url = `${API_URL}/api/site/logout`;
+    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+    const url = API_URL + '/api/site/logout';
     const params = {
       method: 'get',
       headers: {
@@ -85,7 +88,7 @@ async function userLogout(token) {
 
     console.log(params);
 
-    const response = await fetch(NOCORS_URL + url, params);
+    const response = await fetch(proxyUrl + url, params);
     const data = await response.json();
 
     console.log('userLogout', data);
