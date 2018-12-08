@@ -16,7 +16,7 @@ import {
 
 // Reducer
 const defaultFilesState = {
-  comments: [],
+  files: [],
   fetching: true,
   addingFile: false,
   deletingFile: false,
@@ -50,14 +50,14 @@ function files(state = defaultFilesState, action) {
     case CREATE_FILE:
       return {
         ...state,
-        addingFile: true,
+        addingFILE: true,
       };
 
     case CREATE_FILE_SUCCESS:
+      console.log(action.payload);
       return {
         ...state,
-
-        files: state.files.concat(action.payload.file),
+        files: state.files.concat(action.payload.files),
         addingFile: false,
       };
 
