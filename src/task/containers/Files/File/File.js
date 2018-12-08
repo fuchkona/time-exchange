@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
-import {Button, Card, CardText} from "reactstrap";
-
-
+import { Button, FormGroup } from "reactstrap";
 
 
 class File extends Component {
 
-
-
   render() {
 
     return(
-      <div className="files__one-file justify-content-around">
-        <Button color="link">{this.props.filename}</Button>
-        <Button color="info"><a className="files__download" download="" href={this.props.url}>Скачать файл</a></Button>
+      <div className="files__one-file">
+          <Button color="link">{this.props.filename}</Button>
+        <FormGroup>
+          <Button className="files__button " color="info"><a className="files__download" download="" href={this.props.url}>Скачать</a></Button>
+          <Button className="files__button files__button_orange" color="warning">Удалить</Button>
+        </FormGroup>
       </div>
     )
   }

@@ -1,20 +1,14 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone'
-import {
-  Card,
-  CardText,
-  CardBody,
-  CardHeader,
-  CardFooter, Row,
-} from "reactstrap";
 
 import './Files.scss';
 import {bindActionCreators} from "redux";
 import {createFile, fetchFiles} from "../../redux/Files/actions";
 import connect from "react-redux/es/connect/connect";
 import File from "./File/File";
-import Comment from "../Comments/Comment/Comment";
 import LoadingAnimation from "../../../global/components/LoadingAnimation/LoadingAnimation";
+import LoadingAnimationMini from "../../../global/components/LoadingAnimationMini/LoadingAnimationMini";
+
 
 class Files extends Component {
 
@@ -38,19 +32,13 @@ class Files extends Component {
   };
 
   componentDidMount() {
-    console.log('div mount files', this.props);
     const { token, taskId } = this.props;
     this.props.fetchFiles(token, taskId);
-
   }
 
 
   render() {
-
     const files = this.props.files.files;
-
-    console.log(files);
-    console.log('fet', this.props.files.fetching);
 
     return (
       <div className="files">
@@ -69,7 +57,9 @@ class Files extends Component {
             accept=""
             onDrop={this.onDrop}
           >
-            <p>Переместите свои файлы сюда</p>
+            {this.props.files.addingFile ? <LoadingAnimationMini/>
+              : <p>Переместите свои файлы сюда для загрузки на сервер</p>}
+
           </Dropzone>
         </div>
 
