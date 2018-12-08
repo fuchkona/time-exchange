@@ -44,7 +44,7 @@ export function registerNewUser(fullname, username, password, email) {
 export function registerNewUserSuccess(id, token) {
   return {
     type: REGISTER_NEWUSER_SUCCESS,
-    payload: { token },
+    payload: { id, token },
   };
 }
 
