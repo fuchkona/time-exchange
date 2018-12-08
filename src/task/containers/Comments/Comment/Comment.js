@@ -23,7 +23,7 @@ class Comment extends Component {
               Автор: {author.full_name}
             </div>
             <div>
-              Создан: {moment(created_at * 1000).format('Do MMMM YYYY')}
+              Создан: {moment(created_at * 1000).format('Do MMMM YYYY HH:mm:ss')}
             </div>
           </div>
           <div className="comment__footer_right">
