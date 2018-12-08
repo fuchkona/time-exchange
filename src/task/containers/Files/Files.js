@@ -18,11 +18,13 @@ class Files extends Component {
 
   onDrop = (file) => {
     console.log(file);
-    const { token, taskId } = this.props;
+    const { token, taskId, userId } = this.props;
+
+
     const fileDetails = {
       file: file[0],
       taskId: taskId,
-
+      userId: userId
     };
 
     this.props.createFile(token, fileDetails);

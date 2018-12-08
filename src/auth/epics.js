@@ -12,14 +12,14 @@ import {
   registerNewUserSuccess, registerNewUserFailure,
   signOutSuccess, signOutFailure,
 } from './actions';
-import { COOKIE_LIFETIME } from '../constants';
+import {API_URL, COOKIE_LIFETIME} from '../constants';
 
 
 // Function for epic
 async function userAuth(username, password, rememberMe) {
   try {
     const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-    const url = 'back-exchange.herokuapp.com/api/site/login';
+    const url = API_URL + '/api/site/login';
     const body = {
       username,
       password,
@@ -47,7 +47,7 @@ async function userAuth(username, password, rememberMe) {
 async function userRegister(fullname, username, password, email) {
   try {
     const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-    const url = 'back-exchange.herokuapp.com/api/site/signup';
+    const url = API_URL + '/api/site/signup';
     const body = {
       full_name: fullname,
       username,
@@ -76,7 +76,7 @@ async function userRegister(fullname, username, password, email) {
 async function userLogout(token) {
   try {
     const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-    const url = 'back-exchange.herokuapp.com/api/site/logout';
+    const url = API_URL + '/api/site/logout';
     const params = {
       method: 'get',
       headers: {

@@ -8,6 +8,7 @@ import { from, of } from 'rxjs';
 import {
   FETCH_FILES, fetchFilesSuccess, fetchFilesFailure, CREATE_FILE, createFileSuccess, createFileFailure,
 } from './actions';
+import {API_URL} from "../../../constants";
 
 
 // Function for epics
@@ -35,13 +36,18 @@ async function getFilesByTask(token, taskId) {
 async function createFile(token, fileDetails) {
   try {
     const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-    const url = `back-exchange.herokuapp.com/api/file/create`;
+    const url = API_URL + `/api/file/create`;
 
     console.log('createFile', token, fileDetails);
 
+    let formData = new FormData();
+    formData.append('file', fileDetails.file);
+    formData.append('user_id', fileDetails.userId);
+    formData.append('task_id', fileDetails.taskId);
+
     const body = {
       task_id: fileDetails.taskId,
-      file: fileDetails.file,
+      file: formData.get('file'),
       user_id: fileDetails.userId,
     };
     const params = {
@@ -50,7 +56,9 @@ async function createFile(token, fileDetails) {
         'Content-type': 'application/json',
         'Authorization': 'Bearer ' + token,
       },
-      body: JSON.stringify(body),
+      processData: false,
+      contentType: false,
+      body: formData,
     };
     const response = await fetch(proxyUrl + url, params);
     const data = await response.json();

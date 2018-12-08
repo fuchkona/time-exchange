@@ -33,10 +33,10 @@ export function fetchFilesFailure(response) {
   };
 }
 
-export function createFile(token, file) {
+export function createFile(token, fileDetails) {
   return {
     type: CREATE_FILE,
-    payload: { token, file },
+    payload: { token, fileDetails },
   };
 }
 
