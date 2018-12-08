@@ -9,12 +9,11 @@ import {
   FETCH_PROFILE,
   fetchProfileSuccess, fetchProfileFailure, FETCH_PROFILE_TASKS, fetchProfileTasksSuccess, fetchProfileTasksFailure,
 } from './actions';
-import {API_URL} from "../constants";
+import { NOCORS_URL, API_URL } from "../constants";
 
 // Function for epics
 async function getProfile(token) {
   try {
-    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
     const url = API_URL + '/api/user/profile?expand=time,status,created_at';
     const params = {
       method: 'get',
@@ -25,7 +24,7 @@ async function getProfile(token) {
       },
     };
 
-    const response = await fetch(proxyUrl + url, params);
+    const response = await fetch(NOCORS_URL + url, params);
     const data = await response.json();
 
     console.log('getProfile', data);
@@ -37,7 +36,6 @@ async function getProfile(token) {
 
 async function getAllProfileTasks(token, workerId, page = null, perPage = null) {
   try {
-    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
     let url = API_URL + '/api/task/by-worker?worker_id=' + workerId;
 
     if(page != null && perPage != null){
@@ -52,7 +50,7 @@ async function getAllProfileTasks(token, workerId, page = null, perPage = null) 
       },
     };
 
-    const response = await fetch(proxyUrl + url, params);
+    const response = await fetch(NOCORS_URL + url, params);
     const data = await response.json();
 
     data.totalTasks = response.headers.get('X-Pagination-Total-Count');

@@ -16,7 +16,6 @@ import { API_URL, NOCORS_URL } from '../../../constants';
 // Function for epics
 async function getTaskRequests(token, taskId) {
   try {
-    console.log('getTaskRequests', token, taskId);
     const url = `${API_URL}/api/request/by-task?task_id=${taskId}`;
     const params = {
       method: 'get',
@@ -38,33 +37,33 @@ async function getTaskRequests(token, taskId) {
 
 async function createRequest(token, requestDetails) {
   console.log('create request epic helper func');
-//   try {
-//     const url = `${API_URL}/api/request/create`;
-//     const body = {
-//       task_id: requestDetails.taskId,
-//       author_id: requestDetails.authorId,
-//       text: requestDetails.text,
-//     };
-//     const params = {
-//       method: 'post',
-//       headers: {
-//         'Accept': 'application/json, text/plain, */*',
-//         'Content-type': 'application/json',
-//         'Authorization': 'Bearer ' + token,
-//       },
-//       body: JSON.stringify(body),
-//     };
+  try {
+    const url = `${API_URL}/api/request/create`;
+    const body = {
+      task_id: requestDetails.taskId,
+      requester_id: requestDetails.userId,
+      need_time: requestDetails.needTime,
+    };
+    const params = {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-type': 'application/json',
+        'Authorization': 'Bearer ' + token,
+      },
+      body: JSON.stringify(body),
+    };
 
-//     const response = await fetch(NOCORS_URL + url, params);
-//     const data = await response.json();
+    const response = await fetch(NOCORS_URL + url, params);
+    const data = await response.json();
 
-//     data.success = (Math.random() > 0.5) ? true : false; // TESTING!!!
+    // data.success = (Math.random() > 0.5) ? true : false; // TESTING!!!
 
-//     console.log('createTask', data);
-//     return data;
-//   } catch (e) {
-//     throw e;
-//   }
+    console.log('createTask', data);
+    return data;
+  } catch (e) {
+    throw e;
+  }
 }
 
 async function deleteRequest(token, requestId) {

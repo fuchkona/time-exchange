@@ -4,6 +4,7 @@ export const FETCH_REQUESTS = `${MODULE_NAME}/FETCH_REQUESTS`;
 export const FETCH_REQUESTS_SUCCESS = `${MODULE_NAME}/FETCH_REQUESTS_SUCCESS`;
 export const FETCH_REQUESTS_FAILURE = `${MODULE_NAME}/FETCH_REQUESTS_FAILURE`;
 
+export const CREATE_REQUEST_MODAL_TOGGLE = `${MODULE_NAME}/CREATE_REQUEST_MODAL_TOGGLE`;
 export const CREATE_REQUEST = `${MODULE_NAME}/CREATE_REQUEST`;
 export const CREATE_REQUEST_SUCCESS = `${MODULE_NAME}/CREATE_REQUEST_SUCCESS`;
 export const CREATE_REQUEST_FAILURE = `${MODULE_NAME}/CREATE_REQUEST_FAILURE`;
@@ -37,7 +38,12 @@ export function fetchRequestsFailure(response) {
   };
 }
 
-// то что ниже - вынести в task/epics??
+export function createRequestModalToggle() {
+  return {
+    type: CREATE_REQUEST_MODAL_TOGGLE,
+  };
+}
+
 export function createRequest(token, requestDetails) {
   return {
     type: CREATE_REQUEST,
@@ -79,7 +85,6 @@ export function assignRequestFailure(response) {
     payload: { errors: response },
   };
 }
-// то что выше - вынести в task/epics??
 
 export function deleteRequest(token, requestId) {
   return {
