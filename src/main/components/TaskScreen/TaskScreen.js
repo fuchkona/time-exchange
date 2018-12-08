@@ -21,7 +21,15 @@ import './TaskScreen.scss';
 class TaskScreen extends Component {
 
   handleTakeTask = () => {
-    console.log('take task - click');
+    console.log('create request to task - click');
+    const taskId = this.props.tasks.tasks[0] ? this.props.tasks.tasks[0].id : undefined;
+    if (taskId) {
+      console.log(taskId);
+      // надо еще need_time
+      // this.props.createRequest(this.props.signIn.token, this.props.signIn.id, taskId, needTime);
+    } else {
+      console.log('no task on screen!!!'); // error
+    }
   }
 
   componentDidMount() {
@@ -34,7 +42,7 @@ class TaskScreen extends Component {
     const userId = this.props.signIn.id;
     const { id } = this.props.match.params;
     const task = this.props.tasks.tasks[0];
-
+    const taskOwnerId = task ? task.owner.id : undefined;
     console.log('task id', id, task);
 
     const showMakeRequestButton = task && !task.worker && task.owner.id !== userId;
@@ -94,7 +102,7 @@ class TaskScreen extends Component {
               </div>
               <div className="task-screen__requests m-2">
                 <div className="task-screen__requests_title mb-2">Заявки на исполнение</div>
-                <Requests token={token} taskId={id} />
+                <Requests taskOwnerId={taskOwnerId} userId={userId} token={token} taskId={id} />
               </div>
             </Col>
           </Row>

@@ -111,9 +111,9 @@ function verifyUsernamePasswordEpic(action$) {
         if (response.success) {
           console.log('from inside epic', response);
           if (response.rememberMe) {
-            cookie.save('time-exchange-signin', { id: response.data.id, token: response.data.token }, { path: '/', maxAge: COOKIE_LIFETIME });
+            cookie.save('time-exchange-signin', { id: response.data.id, token: response.data.token, username: response.data.username }, { path: '/', maxAge: COOKIE_LIFETIME });
           }
-          return verifyUsernamePasswordSuccess(response.data.id, response.data.token);
+          return verifyUsernamePasswordSuccess(response.data.id, response.data.token, response.data.username);
         } else {
           return verifyUsernamePasswordFailure(response.data);
         }
@@ -136,7 +136,7 @@ function registerNewUserEpic(action$) {
       map(response => {
         console.log(response);
         if (response.success) {
-          return registerNewUserSuccess(response.data.id, response.data.token);
+          return registerNewUserSuccess(response.data.id, response.data.token, response.data.username);
         } else {
           return registerNewUserFailure(response.data);
         }
@@ -158,8 +158,7 @@ function signOutEpic(action$) {
       map(response => {
         console.log(response);
         if (response.success) {
-          cookie.remove('time-exchange-token');
-          cookie.remove('time-exchange-id');
+          cookie.remove('time-exchange-signin');
           return signOutSuccess();
         } else {
           return signOutFailure(response.data);

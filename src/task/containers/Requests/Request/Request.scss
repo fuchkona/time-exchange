@@ -1,0 +1,36 @@
+@import '../../../../base.scss';
+
+.request {
+  &__index {
+    min-width: 20px;
+  }
+
+  &__username {
+    min-width: 150px;
+  }
+
+  &__needtime {
+    min-width: 75px;
+    text-align: right;
+  }
+
+  &__assign {
+    min-width: 30px;
+    text-align: center;
+    
+    & > span {
+      color: $green;
+      cursor: pointer;
+    }
+  }
+
+  &__delete {
+    min-width: 30px;
+    text-align: center;
+    
+    & > span {
+      color: $red;
+      cursor: pointer;
+    } 
+  }
+}

@@ -11,7 +11,6 @@ import {
   createTaskSuccess, createTaskFailure,
   deleteTaskSuccess, deleteTaskFailure,
 } from './actions';
-import { faUserInjured } from '@fortawesome/free-solid-svg-icons';
 import {API_URL} from "../constants";
 
 // Function for epics

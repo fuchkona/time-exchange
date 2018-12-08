@@ -11,7 +11,6 @@ import {
   createCommentSuccess, createCommentFailure,
   deleteCommentSuccess, deleteCommentFailure,
 } from './actions';
-import { faAtlas } from '@fortawesome/free-solid-svg-icons';
 import {API_URL} from "../../../constants";
 
 // Function for epics
@@ -19,7 +18,7 @@ async function getTaskComments(token, taskId) {
   try {
     console.log('getTaskComments', token, taskId);
     const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-    const url = `back-exchange.herokuapp.com/api/comment/by-task?task_id=${taskId}`;
+    const url = `${API_URL}/api/comment/by-task?task_id=${taskId}`;
     const params = {
       method: 'get',
       headers: {
