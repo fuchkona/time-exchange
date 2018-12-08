@@ -123,14 +123,15 @@ function createCommentEpic(action$) {
     .pipe(
       mergeMap((payload) => {
         const { token, commentDetails } = payload.payload;
-        console.log('create task', token, commentDetails);
         return from(createComment(token, commentDetails));
       }),
       map(response => {
         console.log(response);
         if (response.success) {
+          console.log('create comment success');
           return createCommentSuccess(response.data);
         } else {
+          console.log('create comment failed');
           return createCommentFailure(response.data);
         }
       }),

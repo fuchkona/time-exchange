@@ -10,7 +10,7 @@ import './CreateComment.scss';
 
 class CreateComment extends Component {
   state = {
-    commentText: '',
+    commentText: this.props.addingCommentText,
   };
 
   handleCreateComment = () => {
@@ -25,12 +25,9 @@ class CreateComment extends Component {
   }
 
   componentDidUpdate(nextProps) {
-    console.log('nextProps', nextProps.addingCommentText);
-    console.log('this.props', this.props.addingCommentText);
-    console.log('this.state', this.state.commentText);
-    if (!nextProps.addingCommentText && nextProps.addingCommentText !== this.props.addingCommentText && this.state.commentText) {
+    if (nextProps.addingCommentText !== this.props.addingCommentText) {
       this.setState({
-        commentText: '',
+        commentText: this.props.addingCommentText,
       });
     }
   }
