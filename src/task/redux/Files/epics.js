@@ -56,8 +56,6 @@ async function createFile(token, fileDetails) {
         'Content-type': 'application/json',
         'Authorization': 'Bearer ' + token,
       },
-      processData: false,
-      contentType: false,
       body: formData,
     };
     const response = await fetch(proxyUrl + url, params);
