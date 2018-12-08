@@ -8,13 +8,12 @@ import { from, of } from 'rxjs';
 import {
   FETCH_FILES, fetchFilesSuccess, fetchFilesFailure, CREATE_FILE, createFileSuccess, createFileFailure,
 } from './actions';
-import {API_URL} from "../../../constants";
+import { NOCORS_URL, API_URL } from "../../../constants";
 
 
 // Function for epics
 async function getFilesByTask(token, taskId) {
   try {
-    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
     const url = `back-exchange.herokuapp.com/api/file/files-by-task?task_id=${taskId}`;
     const params = {
       method: 'get',
@@ -23,7 +22,7 @@ async function getFilesByTask(token, taskId) {
         'Authorization': 'Bearer ' + token,
       }
     };
-    const response = await fetch(proxyUrl + url, params);
+    const response = await fetch(NOCORS_URL + url, params);
     const data = await response.json();
 
     console.log('get files by task', data);
@@ -35,7 +34,6 @@ async function getFilesByTask(token, taskId) {
 
 async function createFile(token, fileDetails) {
   try {
-    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
     const url = API_URL + `/api/file/create`;
 
     console.log('createFile', token, fileDetails);
@@ -52,7 +50,7 @@ async function createFile(token, fileDetails) {
       },
       body: formData,
     };
-    const response = await fetch(proxyUrl + url, params);
+    const response = await fetch(NOCORS_URL + url, params);
     const data = await response.json();
 
     console.log('create file by task', data);

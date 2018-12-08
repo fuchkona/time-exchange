@@ -23,6 +23,7 @@ function tasks(state = defaultTasksState, action) {
     case FETCH_TASKS:
       return {
         ...state,
+        tasks: [],
         fetching: true,
       };
 

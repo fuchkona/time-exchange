@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import {
   FETCH_REQUESTS, FETCH_REQUESTS_SUCCESS, FETCH_REQUESTS_FAILURE,
-  CREATE_REQUEST, CREATE_REQUEST_SUCCESS, CREATE_REQUEST_FAILURE,
+  CREATE_REQUEST_MODAL_TOGGLE, CREATE_REQUEST, CREATE_REQUEST_SUCCESS, CREATE_REQUEST_FAILURE,
   DELETE_REQUEST, DELETE_REQUEST_SUCCESS, DELETE_REQUEST_FAILURE,
   ASSIGN_REQUEST, ASSIGN_REQUEST_SUCCESS, ASSIGN_REQUEST_FAILURE,
 } from './actions';
@@ -17,6 +17,7 @@ const defaultRequestsState = {
   assigningRequest: false,
   deletingRequest: false,
   errors: null,
+  modalCreateRequestOpen: false,
 };
 
 function requests(state = defaultRequestsState, action) {
@@ -24,6 +25,7 @@ function requests(state = defaultRequestsState, action) {
     case FETCH_REQUESTS:
       return {
         ...state,
+        requests: [],
         fetching: true,
       };
 
@@ -42,6 +44,12 @@ function requests(state = defaultRequestsState, action) {
         errors: action.payload.errors,
       };
 
+    case CREATE_REQUEST_MODAL_TOGGLE:
+      return {
+        ...state,
+        modalCreateRequestOpen: !state.modalCreateRequestOpen,
+      };
+
     case CREATE_REQUEST:
       return {
         ...state,
@@ -53,7 +61,8 @@ function requests(state = defaultRequestsState, action) {
       return {
         ...state,
         creatingRequest: false,
-        requests: state.requests.concat(action.payload.request), // уточнить, может не так
+        requests: state.requests.concat(action.payload.request),
+        modalCreateRequestOpen: false,
       };
 
     case CREATE_REQUEST_FAILURE:
