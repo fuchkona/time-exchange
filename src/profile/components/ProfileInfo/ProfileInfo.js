@@ -20,7 +20,6 @@ class ProfileInfo extends Component {
   render() {
 
     const profile = this.props.profile;
-    console.log('Profile', profile);
 
     return (
       <Card className="m-2 profile-screen__card">
