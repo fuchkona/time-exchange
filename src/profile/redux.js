@@ -114,5 +114,6 @@ function profileTasks(state = defaultProfileTasks, action) {
 
 export const reducer = combineReducers({
   profile,
-  profileTasks
+  profileTasks,
+  user
 });

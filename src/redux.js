@@ -7,6 +7,8 @@ import { reducer as tasks } from './main/redux';
 import { epics as tasksEpic } from './main/epics';
 import { reducer as profile} from "./profile/redux";
 import { epics as profileEpic} from "./profile/epics";
+import { reducer as user} from "./profile/redux";
+import { epics as userEpic} from "./profile/epics";
 
 import { reducer as comments} from "./task/redux/Comments/redux";
 import { epics as commentsEpic} from "./task/redux/Comments/epics";
@@ -21,6 +23,7 @@ const rootReducer = combineReducers({
   auth,
   tasks,
   profile,
+  user,
   comments,
   requests,
   files
@@ -30,6 +33,7 @@ const rootEpic = combineEpics(
   authEpic,
   tasksEpic,
   profileEpic,
+  userEpic,
   commentsEpic,
   requestsEpic,
   filesEpic
