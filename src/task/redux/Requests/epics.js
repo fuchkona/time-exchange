@@ -6,9 +6,10 @@ import {
 } from 'rxjs/operators';
 import { from, of } from 'rxjs';
 import {
-  FETCH_REQUESTS, CREATE_REQUEST, DELETE_REQUEST,
-  fetchRequestsSuccess, fetchRequestsFailure,
+  FETCH_REQUESTS, CREATE_REQUEST, ASSIGN_REQUEST, DELETE_REQUEST,
+  fetchRequests, fetchRequestsSuccess, fetchRequestsFailure,
   createRequestSuccess, createRequestFailure,
+  assignRequestSuccess, assignRequestFailure,
   deleteRequestSuccess, deleteRequestFailure,
 } from './actions';
 import { API_URL, NOCORS_URL } from '../../../constants';
@@ -59,7 +60,32 @@ async function createRequest(token, requestDetails) {
 
     // data.success = (Math.random() > 0.5) ? true : false; // TESTING!!!
 
-    console.log('createTask', data);
+    console.log('createRequest', data);
+    return data;
+  } catch (e) {
+    throw e;
+  }
+}
+
+async function assignRequest(token, requestDetails) {
+  console.log('assign request epic helper func', requestDetails);
+  try {
+    const url = `${API_URL}/api/task/accept-request/?request_id=${requestDetails.id}`;
+    const params = {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-type': 'application/json',
+        'Authorization': 'Bearer ' + token,
+      },
+    };
+
+    const response = await fetch(NOCORS_URL + url, params);
+    const data = await response.json();
+
+    // data.success = (Math.random() > 0.5) ? true : false; // TESTING!!!
+
+    console.log('assignRequest', data);
     return data;
   } catch (e) {
     throw e;
@@ -139,6 +165,34 @@ function createRequestEpic(action$) {
     )
 }
 
+function assignRequestEpic(action$) {
+  console.log(action$);
+  return action$
+    .ofType(ASSIGN_REQUEST)
+    .pipe(
+      mergeMap((payload) => {
+        const { token, requestDetails } = payload.payload;
+        return from(assignRequest(token, requestDetails));
+      }),
+      map(response => {
+        console.log(response);
+        if (response.success) {
+          console.log('assign request success');
+          return [
+            assignRequestSuccess(),
+            fetchRequests(),
+          ];
+        } else {
+          console.log('assign request failed');
+          return assignRequestFailure(response.data);
+        }
+      }),
+      catchError(error => {
+        return of(assignRequestFailure(error));
+      })
+    )
+}
+
 function deleteRequestEpic(action$) {
   console.log(action$);
   return action$
@@ -166,5 +220,6 @@ function deleteRequestEpic(action$) {
 export const epics = combineEpics(
   fetchRequestsEpic,
   createRequestEpic,
+  assignRequestEpic,
   deleteRequestEpic,
 );
