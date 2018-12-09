@@ -21,6 +21,8 @@ class UserScreen extends Component{
     this.defaultPage = 1;
     this.defaultTaskPerPage = 5;
 
+    this.currentUserId = this.props.match.params.id;
+
     this.state = {
       activePage: this.defaultPage,
     };
@@ -28,12 +30,12 @@ class UserScreen extends Component{
 
   handlePageChange = (pageNumber) => {
     this.setState({ activePage: pageNumber });
-    this.props.fetchProfileTasks(this.props.signIn.token, this.props.signIn.id, pageNumber, this.defaultTaskPerPage);
+    this.props.fetchProfileTasks(this.props.signIn.token, this.currentUserId, pageNumber, this.defaultTaskPerPage);
   };
 
   componentDidMount() {
-    this.props.fetchUser(this.props.signIn.token, this.props.signIn.id);
-    this.props.fetchProfileTasks(this.props.signIn.token, this.props.signIn.id, this.state.activePage, this.defaultTaskPerPage);
+    this.props.fetchUser(this.props.signIn.token, this.currentUserId);
+    this.props.fetchProfileTasks(this.props.signIn.token, this.currentUserId, this.state.activePage, this.defaultTaskPerPage);
   }
 
   render() {
