@@ -70,10 +70,10 @@ class TaskScreen extends Component {
                     Статус: {(task.currentStatus === null) ? 'null (fixme)' : task.currentStatus.title}
                     </div>
                     <div>
-                      Автор: {task.owner.full_name}
+                      Автор: <Link to={`/user/${task.owner.id}`}>{task.owner.full_name}</Link>
                     </div>
                     <div>
-                      Исполнитель: {(task.worker === null) ? 'Не назначен' : task.worker.full_name}
+                      Исполнитель: {(task.worker === null) ? 'Не назначен' : <Link to={`/user/${task.worker.id}`}>{task.worker.full_name}</Link>}
                     </div>
                   </div>
                 ) : (
