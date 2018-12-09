@@ -61,6 +61,30 @@ async function getAllProfileTasks(token, workerId, page = null, perPage = null) 
   }
 }
 
+async function getUser(token, userId) {
+  try {
+    const url = API_URL + `/api/users/${userId}?expand=created_at`;
+    const params = {
+      method: 'get',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-type': 'application/json',
+        'Authorization': 'Bearer ' + token,
+      },
+    };
+
+    const response = await fetch(NOCORS_URL + url, params);
+    const data = await response.json();
+
+    console.log('getUser', data);
+    return data;
+  } catch (e) {
+    throw e;
+  }
+}
+
+
+
 
 // Epics
 function fetchProfileEpic(action$) {

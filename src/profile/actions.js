@@ -12,9 +12,7 @@ export const FETCH_USER = `${MODULE_NAME}/FETCH_PROFILE`;
 export const FETCH_USER_SUCCESS = `${MODULE_NAME}/FETCH_USER_SUCCESS`;
 export const FETCH_USER_FAILURE = `${MODULE_NAME}/FETCH_USER_FAILURE`;
 
-export const FETCH_USER_TASKS = `${MODULE_NAME}/FETCH_USER_TASKS`;
-export const FETCH_USER_TASKS_SUCCESS = `${MODULE_NAME}/FETCH_USER_TASKS_SUCCESS`;
-export const FETCH_USER_TASKS_FAILURE = `${MODULE_NAME}/FETCH_USER_TASKS_FAILURE`;
+
 
 
 // actions profile info
@@ -83,24 +81,4 @@ export function fetchUserFailure(response) {
   };
 }
 
-//actions profile tasks
-export function fetchUserTasks(token, workerId, page, perPage) {
-  return {
-    type: FETCH_USER_TASKS,
-    payload: { token, workerId, page, perPage },
-  };
-}
 
-export function fetchUserTasksSuccess(userTasks, totalTasks) {
-  return {
-    type: FETCH_USER_TASKS_SUCCESS,
-    payload: { userTasks, totalTasks },
-  };
-}
-
-export function fetchUserTasksFailure(response) {
-  return {
-    type: FETCH_USER_TASKS_FAILURE,
-    payload: { status: response },
-  };
-}
