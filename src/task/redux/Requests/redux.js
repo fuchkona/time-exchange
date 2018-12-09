@@ -104,7 +104,6 @@ function requests(state = defaultRequestsState, action) {
       return {
         ...state,
         assigningRequest: false,
-        requests: state.requests.concat(action.payload.request), // TODO - исправить как
       };
 
     case ASSIGN_REQUEST_FAILURE:

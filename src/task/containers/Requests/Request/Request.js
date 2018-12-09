@@ -12,7 +12,12 @@ class Request extends Component {
   }
 
   handleAssign = () => {
-    this.props.onAssign(this.props.id);
+    const requestInfo = {
+      id: this.props.id,
+      requester: this.props.requester,
+      need_time: this.props.need_time,
+    };
+    this.props.onAssign(requestInfo);
   }
 
   render() {
