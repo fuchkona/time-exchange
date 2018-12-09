@@ -54,8 +54,8 @@ class TaskScreen extends Component {
     const taskOwnerId = task ? task.owner.id : undefined;
     console.log('task id', id, task);
 
-    const showMakeRequestButton = task && !task.worker && task.owner.id !== userId;
-    // TODO - подтягивать requester_id по данному task.id - и проверять userId не входит ли уже в requester_id's
+    const taskRequesters = this.props.requests.requests.map((request) => request.requester.id);
+    const showMakeRequestButton = task && !task.worker && task.owner.id !== userId && !taskRequesters.includes(userId);
     return (
       <Layout
         debugScreenName="Экран одной задачи"
