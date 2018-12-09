@@ -72,10 +72,9 @@ export function assignRequest(token, requestDetails) {
   };
 }
 
-export function assignRequestSuccess(request) {
+export function assignRequestSuccess() {
   return {
     type: ASSIGN_REQUEST_SUCCESS,
-    payload: { request },
   };
 }
 

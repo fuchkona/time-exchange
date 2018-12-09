@@ -54,8 +54,8 @@ class TaskScreen extends Component {
     const taskOwnerId = task ? task.owner.id : undefined;
     console.log('task id', id, task);
 
-    const showMakeRequestButton = task && !task.worker && task.owner.id !== userId;
-    // TODO - подтягивать requester_id по данному task.id - и проверять userId не входит ли уже в requester_id's
+    const taskRequesters = this.props.requests.requests.map((request) => request.requester.id);
+    const showMakeRequestButton = task && !task.worker && task.owner.id !== userId && !taskRequesters.includes(userId);
     return (
       <Layout
         debugScreenName="Экран одной задачи"
@@ -70,10 +70,10 @@ class TaskScreen extends Component {
                     Статус: {(task.currentStatus === null) ? 'null (fixme)' : task.currentStatus.title}
                     </div>
                     <div>
-                      Автор: {task.owner.full_name}
+                      Автор: <Link to={`/user/${task.owner.id}`}>{task.owner.full_name}</Link>
                     </div>
                     <div>
-                      Исполнитель: {(task.worker === null) ? 'Не назначен' : task.worker.full_name}
+                      Исполнитель: {(task.worker === null) ? 'Не назначен' : <Link to={`/user/${task.worker.id}`}>{task.worker.full_name}</Link>}
                     </div>
                   </div>
                 ) : (

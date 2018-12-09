@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCheck } from '@fortawesome/free-solid-svg-icons'
@@ -12,7 +13,12 @@ class Request extends Component {
   }
 
   handleAssign = () => {
-    this.props.onAssign(this.props.id);
+    const requestInfo = {
+      id: this.props.id,
+      requester: this.props.requester,
+      need_time: this.props.need_time,
+    };
+    this.props.onAssign(requestInfo);
   }
 
   render() {
@@ -21,7 +27,7 @@ class Request extends Component {
     return (
       <tr className="request">
         <td className="request__index">{index}</td>
-        <td className="request__username">{requester.username}</td>
+        <td className="request__username"><Link to={`/user/${requester.id}`}>{requester.username}</Link></td>
         <td className="request__needtime">{need_time}</td>
         <td className="request__assign">{this.props.onAssign ? <span onClick={this.handleAssign}><FontAwesomeIcon icon={faUserCheck} /></span> : <span></span>}</td>
         <td className="request__delete">{this.props.onDelete ? <span onClick={this.handleDelete}><FontAwesomeIcon icon={faTimes} /></span> : <span></span>}</td>
