@@ -28,12 +28,19 @@ class UserScreen extends Component{
     };
   }
 
+  checkAuthUser(){
+    if (this.props.signIn.id === this.currentUserId){
+      document.location.href = "/profile";
+    }
+  }
+
   handlePageChange = (pageNumber) => {
     this.setState({ activePage: pageNumber });
     this.props.fetchProfileTasks(this.props.signIn.token, this.currentUserId, pageNumber, this.defaultTaskPerPage);
   };
 
   componentDidMount() {
+    this.checkAuthUser();
     this.props.fetchUser(this.props.signIn.token, this.currentUserId);
     this.props.fetchProfileTasks(this.props.signIn.token, this.currentUserId, this.state.activePage, this.defaultTaskPerPage);
   }
