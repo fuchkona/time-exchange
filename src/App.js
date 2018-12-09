@@ -50,6 +50,7 @@ class App extends Component {
             <PrivateRoute path="/" exact component={TasksScreen} />
             <PrivateRoute path="/task/:id" exact component={TaskScreen} />
             <PrivateRoute path="/profile" exact component={ProfileScreen} />
+
             <Route path="/login" component={LoginScreen} />
             <Route path="*" component={ Error404 }/>
           </Switch>
