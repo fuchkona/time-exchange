@@ -7,6 +7,8 @@ import {
   ListGroupItem,
 } from "reactstrap";
 import moment from "moment";
+import "./UserScreen.scss";
+
 
 
 class UserInfo extends Component{
