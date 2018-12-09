@@ -10,6 +10,7 @@ import LoadingAnimation from "../../../global/components/LoadingAnimation/Loadin
 import BriefTask from "../../../main/components/BriefTask/BriefTask";
 import TEPagination from "../../../global/components/TEPagination/TEPagination";
 import "./UserScreen.scss";
+import {Redirect} from "react-router-dom";
 
 
 class UserScreen extends Component{
@@ -21,11 +22,15 @@ class UserScreen extends Component{
     this.defaultPage = 1;
     this.defaultTaskPerPage = 5;
 
-    this.currentUserId = this.props.match.params.id;
+    this.currentUserId = +this.props.match.params.id;
 
     this.state = {
       activePage: this.defaultPage,
     };
+  }
+
+  isAuthUser(){
+    return +this.props.signIn.id === this.currentUserId;
   }
 
   handlePageChange = (pageNumber) => {
@@ -34,6 +39,7 @@ class UserScreen extends Component{
   };
 
   componentDidMount() {
+
     this.props.fetchUser(this.props.signIn.token, this.currentUserId);
     this.props.fetchProfileTasks(this.props.signIn.token, this.currentUserId, this.state.activePage, this.defaultTaskPerPage);
   }
@@ -47,6 +53,10 @@ class UserScreen extends Component{
     const tasks = this.props.profileTasks.profileTasks;
 
     const totalTasks = this.props.profileTasks.totalTasks;
+
+    if (this.isAuthUser()){
+      return <Redirect to="/profile"/>;
+    }
 
     return (
       <Layout
