@@ -21,6 +21,8 @@ import ProfileScreen from './profile/containers/ProfileScreen';
 import Error404 from "./errors/components/Error404/Error404";
 import moment from 'moment';
 import 'moment/locale/ru';
+import UserScreen from "./profile/containers/UserScreen";
+
 
 
 moment().locale('ru');
@@ -50,6 +52,7 @@ class App extends Component {
             <PrivateRoute path="/" exact component={TasksScreen} />
             <PrivateRoute path="/task/:id" exact component={TaskScreen} />
             <PrivateRoute path="/profile" exact component={ProfileScreen} />
+            <PrivateRoute path="/user/:id" exact component={UserScreen}/>
             <Route path="/login" component={LoginScreen} />
             <Route path="*" component={ Error404 }/>
           </Switch>

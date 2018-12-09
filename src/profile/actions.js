@@ -8,6 +8,13 @@ export const FETCH_PROFILE_TASKS = `${MODULE_NAME}/FETCH_PROFILE_TASKS`;
 export const FETCH_PROFILE_TASKS_SUCCESS = `${MODULE_NAME}/FETCH_PROFILE_TASKS_SUCCESS`;
 export const FETCH_PROFILE_TASKS_FAILURE = `${MODULE_NAME}/FETCH_PROFILE_TASKS_FAILURE`;
 
+export const FETCH_USER = `${MODULE_NAME}/FETCH_PROFILE`;
+export const FETCH_USER_SUCCESS = `${MODULE_NAME}/FETCH_USER_SUCCESS`;
+export const FETCH_USER_FAILURE = `${MODULE_NAME}/FETCH_USER_FAILURE`;
+
+
+
+
 // actions profile info
 export function fetchProfile(token) {
   return {
@@ -51,3 +58,27 @@ export function fetchProfileTasksFailure(response) {
     payload: { status: response },
   };
 }
+
+// actions user info
+export function fetchUser(token, userId) {
+  return {
+    type: FETCH_USER,
+    payload: { token, userId },
+  };
+}
+
+export function fetchUserSuccess(user) {
+  return {
+    type: FETCH_USER_SUCCESS,
+    payload: { user },
+  };
+}
+
+export function fetchUserFailure(response) {
+  return {
+    type: FETCH_USER_FAILURE,
+    payload: { status: response },
+  };
+}
+
+

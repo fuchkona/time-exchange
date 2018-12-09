@@ -5,7 +5,7 @@ import {
   FETCH_PROFILE_FAILURE,
   FETCH_PROFILE_TASKS,
   FETCH_PROFILE_TASKS_SUCCESS,
-  FETCH_PROFILE_TASKS_FAILURE,
+  FETCH_PROFILE_TASKS_FAILURE, FETCH_USER, FETCH_USER_SUCCESS, FETCH_USER_FAILURE,
 } from './actions';
 
 // Function for reducer
@@ -19,6 +19,11 @@ const defaultProfileState = {
 
 const defaultProfileTasks = {
   profileTasks: [],
+  fetching: false,
+};
+
+const defaultUserState = {
+  user: '',
   fetching: false,
 };
 
@@ -39,6 +44,33 @@ function profile(state = defaultProfileState, action) {
       };
 
     case FETCH_PROFILE_FAILURE:
+      return {
+        ...state,
+        fetching: false,
+      };
+
+    default:
+      return state;
+  }
+}
+
+function user(state = defaultUserState, action) {
+  switch(action.type) {
+    case FETCH_USER:
+      return {
+        ...state,
+        fetching: true,
+      };
+
+    case FETCH_USER_SUCCESS:
+      console.log(action.payload);
+      return {
+        ...state,
+        user: action.payload.user,
+        fetching: false,
+      };
+
+    case FETCH_USER_FAILURE:
       return {
         ...state,
         fetching: false,
@@ -82,5 +114,6 @@ function profileTasks(state = defaultProfileTasks, action) {
 
 export const reducer = combineReducers({
   profile,
-  profileTasks
+  profileTasks,
+  user
 });
