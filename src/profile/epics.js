@@ -7,7 +7,12 @@ import {
 import { from, of } from 'rxjs';
 import {
   FETCH_PROFILE,
-  fetchProfileSuccess, fetchProfileFailure, FETCH_PROFILE_TASKS, fetchProfileTasksSuccess, fetchProfileTasksFailure,
+  fetchProfileSuccess,
+  fetchProfileFailure,
+  FETCH_PROFILE_TASKS,
+  fetchProfileTasksSuccess,
+  fetchProfileTasksFailure,
+  FETCH_USER, fetchUserSuccess, fetchUserFailure,
 } from './actions';
 import { NOCORS_URL, API_URL } from "../constants";
 
@@ -109,6 +114,27 @@ function fetchProfileEpic(action$) {
     )
 }
 
+function fetchUserEpic(action$) {
+  return action$
+    .ofType(FETCH_USER)
+    .pipe(
+      mergeMap((payload) => {
+        return from(getUser(payload.payload.token, payload.payload.userId))
+      }),
+      map(response => {
+        console.log(response);
+        if (response.success) {
+          return fetchUserSuccess(response.data);
+        } else {
+          return fetchUserFailure(response);
+        }
+      }),
+      catchError(error => {
+        return of(fetchUserFailure(error));
+      })
+    )
+}
+
 function fetchProfileTasksEpic(action$) {
   console.log(action$);
   return action$
@@ -139,5 +165,6 @@ function fetchProfileTasksEpic(action$) {
 
 export const epics = combineEpics(
   fetchProfileEpic,
+  fetchUserEpic,
   fetchProfileTasksEpic
 );

@@ -60,10 +60,10 @@ export function fetchProfileTasksFailure(response) {
 }
 
 // actions user info
-export function fetchUser(token) {
+export function fetchUser(token, userId) {
   return {
     type: FETCH_USER,
-    payload: { token },
+    payload: { token, userId },
   };
 }
 

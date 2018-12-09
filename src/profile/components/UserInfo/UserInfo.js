@@ -1,9 +1,11 @@
 import React, { Component} from "react";
-import Card from "reactstrap/src/Card";
-import CardHeader from "reactstrap/src/CardHeader";
-import CardBody from "reactstrap/src/CardBody";
-import ListGroup from "reactstrap/src/ListGroup";
-import ListGroupItem from "reactstrap/src/ListGroupItem";
+import {
+  CardBody,
+  Card,
+  CardHeader,
+  ListGroup,
+  ListGroupItem,
+} from "reactstrap";
 import moment from "moment";
 
 

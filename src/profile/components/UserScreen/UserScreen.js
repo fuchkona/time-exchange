@@ -1,12 +1,12 @@
 import React, { Component} from "react";
 import UserInfo from "../UserInfo/UserInfo";
 import Layout from "../../../main/containers/Layout/Layout";
-import Row from "reactstrap/src/Row";
-import Col from "reactstrap/src/Col";
+import {
+  Row,
+  Col, CardHeader, CardBody, Card,
+} from "reactstrap";
 import LoadingAnimation from "../../../global/components/LoadingAnimation/LoadingAnimation";
-import Card from "reactstrap/src/Card";
-import CardHeader from "reactstrap/src/CardHeader";
-import CardBody from "reactstrap/src/CardBody";
+
 import BriefTask from "../../../main/components/BriefTask/BriefTask";
 import TEPagination from "../../../global/components/TEPagination/TEPagination";
 import "./UserScreen.scss";
