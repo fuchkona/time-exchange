@@ -11,6 +11,8 @@ import {
   createCommentSuccess, createCommentFailure,
   deleteCommentSuccess, deleteCommentFailure,
 } from './actions';
+import { signOutSuccess } from '../../../auth/actions';
+import cookie from 'react-cookie';
 import { NOCORS_URL, API_URL } from "../../../constants";
 
 // Function for epics
@@ -56,7 +58,7 @@ async function createComment(token, commentDetails) {
     const response = await fetch(NOCORS_URL + url, params);
     const data = await response.json();
 
-    data.success = (Math.random() > 0.5) ? true : false; // TESTING!!!
+    // data.success = (Math.random() > 0.5) ? true : false; // TESTING!!!
 
     console.log('createTask', data);
     return data;
@@ -102,9 +104,12 @@ function fetchCommentsEpic(action$) {
         console.log(response);
         if (response.success) {
           return fetchCommentsSuccess(response.data);
-        } else {
-          return fetchCommentsFailure(response.data);
+        } else if(response.data.status == 401) {
+          console.log('unauthorised');
+          cookie.remove('time-exchange-signin');
+          return signOutSuccess();
         }
+        return fetchCommentsFailure(response.data);
       }),
       catchError(error => {
         return of(fetchCommentsFailure(error));
@@ -126,10 +131,13 @@ function createCommentEpic(action$) {
         if (response.success) {
           console.log('create comment success');
           return createCommentSuccess(response.data);
-        } else {
-          console.log('create comment failed');
-          return createCommentFailure(response.data);
+        } else if(response.data.status == 401) {
+          console.log('unauthorised');
+          cookie.remove('time-exchange-signin');
+          return signOutSuccess();
         }
+        console.log('create comment failed');
+        return createCommentFailure(response.data);
       }),
       catchError(error => {
         return of(createCommentFailure(error));
@@ -151,9 +159,12 @@ function deleteCommentEpic(action$) {
         console.log(response);
         if (response.success) {
           return deleteCommentSuccess(+response.data.id);
-        } else {
-          return deleteCommentFailure(response.data);
+        } else if(response.data.status == 401) {
+          console.log('unauthorised');
+          cookie.remove('time-exchange-signin');
+          return signOutSuccess();
         }
+        return deleteCommentFailure(response.data);
       }),
       catchError(error => {
         return of(deleteCommentFailure(error));

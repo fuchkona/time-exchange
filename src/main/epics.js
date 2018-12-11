@@ -11,6 +11,8 @@ import {
   createTaskSuccess, createTaskFailure,
   deleteTaskSuccess, deleteTaskFailure,
 } from './actions';
+import { signOutSuccess } from '../auth/actions';
+import cookie from 'react-cookie';
 import { NOCORS_URL, API_URL } from "../constants";
 
 // Function for epics
@@ -127,9 +129,12 @@ function fetchTasksEpic(action$) {
         console.log(response);
         if (response.success) {
           return fetchTasksSuccess(response.data); // , +response.totalTasks
-        } else {
-          return fetchTasksFailure(response.data);
+        } else if(response.data.status == 401) {
+          console.log('unauthorised');
+          cookie.remove('time-exchange-signin');
+          return signOutSuccess();
         }
+        return fetchTasksFailure(response.data);
       }),
       catchError(error => {
         return of(fetchTasksFailure(error));
@@ -151,9 +156,12 @@ function createTaskEpic(action$) {
         console.log(response);
         if (response.success) {
           return createTaskSuccess(response.data);
-        } else {
-          return createTaskFailure(response.data);
+        } else if(response.data.status == 401) {
+          console.log('unauthorised');
+          cookie.remove('time-exchange-signin');
+          return signOutSuccess();
         }
+        return createTaskFailure(response.data);
       }),
       catchError(error => {
         return of(createTaskFailure(error));
@@ -175,9 +183,12 @@ function deleteTaskEpic(action$) {
         console.log(response);
         if (response.success) {
           return deleteTaskSuccess(+response.data.id);
-        } else {
-          return deleteTaskFailure(response.data);
+        } else if(response.data.status == 401) {
+          console.log('unauthorised');
+          cookie.remove('time-exchange-signin');
+          return signOutSuccess();
         }
+        return deleteTaskFailure(response.data);
       }),
       catchError(error => {
         return of(deleteTaskFailure(error));

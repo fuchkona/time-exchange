@@ -14,6 +14,8 @@ import {
   fetchProfileTasksFailure,
   FETCH_USER, fetchUserSuccess, fetchUserFailure,
 } from './actions';
+import { signOutSuccess } from '../auth/actions';
+import cookie from 'react-cookie';
 import { NOCORS_URL, API_URL } from "../constants";
 
 // Function for epics
@@ -89,8 +91,6 @@ async function getUser(token, userId) {
 }
 
 
-
-
 // Epics
 function fetchProfileEpic(action$) {
   console.log(action$);
@@ -104,9 +104,12 @@ function fetchProfileEpic(action$) {
         console.log(response);
         if (response.success) {
           return fetchProfileSuccess(response.data);
-        } else {
-          return fetchProfileFailure(response);
+        } else if(response.data.status == 401) {
+          console.log('unauthorised');
+          cookie.remove('time-exchange-signin');
+          return signOutSuccess();
         }
+        return fetchProfileFailure(response);
       }),
       catchError(error => {
         return of(fetchProfileFailure(error));
@@ -125,9 +128,12 @@ function fetchUserEpic(action$) {
         console.log(response);
         if (response.success) {
           return fetchUserSuccess(response.data);
-        } else {
-          return fetchUserFailure(response);
+        } else if(response.data.status == 401) {
+          console.log('unauthorised');
+          cookie.remove('time-exchange-signin');
+          return signOutSuccess();
         }
+        return fetchUserFailure(response);
       }),
       catchError(error => {
         return of(fetchUserFailure(error));
@@ -152,9 +158,12 @@ function fetchProfileTasksEpic(action$) {
         console.log(response);
         if(response.success) {
           return fetchProfileTasksSuccess(response.data, +response.totalTasks);
-        } else {
-          return fetchProfileFailure(response);
+        } else if(response.data.status == 401) {
+          console.log('unauthorised');
+          cookie.remove('time-exchange-signin');
+          return signOutSuccess();
         }
+        return fetchProfileFailure(response);
       }),
       catchError(error => {
         return of(fetchProfileTasksFailure(error));

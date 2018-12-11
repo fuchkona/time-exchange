@@ -8,6 +8,8 @@ import { from, of } from 'rxjs';
 import {
   FETCH_FILES, fetchFilesSuccess, fetchFilesFailure, CREATE_FILE, createFileSuccess, createFileFailure,
 } from './actions';
+import { signOutSuccess } from '../../../auth/actions';
+import cookie from 'react-cookie';
 import { NOCORS_URL, API_URL } from "../../../constants";
 
 
@@ -79,9 +81,12 @@ function fetchFilesEpic(action$) {
         console.log(response);
         if (response.success) {
           return fetchFilesSuccess(response.data);
-        } else {
-          return fetchFilesFailure(response.data);
+        } else if(response.data.status == 401) {
+          console.log('unauthorised');
+          cookie.remove('time-exchange-signin');
+          return signOutSuccess();
         }
+        return fetchFilesFailure(response.data);
       }),
       catchError(error => {
         return of(fetchFilesFailure(error));
@@ -103,9 +108,12 @@ function createFileEpic(action$) {
         console.log(response);
         if (response.success) {
           return createFileSuccess(response.data);
-        } else {
-          return createFileFailure(response.data);
+        } else if(response.data.status == 401) {
+          console.log('unauthorised');
+          cookie.remove('time-exchange-signin');
+          return signOutSuccess();
         }
+        return createFileFailure(response.data);
       }),
       catchError(error => {
         return of(createFileFailure(error));

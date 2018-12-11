@@ -157,9 +157,11 @@ function signOutEpic(action$) {
         if (response.success) {
           cookie.remove('time-exchange-signin');
           return signOutSuccess();
-        } else {
-          return signOutFailure(response.data);
+        } else if(response.data.status == 401) {
+          console.log('unauthorised');
+          cookie.remove('time-exchange-signin');
         }
+        return signOutFailure(response.data);
       }),
       catchError(error => {
         return of(signOutFailure(error));
