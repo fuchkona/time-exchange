@@ -32,6 +32,8 @@ class Requests extends Component {
 
   handleRequestAssign = () => {
     console.log('подтверждаем после модалки', this.state.requestInfo, this.props.userId);
+    const { requestInfo } = this.state;
+    requestInfo.taskId = this.props.taskId;
     this.props.assignRequest(this.props.token, this.state.requestInfo);
     this.setState({ modal: false, requestInfo: {} });
   }

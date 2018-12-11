@@ -12,6 +12,9 @@ import {
   assignRequestSuccess, assignRequestFailure,
   deleteRequestSuccess, deleteRequestFailure,
 } from './actions';
+import { signOutSuccess } from '../../../auth/actions';
+import cookie from 'react-cookie';
+import { fetchTasks } from '../../../main/actions';
 import { API_URL, NOCORS_URL } from '../../../constants';
 
 // Function for epics
@@ -82,7 +85,8 @@ async function assignRequest(token, requestDetails) {
 
     const response = await fetch(NOCORS_URL + url, params);
     const data = await response.json();
-
+    data.requestDetails = requestDetails;
+    data.token = token;
     // data.success = (Math.random() > 0.5) ? true : false; // TESTING!!!
 
     console.log('assignRequest', data);
@@ -130,9 +134,12 @@ function fetchRequestsEpic(action$) {
         console.log(response);
         if (response.success) {
           return fetchRequestsSuccess(response.data);
-        } else {
-          return fetchRequestsFailure(response.data);
+        } else if(response.data.status == 401) {
+          console.log('unauthorised');
+          cookie.remove('time-exchange-signin');
+          return signOutSuccess();
         }
+        return fetchRequestsFailure(response.data);
       }),
       catchError(error => {
         return of(fetchRequestsFailure(error));
@@ -154,10 +161,13 @@ function createRequestEpic(action$) {
         if (response.success) {
           console.log('create request success');
           return createRequestSuccess(response.data);
-        } else {
-          console.log('create request failed');
-          return createRequestFailure(response.data);
+        } else if(response.data.status == 401) {
+          console.log('unauthorised');
+          cookie.remove('time-exchange-signin');
+          return signOutSuccess();
         }
+        console.log('create request failed');
+        return createRequestFailure(response.data);
       }),
       catchError(error => {
         return of(createRequestFailure(error));
@@ -174,18 +184,21 @@ function assignRequestEpic(action$) {
         const { token, requestDetails } = payload.payload;
         return from(assignRequest(token, requestDetails));
       }),
-      map(response => {
+      mergeMap(response => {
         console.log(response);
         if (response.success) {
-          console.log('assign request success');
-          return [
+          console.log('assign request success', response.token, response.requestDetails.taskId);
+          return ([
             assignRequestSuccess(),
-            fetchRequests(),
-          ];
-        } else {
-          console.log('assign request failed');
-          return assignRequestFailure(response.data);
+            fetchRequests(response.token, response.requestDetails.taskId),
+            fetchTasks(response.token, response.requestDetails.taskId),
+          ]);
+        } else if(response.data.status == 401) {
+          console.log('unauthorised');
+          cookie.remove('time-exchange-signin');
+          return signOutSuccess();
         }
+        return of(assignRequestFailure(response.data));
       }),
       catchError(error => {
         return of(assignRequestFailure(error));
@@ -207,9 +220,12 @@ function deleteRequestEpic(action$) {
         console.log(response);
         if (response.success) {
           return deleteRequestSuccess(+response.data.id);
-        } else {
-          return deleteRequestFailure(response.data);
+        } else if(response.data.status == 401) {
+          console.log('unauthorised');
+          cookie.remove('time-exchange-signin');
+          return signOutSuccess();
         }
+        return deleteRequestFailure(response.data);
       }),
       catchError(error => {
         return of(deleteRequestFailure(error));
