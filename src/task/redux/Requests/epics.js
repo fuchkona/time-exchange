@@ -72,8 +72,9 @@ async function createRequest(token, requestDetails) {
 
 async function assignRequest(token, requestDetails) {
   console.log('assign request epic helper func', requestDetails);
+  const { id, taskId } = requestDetails;
   try {
-    const url = `${API_URL}/api/task/accept-request/?request_id=${requestDetails.id}`;
+    const url = `${API_URL}/api/task/accept-request?request_id=${id}&task_id=${taskId}`;
     const params = {
       method: 'post',
       headers: {
@@ -87,7 +88,6 @@ async function assignRequest(token, requestDetails) {
     const data = await response.json();
     data.requestDetails = requestDetails;
     data.token = token;
-    // data.success = (Math.random() > 0.5) ? true : false; // TESTING!!!
 
     console.log('assignRequest', data);
     return data;
