@@ -19,6 +19,7 @@ const defaultSignInState = {
   username: cookieSignIn ? cookieSignIn.username : null,
   errors: null,
   verifying: false,
+  signingOut: false,
   auth: cookieSignIn ? true : false,
 };
 
@@ -76,6 +77,7 @@ function signIn(state = defaultSignInState, action) {
     case SIGNOUT:
       return {
         ...state,
+        signingOut: true,
       };
 
     case SIGNOUT_SUCCESS:
@@ -85,10 +87,14 @@ function signIn(state = defaultSignInState, action) {
         token: null,
         username: null,
         auth: false,
+        signingOut: false,
       };
 
     case SIGNOUT_FAILURE:
-      return state;
+      return {
+        ...state,
+        signingOut: false,
+      };
 
     default:
       return state;
