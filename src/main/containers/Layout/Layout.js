@@ -15,7 +15,12 @@ import { signOut } from '../../../auth/actions';
 import { createTask, createTaskModalToggle } from '../../actions';
 import CreateTask from './LayoutModals/CreateTask';
 import './Layout.scss';
+import {ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 const logo = require('../../../static/time-exchange-logo.png');
+
+
 
 class Layout extends Component {
   static defaultProps = {
@@ -46,6 +51,7 @@ class Layout extends Component {
   render() {
     return (
       <div className="layout">
+        <ToastContainer />
         <Container fluid>
           <Row className="layout__header m-0" justify="between">
             <Col md="3">

@@ -8,6 +8,8 @@ import connect from "react-redux/es/connect/connect";
 import File from "./File/File";
 import LoadingAnimation from "../../../global/components/LoadingAnimation/LoadingAnimation";
 import LoadingAnimationMini from "../../../global/components/LoadingAnimationMini/LoadingAnimationMini";
+import {toast, ToastContainer} from "react-toastify";
+
 
 
 class Files extends Component {
@@ -37,9 +39,20 @@ class Files extends Component {
   }
 
 
+
+  checkSuccessFetching = () => {
+    if (this.props.files.errors){
+      toast.error(this.props.files.errors.message);
+    }
+
+
+    console.log('checkSuccessUploadFile',this.props);
+  };
+
+
   render() {
     const files = this.props.files.files;
-
+    this.checkSuccessFetching();
     return (
       <div className="files">
         <div className="files__list">
