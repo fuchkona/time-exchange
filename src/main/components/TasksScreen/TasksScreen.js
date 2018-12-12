@@ -15,6 +15,7 @@ import {
 } from '../../../constants';
 import './TasksScreen.scss';
 import TEPagination from "../../../global/components/TEPagination/TEPagination";
+import WaitingModal from '../../../global/components/WaitingModal/WaitingModal';
 
 class TasksScreen extends Component {
   constructor(props) {
@@ -106,6 +107,9 @@ class TasksScreen extends Component {
               />
             ))}
           </div>
+          <WaitingModal
+            open={this.props.tasks ? this.props.tasks.fetching : false}
+          />
           <div className="tasks-screen__pagination">
             <div className="tasks-screen__pagination_pages">
               <TEPagination

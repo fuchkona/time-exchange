@@ -13,6 +13,7 @@ import {
 import './LoginScreen.scss';
 import Login from './LoginScreenModals/Login';
 import Register from './LoginScreenModals/Register';
+import WaitingModal from '../../../global/components/WaitingModal/WaitingModal';
 import LoadingAnimation from "../../../global/components/LoadingAnimation/LoadingAnimation";
 
 class LoginScreen extends Component {
@@ -116,6 +117,9 @@ class LoginScreen extends Component {
                   open={this.state.modalRegisterOpen}
                   handleToggle={this.handleRegisterToggle}
                   handleRegister={this.handleRegister}
+                />
+                <WaitingModal
+                  open={this.props.signIn ? this.props.signIn.verifying : false}
                 />
               </div>
               <div className="login-screen__buttons">

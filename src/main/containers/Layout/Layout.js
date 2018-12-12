@@ -14,6 +14,7 @@ import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import { signOut } from '../../../auth/actions';
 import { createTask, createTaskModalToggle } from '../../actions';
 import CreateTask from './LayoutModals/CreateTask';
+import WaitingModal from '../../../global/components/WaitingModal/WaitingModal';
 import './Layout.scss';
 const logo = require('../../../static/time-exchange-logo.png');
 
@@ -91,6 +92,9 @@ class Layout extends Component {
                   {this.props.signIn.username}
                 </Button>
               </Link>
+              <WaitingModal
+                open={this.props.signIn ? this.props.signIn.signingOut : false}
+              />
               <Button
                 className="m-1 px-1"
                 size="md"

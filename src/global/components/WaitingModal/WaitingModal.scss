@@ -1,0 +1,12 @@
+.waiting-modal {
+  & > .modal-content {
+    background-color: rgba(255,255,255,0.85);
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
