@@ -83,6 +83,9 @@ class Layout extends Component {
                   handleCreateTask={this.handleCreateTask}
                 />
               </div>
+              <WaitingModal
+                open={this.props.tasks ? this.props.tasks.addingTask : false}
+              />
               <Button
                 className="m-1 px-1"
                 size="md"

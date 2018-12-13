@@ -14,6 +14,7 @@ const defaultCommentsState = {
   fetching: false,
   addingCommentText: '',
   deletingComment: false,
+  addingComment: false,
   errors: null,
 };
 
@@ -45,6 +46,7 @@ function comments(state = defaultCommentsState, action) {
       return {
         ...state,
         addingCommentText: action.payload.commentDetails.text,
+        addingComment: true,
       };
 
     case CREATE_COMMENT_SUCCESS:
@@ -53,12 +55,14 @@ function comments(state = defaultCommentsState, action) {
         ...state,
         comments: state.comments.concat(action.payload.comment),
         addingCommentText: '',
+        addingComment: false,
       };
 
     case CREATE_COMMENT_FAILURE:
       return {
         ...state,
         errors: action.payload.errors,
+        addingComment: false,
       };
 
     case DELETE_COMMENT:

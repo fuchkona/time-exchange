@@ -132,7 +132,13 @@ class TaskScreen extends Component {
 
               <div className="task-screen__requests m-2">
                 <div className="task-screen__requests_title mb-2">Заявки на исполнение</div>
-                <Requests taskOwnerId={taskOwnerId} userId={userId} token={token} taskId={id} />
+                {task && task.worker ? (
+                  <div>
+                    Задача уже в работе
+                  </div>
+                ) : (
+                  <Requests taskOwnerId={taskOwnerId} userId={userId} token={token} taskId={id} />
+                )}
               </div>
             </Col>
           </Row>
