@@ -57,7 +57,7 @@ class Comments extends Component {
 
   render() {
     console.log(this.props);
-    const { comments, addingCommentText } = this.props.comments;
+    const { comments, addingCommentText, addingComment } = this.props.comments;
     const totalComments = comments.length;
     const sortedComments = comments.sort((commentA, commentB) => commentB.created_at - commentA.created_at)
     const commentsToDisplay = this.getItemsOnPage(sortedComments);
@@ -68,6 +68,7 @@ class Comments extends Component {
         <CreateComment
           addingCommentText={addingCommentText}
           handleCreateComment={this.handleCreateComment}
+          addingComment={addingComment}
         />
         {commentsToDisplay.map((comment) => (
           <Comment

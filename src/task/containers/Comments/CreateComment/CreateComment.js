@@ -44,7 +44,7 @@ class CreateComment extends Component {
             />
           </FormGroup>
         </Form>
-        <Button disabled={!this.state.commentText} size="sm" onClick={this.handleCreateComment}>Оставить комментарий</Button>
+        <Button disabled={!this.state.commentText || this.props.addingComment} size="sm" onClick={this.handleCreateComment}>{this.props.addingComment ? 'Добавляем...' : 'Оставить комментарий'}</Button>
       </div>
     );
   }
