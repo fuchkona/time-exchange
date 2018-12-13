@@ -3,7 +3,7 @@ import Dropzone from 'react-dropzone'
 
 import './Files.scss';
 import {bindActionCreators} from "redux";
-import {createFile, fetchFiles} from "../../redux/Files/actions";
+import {createFile, deleteFile, fetchFiles} from "../../redux/Files/actions";
 import connect from "react-redux/es/connect/connect";
 import File from "./File/File";
 import LoadingAnimation from "../../../global/components/LoadingAnimation/LoadingAnimation";
@@ -31,6 +31,10 @@ class Files extends Component {
 
   };
 
+  handleFileDelete = (fileId) => {
+    this.props.deleteFile(this.props.token, fileId);
+  };
+
   componentDidMount() {
     const { token, taskId } = this.props;
     this.props.fetchFiles(token, taskId);
@@ -39,6 +43,8 @@ class Files extends Component {
 
   render() {
     const files = this.props.files.files;
+
+    const { userId } = this.props;
 
     return (
       <div className="files">
@@ -49,6 +55,8 @@ class Files extends Component {
 
             files.map((file) => (
               <File key={file.id}
+                    onDelete={this.handleFileDelete}
+                    userId={userId}
                     {...file}/>
             ))}
         </div>
@@ -57,7 +65,7 @@ class Files extends Component {
             accept=""
             onDrop={this.onDrop}
           >
-            {this.props.files.addingFile ? <LoadingAnimationMini/>
+            {this.props.files.addingFile || this.props.files.deletingFile ? <LoadingAnimationMini/>
               : <p>Переместите свои файлы сюда для загрузки на сервер</p>}
 
           </Dropzone>
@@ -77,7 +85,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
-      fetchFiles, createFile,
+      fetchFiles, createFile, deleteFile
     },
     dispatch,
   );

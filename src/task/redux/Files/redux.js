@@ -71,6 +71,7 @@ function files(state = defaultFilesState, action) {
       };
 
     case DELETE_FILE:
+      console.log('delete file redux');
       return {
         ...state,
         deletingFile: true,

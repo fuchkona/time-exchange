@@ -6,11 +6,18 @@ import {
 } from 'rxjs/operators';
 import { from, of } from 'rxjs';
 import {
-  FETCH_FILES, fetchFilesSuccess, fetchFilesFailure, CREATE_FILE, createFileSuccess, createFileFailure,
+  FETCH_FILES,
+  fetchFilesSuccess,
+  fetchFilesFailure,
+  CREATE_FILE,
+  createFileSuccess,
+  createFileFailure,
+  deleteFileFailure, deleteFileSuccess, DELETE_FILE,
 } from './actions';
 import { signOutSuccess } from '../../../auth/actions';
 import cookie from 'react-cookie';
 import { NOCORS_URL, API_URL } from "../../../constants";
+
 
 
 // Function for epics
@@ -63,7 +70,26 @@ async function createFile(token, fileDetails) {
 }
 
 async function deleteFile(token, fileId) {
-  console.log('deleteFile', token, fileId);
+  console.log('delete file fetch');
+  try {
+    const url = API_URL + `/api/file/delete?file_id=${fileId}`;
+    const params = {
+      method: 'delete',
+      headers: {
+        'Content-type': 'application/json',
+        'Authorization': 'Bearer ' + token,
+      },
+    };
+
+    const response = await fetch(NOCORS_URL + url, params);
+    const data = await response.json();
+
+    console.log('deleteFile', data);
+    data.data.id = fileId;
+    return data;
+  } catch (e) {
+    throw e;
+  }
 }
 
 // Epics
@@ -121,10 +147,37 @@ function createFileEpic(action$) {
     )
 }
 
+function deleteFileEpic(action$) {
+  console.log(action$);
+  return action$
+    .ofType(DELETE_FILE)
+    .pipe(
+      mergeMap((payload) => {
+        const { token, fileId } = payload.payload;
+        return from(deleteFile(token, fileId));
+      }),
+      map(response => {
+        console.log(response);
+        if (response.success) {
+          return deleteFileSuccess(+response.data.id);
+        } else if(response.data.status == 401) {
+          console.log('unauthorised');
+          cookie.remove('time-exchange-signin');
+          return signOutSuccess();
+        }
+        return deleteFileFailure(response.data);
+      }),
+      catchError(error => {
+        return of(deleteFileFailure(error));
+      })
+    )
+}
+
 
 
 export const epics = combineEpics(
   fetchFilesEpic,
-  createFileEpic
+  createFileEpic,
+  deleteFileEpic
 
 );
