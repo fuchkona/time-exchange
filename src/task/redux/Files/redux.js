@@ -30,6 +30,7 @@ function files(state = defaultFilesState, action) {
       return {
         ...state,
         files: [],
+        errors: null,
         fetching: true,
       };
 
