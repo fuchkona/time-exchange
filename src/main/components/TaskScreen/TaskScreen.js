@@ -46,6 +46,15 @@ class TaskScreen extends Component {
     this.props.fetchTasks(this.props.signIn.token, this.props.match.params.id);
   }
 
+  static canUserSeeFiles(task, userId){
+    if (task){
+      if ((task.owner.id === userId) || (task.worker && task.worker.id === userId)){
+        return true;
+      }
+    }
+    return false;
+  }
+
   render() {
     const { token } = this.props.signIn;
     const userId = this.props.signIn.id;
@@ -56,6 +65,10 @@ class TaskScreen extends Component {
 
     const taskRequesters = this.props.requests.requests.map((request) => request.requester.id);
     const showMakeRequestButton = task && !task.worker && task.owner.id !== userId && !taskRequesters.includes(userId);
+
+
+    const showFiles = TaskScreen.canUserSeeFiles(task, userId);
+
     return (
       <Layout
         debugScreenName="Экран одной задачи"
@@ -112,10 +125,11 @@ class TaskScreen extends Component {
               </div>
             </Col>
             <Col md="3">
-              <div className="task-screen__files m-2">
+              {showFiles ? <div className="task-screen__files m-2">
                 <div className="task-screen__files_title mb-2">Файлы</div>
                 <Files userId={userId} token={token} taskId={id} />
-              </div>
+              </div> : null}
+
               <div className="task-screen__requests m-2">
                 <div className="task-screen__requests_title mb-2">Заявки на исполнение</div>
                 {task && task.worker ? (
