@@ -8,10 +8,17 @@ export const FETCH_PROFILE_TASKS = `${MODULE_NAME}/FETCH_PROFILE_TASKS`;
 export const FETCH_PROFILE_TASKS_SUCCESS = `${MODULE_NAME}/FETCH_PROFILE_TASKS_SUCCESS`;
 export const FETCH_PROFILE_TASKS_FAILURE = `${MODULE_NAME}/FETCH_PROFILE_TASKS_FAILURE`;
 
+export const FETCH_PROFILE_UPDATE = `${MODULE_NAME}/FETCH_PROFILE_UPDATE`;
+export const FETCH_PROFILE_UPDATE_SUCCESS = `${MODULE_NAME}/FETCH_PROFILE_UPDATE_SUCCESS`;
+export const FETCH_PROFILE_UPDATE_FAILURE = `${MODULE_NAME}/FETCH_PROFILE_UPDATE_FAILURE`;
+
+export const FETCH_PROFILE_CHANGE_PASS = `${MODULE_NAME}/FETCH_PROFILE_CHANGE_PASS`;
+export const FETCH_PROFILE_CHANGE_PASS_SUCCESS = `${MODULE_NAME}/FETCH_PROFILE_CHANGE_PASS_SUCCESS`;
+export const FETCH_PROFILE_CHANGE_PASS_FAILURE = `${MODULE_NAME}/FETCH_PROFILE_CHANGE_PASS_FAILURE`;
+
 export const FETCH_USER = `${MODULE_NAME}/FETCH_PROFILE`;
 export const FETCH_USER_SUCCESS = `${MODULE_NAME}/FETCH_USER_SUCCESS`;
 export const FETCH_USER_FAILURE = `${MODULE_NAME}/FETCH_USER_FAILURE`;
-
 
 
 
@@ -33,6 +40,50 @@ export function fetchProfileSuccess(profile) {
 export function fetchProfileFailure(response) {
   return {
     type: FETCH_PROFILE_FAILURE,
+    payload: { status: response },
+  };
+}
+
+// actions profile update
+export function fetchProfileUpdate(token, profileDetails) {
+  return {
+    type: FETCH_PROFILE_UPDATE,
+    payload: { token },
+  };
+}
+
+export function fetchProfileUpdateSuccess(profile) {
+  return {
+    type: FETCH_PROFILE_UPDATE_SUCCESS,
+    payload: { profile },
+  };
+}
+
+export function fetchProfileUpdateFailure(response) {
+  return {
+    type: FETCH_PROFILE_UPDATE_FAILURE,
+    payload: { status: response },
+  };
+}
+
+// actions profile change password
+export function fetchProfileChangePass(token, passwordDetails) {
+  return {
+    type: FETCH_PROFILE_CHANGE_PASS,
+    payload: { token },
+  };
+}
+
+export function fetchProfileChangePassSuccess(profile) {
+  return {
+    type: FETCH_PROFILE_CHANGE_PASS_SUCCESS,
+    payload: { profile },
+  };
+}
+
+export function fetchProfileChangePassFailure(response) {
+  return {
+    type: FETCH_PROFILE_CHANGE_PASS_FAILURE,
     payload: { status: response },
   };
 }
