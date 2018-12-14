@@ -52,17 +52,17 @@ export function fetchProfileUpdate(token, profileDetails) {
   };
 }
 
-export function fetchProfileUpdateSuccess(profile) {
+export function fetchProfileUpdateSuccess( response ) {
   return {
     type: FETCH_PROFILE_UPDATE_SUCCESS,
-    payload: { profile },
+    payload: { result: response },
   };
 }
 
 export function fetchProfileUpdateFailure(response) {
   return {
     type: FETCH_PROFILE_UPDATE_FAILURE,
-    payload: { status: response },
+    payload: { result: response },
   };
 }
 
@@ -75,17 +75,17 @@ export function fetchProfileChangePass(token, passwordDetails) {
   };
 }
 
-export function fetchProfileChangePassSuccess(profile) {
+export function fetchProfileChangePassSuccess(response) {
   return {
     type: FETCH_PROFILE_CHANGE_PASS_SUCCESS,
-    payload: { profile },
+    payload: { result: response },
   };
 }
 
 export function fetchProfileChangePassFailure(response) {
   return {
     type: FETCH_PROFILE_CHANGE_PASS_FAILURE,
-    payload: { status: response },
+    payload: { result: response },
   };
 }
 

@@ -179,7 +179,7 @@ function fetchProfileUpdateEpic(action$) {
       map(response => {
         console.log(response);
         if (response.success) {
-          return fetchProfileUpdateSuccess(response.data);
+          return fetchProfileUpdateSuccess(response);
         } else if(response.data.status == 401) {
           console.log('unauthorised');
           cookie.remove('time-exchange-signin');
@@ -204,7 +204,7 @@ function fetchProfileChangePassEpic(action$) {
       map(response => {
         console.log(response);
         if (response.success) {
-          return fetchProfileChangePassSuccess(response.data);
+          return fetchProfileChangePassSuccess(response);
         } else if(response.data.status == 401) {
           console.log('unauthorised');
           cookie.remove('time-exchange-signin');

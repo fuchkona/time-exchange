@@ -25,7 +25,7 @@ const defaultProfileState = {
   updateProfile: false,
   changePass: false,
   fetching: false,
-  errors: ''
+  result: null
 };
 
 const defaultProfileTasks = {
@@ -49,10 +49,10 @@ function profile(state = defaultProfileState, action) {
       return {
         ...state,
         fetching: true,
+        result: null
       };
 
     case FETCH_PROFILE_SUCCESS:
-      console.log(action.payload);
       return {
         ...state,
         profile: action.payload.profile,
@@ -68,37 +68,41 @@ function profile(state = defaultProfileState, action) {
       return {
         ...state,
         updateProfile: true,
+        result: null
       };
     case FETCH_PROFILE_UPDATE_SUCCESS:
       return{
         ...state,
         profile: action.payload.profile,
-        updateProfile: false
+        updateProfile: false,
+        result: action.payload.result
       };
     case FETCH_PROFILE_UPDATE_FAILURE:
       return {
         ...state,
         updateProfile: false,
-        errors: action.payload.errors,
+        result: action.payload.result,
       };
 
     case FETCH_PROFILE_CHANGE_PASS:
       return {
         ...state,
-        changePass: true
+        changePass: true,
+        result: null
       };
     case FETCH_PROFILE_CHANGE_PASS_SUCCESS:
       return {
         ...state,
         changePass: false,
-        successChangePass: true
+        successChangePass: true,
+        result: action.payload.result
       };
     case FETCH_PROFILE_CHANGE_PASS_FAILURE:
       return {
         ...state,
         changePass: false,
         successChangePass: false,
-        errors: action.payload.errors,
+        result: action.payload.result,
       };
 
 

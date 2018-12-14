@@ -11,6 +11,7 @@ import LoadingAnimation from "../../../global/components/LoadingAnimation/Loadin
 import BriefTask from "../../../main/components/BriefTask/BriefTask";
 import TEPagination from "../../../global/components/TEPagination/TEPagination";
 import {fetchProfileChangePass, fetchProfileUpdate} from "../../actions";
+import {toast} from "react-toastify";
 
 
 class ProfileScreen extends Component {
@@ -47,6 +48,25 @@ class ProfileScreen extends Component {
     this.handlePageChange(this.defaultPage);
   }
 
+  checkErrors(){
+    let result = this.props.profile.result;
+    console.log('update errors', this.props);
+    if (!result){
+      return;
+    }
+
+    if (!result.success){
+      for (let key in result.data){
+        toast.error(result.data[key].message);
+      }
+    }
+    else {
+      toast.info('Данные успешно изменены');
+    }
+  }
+
+
+
   render() {
 
     const { token } = this.props.signIn;
@@ -56,6 +76,10 @@ class ProfileScreen extends Component {
     const tasks = this.props.profileTasks.profileTasks;
 
     const totalTasks = this.props.profileTasks.totalTasks;
+
+    console.log('props update profile', this.props);
+
+    this.checkErrors();
 
     return (
       <Layout
