@@ -96,7 +96,6 @@ async function getUser(token, userId) {
 }
 
 async function updateProfile(token, profileDetails) {
-  console.log('update profile send ajax');
   try {
     const url = API_URL + `/api/user/update-profile`;
     const params = {

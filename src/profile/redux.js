@@ -65,7 +65,6 @@ function profile(state = defaultProfileState, action) {
         fetching: false,
       };
     case FETCH_PROFILE_UPDATE:
-      console.log('fetchProfileUpdate redux');
       return {
         ...state,
         updateProfile: true,

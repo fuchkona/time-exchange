@@ -46,7 +46,6 @@ export function fetchProfileFailure(response) {
 
 // actions profile update
 export function fetchProfileUpdate(token, profileDetails) {
-  console.log('fetchProfileUpdate');
   return {
     type: FETCH_PROFILE_UPDATE,
     payload: { token , profileDetails },
