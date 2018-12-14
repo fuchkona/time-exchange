@@ -5,7 +5,15 @@ import {
   FETCH_PROFILE_FAILURE,
   FETCH_PROFILE_TASKS,
   FETCH_PROFILE_TASKS_SUCCESS,
-  FETCH_PROFILE_TASKS_FAILURE, FETCH_USER, FETCH_USER_SUCCESS, FETCH_USER_FAILURE,
+  FETCH_PROFILE_TASKS_FAILURE,
+  FETCH_USER,
+  FETCH_USER_SUCCESS,
+  FETCH_USER_FAILURE,
+  FETCH_PROFILE_UPDATE,
+  FETCH_PROFILE_UPDATE_SUCCESS,
+  FETCH_PROFILE_UPDATE_FAILURE,
+  FETCH_PROFILE_CHANGE_PASS,
+  FETCH_PROFILE_CHANGE_PASS_SUCCESS, FETCH_PROFILE_CHANGE_PASS_FAILURE,
 } from './actions';
 
 // Function for reducer
@@ -14,7 +22,10 @@ import {
 // Reducer
 const defaultProfileState = {
   profile: '',
+  updateProfile: false,
+  changePass: false,
   fetching: false,
+  errors: ''
 };
 
 const defaultProfileTasks = {
@@ -22,10 +33,15 @@ const defaultProfileTasks = {
   fetching: false,
 };
 
+
+
 const defaultUserState = {
   user: '',
   fetching: false,
 };
+
+
+
 
 function profile(state = defaultProfileState, action) {
   switch(action.type) {
@@ -48,6 +64,44 @@ function profile(state = defaultProfileState, action) {
         ...state,
         fetching: false,
       };
+    case FETCH_PROFILE_UPDATE:
+      console.log('fetchProfileUpdate redux');
+      return {
+        ...state,
+        updateProfile: true,
+      };
+    case FETCH_PROFILE_UPDATE_SUCCESS:
+      return{
+        ...state,
+        profile: action.payload.profile,
+        updateProfile: false
+      };
+    case FETCH_PROFILE_UPDATE_FAILURE:
+      return {
+        ...state,
+        updateProfile: false,
+        errors: action.payload.errors,
+      };
+
+    case FETCH_PROFILE_CHANGE_PASS:
+      return {
+        ...state,
+        changePass: true
+      };
+    case FETCH_PROFILE_CHANGE_PASS_SUCCESS:
+      return {
+        ...state,
+        changePass: false,
+        successChangePass: true
+      };
+    case FETCH_PROFILE_CHANGE_PASS_FAILURE:
+      return {
+        ...state,
+        changePass: false,
+        successChangePass: false,
+        errors: action.payload.errors,
+      };
+
 
     default:
       return state;

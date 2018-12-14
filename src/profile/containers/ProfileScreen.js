@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { signOut } from '../../auth/actions';
-import { fetchProfile, fetchProfileTasks } from '../actions';
+import {fetchProfile, fetchProfileChangePass, fetchProfileTasks, fetchProfileUpdate} from '../actions';
 import ProfileScreen from "../components/ProfileScreen/ProfileScreen";
 
 function mapStateToProps(state) {
@@ -19,7 +19,9 @@ function mapDispatchToProps(dispatch) {
     {
       signOut,
       fetchProfile,
-      fetchProfileTasks
+      fetchProfileTasks,
+      fetchProfileUpdate,
+      fetchProfileChangePass
     },
     dispatch,
   );

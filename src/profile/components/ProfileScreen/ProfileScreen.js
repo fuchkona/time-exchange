@@ -10,6 +10,7 @@ import ProfileInfo from "../ProfileInfo/ProfileInfo";
 import LoadingAnimation from "../../../global/components/LoadingAnimation/LoadingAnimation";
 import BriefTask from "../../../main/components/BriefTask/BriefTask";
 import TEPagination from "../../../global/components/TEPagination/TEPagination";
+import {fetchProfileChangePass, fetchProfileUpdate} from "../../actions";
 
 
 class ProfileScreen extends Component {
@@ -31,17 +32,19 @@ class ProfileScreen extends Component {
   };
 
   handleProfileUpdate = (profileDetails) => {
-
+    console.log('update profile');
+    this.props.fetchProfileUpdate(this.props.signIn.token, profileDetails)
   };
 
   handleChangePassword = (passwordDetails) => {
-
+    console.log('change pass');
+    this.props.fetchProfileChangePass(this.props.signIn.token, passwordDetails);
   };
 
 
   componentDidMount() {
     this.props.fetchProfile(this.props.signIn.token);
-    this.props.fetchProfileTasks(this.props.signIn.token, this.props.signIn.id, this.state.activePage, this.defaultTaskPerPage);
+    this.handlePageChange(this.defaultPage);
   }
 
   render() {
@@ -65,8 +68,8 @@ class ProfileScreen extends Component {
           <Col md="4">
             {this.props.profile.fetching ?
               <LoadingAnimation/> :
-              <ProfileInfo onProfileUpdate={this.handleProfileUpdate()}
-                           onChangePassword={this.handleChangePassword()}
+              <ProfileInfo onProfileUpdate={this.handleProfileUpdate}
+                           onChangePassword={this.handleChangePassword}
                            {...profile}/>}
           </Col>
             <Col md="8">

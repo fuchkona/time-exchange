@@ -28,7 +28,8 @@ class ProfileInfo extends Component {
       profileFullName: this.profile.full_name,
       profileEmail: this.profile.email,
       currentPassword: '',
-      newPassword: ''
+      newPassword: '',
+      newPasswordRepeat: ''
     }
   }
 
@@ -53,7 +54,8 @@ class ProfileInfo extends Component {
 
     let passwordDetails = {
       currentPassword: this.state.currentPassword,
-      newPassword: this.state.newPassword
+      newPassword: this.state.newPassword,
+      newPasswordRepeat: this.state.newPasswordRepeat
     };
 
     this.props.onChangePassword(passwordDetails)
@@ -91,7 +93,7 @@ class ProfileInfo extends Component {
             </ListGroupItem>
           </ListGroup>
           <FormGroup className="m-2">
-            <Button className="profile-screen__button_update" onClick={}>Редактировать</Button>
+            <Button className="profile-screen__button_update" onClick={this.handleUpdateProfile}>Редактировать</Button>
           </FormGroup>
         </CardBody>
         <CardFooter>
@@ -106,9 +108,15 @@ class ProfileInfo extends Component {
               <Input type="password" name="newPassword" id="newPassword"
                      value={this.state.newPassword} onChange={this.handleChange} />
             </ListGroupItem>
+            <ListGroupItem>
+              <Label for="newPasswordRepeat">Повторите пароль:</Label>
+              <Input type="password" name="newPasswordRepeat" id="newPasswordRepeat"
+                     value={this.state.newPasswordRepeat} onChange={this.handleChange} />
+            </ListGroupItem>
           </ListGroup>
           <FormGroup className="m-2">
-            <Button className="profile-screen__button_update_password">Изменить пароль</Button>
+            <Button className="profile-screen__button_update_password"
+                    onClick={this.handleChangePassword}>Изменить пароль</Button>
           </FormGroup>
         </CardFooter>
       </Card>
