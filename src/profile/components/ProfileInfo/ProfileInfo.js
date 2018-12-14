@@ -77,7 +77,7 @@ class ProfileInfo extends Component {
               Зарегистрирован: {moment(this.profile.created_at * 1000).format('Do MMMM YYYY')}
             </ListGroupItem>
             <ListGroupItem>
-              <Label for="profileUserName">Логин:</Label>
+              <Label for="profileUserName">Имя пользователя:</Label>
               <Input type="text" name="profileUserName" id="profileUserName"
                      value={this.state.profileUserName} onChange={this.handleChange} />
             </ListGroupItem>
@@ -87,7 +87,7 @@ class ProfileInfo extends Component {
                      value={this.state.profileEmail} onChange={this.handleChange} />
             </ListGroupItem>
             <ListGroupItem>
-              <Label for="profileFullName">Имя пользователя:</Label>
+              <Label for="profileFullName">Имя:</Label>
               <Input type="text" name="profileFullName" id="profileFullName"
                      value={this.state.profileFullName} onChange={this.handleChange} />
             </ListGroupItem>
