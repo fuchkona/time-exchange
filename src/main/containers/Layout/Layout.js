@@ -68,13 +68,14 @@ class Layout extends Component {
             <Col className="layout__filter pt-4" md="4">
               {this.props.filter}
             </Col>
-            <Col md="2">
-              <div className="layout__debug">
-                <p>Отладочная инфа</p>
-                <p>{this.props.debugScreenName}</p>
-                <p>{this.props.debugAuthToken}</p>
-              </div>
-            </Col>
+            <Col md="2"/>
+            {/*отладкку скрыл для скринкаста*/}
+              {/*<div className="layout__debug">*/}
+                {/*<p>Отладочная инфа</p>*/}
+                {/*<p>{this.props.debugScreenName}</p>*/}
+                {/*<p>{this.props.debugAuthToken}</p>*/}
+              {/*</div>*/}
+            {/*</Col>*/}
             <Col md="3 pt-2">
               <div className="layout__create-task-form">
                 <CreateTask
