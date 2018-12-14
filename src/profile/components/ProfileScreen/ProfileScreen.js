@@ -12,6 +12,7 @@ import BriefTask from "../../../main/components/BriefTask/BriefTask";
 import TEPagination from "../../../global/components/TEPagination/TEPagination";
 import {fetchProfileChangePass, fetchProfileUpdate} from "../../actions";
 import {toast} from "react-toastify";
+import WaitingModal from "../../../global/components/WaitingModal/WaitingModal";
 
 
 class ProfileScreen extends Component {
@@ -33,12 +34,10 @@ class ProfileScreen extends Component {
   };
 
   handleProfileUpdate = (profileDetails) => {
-    console.log('update profile');
     this.props.fetchProfileUpdate(this.props.signIn.token, profileDetails)
   };
 
   handleChangePassword = (passwordDetails) => {
-    console.log('change pass');
     this.props.fetchProfileChangePass(this.props.signIn.token, passwordDetails);
   };
 
@@ -50,7 +49,6 @@ class ProfileScreen extends Component {
 
   checkErrors(){
     let result = this.props.profile.result;
-    console.log('update errors', this.props);
     if (!result){
       return;
     }
@@ -65,8 +63,6 @@ class ProfileScreen extends Component {
     }
   }
 
-
-
   render() {
 
     const { token } = this.props.signIn;
@@ -77,8 +73,6 @@ class ProfileScreen extends Component {
 
     const totalTasks = this.props.profileTasks.totalTasks;
 
-    console.log('props update profile', this.props);
-
     this.checkErrors();
 
     return (
@@ -88,6 +82,9 @@ class ProfileScreen extends Component {
       >
 
         <div className="profile-screen">
+          <WaitingModal
+            open={this.props.profile.updateProfile || this.props.profile.changePass}
+          />
           <Row>
           <Col md="4">
             {this.props.profile.fetching ?

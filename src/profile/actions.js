@@ -55,7 +55,7 @@ export function fetchProfileUpdate(token, profileDetails) {
 export function fetchProfileUpdateSuccess( response ) {
   return {
     type: FETCH_PROFILE_UPDATE_SUCCESS,
-    payload: { result: response },
+    payload: { result: response, profile: response.data },
   };
 }
 
