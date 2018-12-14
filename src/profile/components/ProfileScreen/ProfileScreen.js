@@ -30,6 +30,15 @@ class ProfileScreen extends Component {
     this.props.fetchProfileTasks(this.props.signIn.token, this.props.signIn.id, pageNumber, this.defaultTaskPerPage);
   };
 
+  handleProfileUpdate = (profileDetails) => {
+
+  };
+
+  handleChangePassword = (passwordDetails) => {
+
+  };
+
+
   componentDidMount() {
     this.props.fetchProfile(this.props.signIn.token);
     this.props.fetchProfileTasks(this.props.signIn.token, this.props.signIn.id, this.state.activePage, this.defaultTaskPerPage);
@@ -54,7 +63,11 @@ class ProfileScreen extends Component {
         <div className="profile-screen">
           <Row>
           <Col md="4">
-            {this.props.profile.fetching ? <LoadingAnimation/> : <ProfileInfo {...profile}/>}
+            {this.props.profile.fetching ?
+              <LoadingAnimation/> :
+              <ProfileInfo onProfileUpdate={this.handleProfileUpdate()}
+                           onChangePassword={this.handleChangePassword()}
+                           {...profile}/>}
           </Col>
             <Col md="8">
               <Card className="profile-screen__portfolio m-2">
