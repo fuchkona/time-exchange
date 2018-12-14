@@ -10,6 +10,9 @@ import ProfileInfo from "../ProfileInfo/ProfileInfo";
 import LoadingAnimation from "../../../global/components/LoadingAnimation/LoadingAnimation";
 import BriefTask from "../../../main/components/BriefTask/BriefTask";
 import TEPagination from "../../../global/components/TEPagination/TEPagination";
+import {fetchProfileChangePass, fetchProfileUpdate} from "../../actions";
+import {toast} from "react-toastify";
+import WaitingModal from "../../../global/components/WaitingModal/WaitingModal";
 
 
 class ProfileScreen extends Component {
@@ -30,9 +33,34 @@ class ProfileScreen extends Component {
     this.props.fetchProfileTasks(this.props.signIn.token, this.props.signIn.id, pageNumber, this.defaultTaskPerPage);
   };
 
+  handleProfileUpdate = (profileDetails) => {
+    this.props.fetchProfileUpdate(this.props.signIn.token, profileDetails)
+  };
+
+  handleChangePassword = (passwordDetails) => {
+    this.props.fetchProfileChangePass(this.props.signIn.token, passwordDetails);
+  };
+
+
   componentDidMount() {
     this.props.fetchProfile(this.props.signIn.token);
-    this.props.fetchProfileTasks(this.props.signIn.token, this.props.signIn.id, this.state.activePage, this.defaultTaskPerPage);
+    this.handlePageChange(this.defaultPage);
+  }
+
+  checkErrors(){
+    let result = this.props.profile.result;
+    if (!result){
+      return;
+    }
+
+    if (!result.success){
+      for (let key in result.data){
+        toast.error(result.data[key].message);
+      }
+    }
+    else {
+      toast.info('Данные успешно изменены');
+    }
   }
 
   render() {
@@ -45,6 +73,8 @@ class ProfileScreen extends Component {
 
     const totalTasks = this.props.profileTasks.totalTasks;
 
+    this.checkErrors();
+
     return (
       <Layout
         debugScreenName="Экран профиля пользователя"
@@ -52,9 +82,16 @@ class ProfileScreen extends Component {
       >
 
         <div className="profile-screen">
+          <WaitingModal
+            open={this.props.profile.updateProfile || this.props.profile.changePass}
+          />
           <Row>
           <Col md="4">
-            {this.props.profile.fetching ? <LoadingAnimation/> : <ProfileInfo {...profile}/>}
+            {this.props.profile.fetching ?
+              <LoadingAnimation/> :
+              <ProfileInfo onProfileUpdate={this.handleProfileUpdate}
+                           onChangePassword={this.handleChangePassword}
+                           {...profile}/>}
           </Col>
             <Col md="8">
               <Card className="profile-screen__portfolio m-2">

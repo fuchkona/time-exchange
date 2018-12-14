@@ -5,7 +5,15 @@ import {
   FETCH_PROFILE_FAILURE,
   FETCH_PROFILE_TASKS,
   FETCH_PROFILE_TASKS_SUCCESS,
-  FETCH_PROFILE_TASKS_FAILURE, FETCH_USER, FETCH_USER_SUCCESS, FETCH_USER_FAILURE,
+  FETCH_PROFILE_TASKS_FAILURE,
+  FETCH_USER,
+  FETCH_USER_SUCCESS,
+  FETCH_USER_FAILURE,
+  FETCH_PROFILE_UPDATE,
+  FETCH_PROFILE_UPDATE_SUCCESS,
+  FETCH_PROFILE_UPDATE_FAILURE,
+  FETCH_PROFILE_CHANGE_PASS,
+  FETCH_PROFILE_CHANGE_PASS_SUCCESS, FETCH_PROFILE_CHANGE_PASS_FAILURE,
 } from './actions';
 
 // Function for reducer
@@ -14,7 +22,10 @@ import {
 // Reducer
 const defaultProfileState = {
   profile: '',
+  updateProfile: false,
+  changePass: false,
   fetching: false,
+  result: null
 };
 
 const defaultProfileTasks = {
@@ -22,10 +33,15 @@ const defaultProfileTasks = {
   fetching: false,
 };
 
+
+
 const defaultUserState = {
   user: '',
   fetching: false,
 };
+
+
+
 
 function profile(state = defaultProfileState, action) {
   switch(action.type) {
@@ -33,10 +49,10 @@ function profile(state = defaultProfileState, action) {
       return {
         ...state,
         fetching: true,
+        result: null
       };
 
     case FETCH_PROFILE_SUCCESS:
-      console.log(action.payload);
       return {
         ...state,
         profile: action.payload.profile,
@@ -48,6 +64,47 @@ function profile(state = defaultProfileState, action) {
         ...state,
         fetching: false,
       };
+    case FETCH_PROFILE_UPDATE:
+      return {
+        ...state,
+        updateProfile: true,
+        result: null
+      };
+    case FETCH_PROFILE_UPDATE_SUCCESS:
+      return{
+        ...state,
+        profile: action.payload.profile,
+        updateProfile: false,
+        result: action.payload.result
+      };
+    case FETCH_PROFILE_UPDATE_FAILURE:
+      return {
+        ...state,
+        updateProfile: false,
+        result: action.payload.result,
+      };
+
+    case FETCH_PROFILE_CHANGE_PASS:
+      return {
+        ...state,
+        changePass: true,
+        result: null
+      };
+    case FETCH_PROFILE_CHANGE_PASS_SUCCESS:
+      return {
+        ...state,
+        changePass: false,
+        successChangePass: true,
+        result: action.payload.result
+      };
+    case FETCH_PROFILE_CHANGE_PASS_FAILURE:
+      return {
+        ...state,
+        changePass: false,
+        successChangePass: false,
+        result: action.payload.result,
+      };
+
 
     default:
       return state;

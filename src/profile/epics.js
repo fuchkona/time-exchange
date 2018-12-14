@@ -12,7 +12,12 @@ import {
   FETCH_PROFILE_TASKS,
   fetchProfileTasksSuccess,
   fetchProfileTasksFailure,
-  FETCH_USER, fetchUserSuccess, fetchUserFailure,
+  FETCH_USER,
+  fetchUserSuccess,
+  fetchUserFailure,
+  fetchProfileUpdateSuccess,
+  fetchProfileUpdateFailure,
+  FETCH_PROFILE_UPDATE, FETCH_PROFILE_CHANGE_PASS, fetchProfileChangePassSuccess, fetchProfileChangePassFailure,
 } from './actions';
 import { signOutSuccess } from '../auth/actions';
 import cookie from 'react-cookie';
@@ -90,6 +95,52 @@ async function getUser(token, userId) {
   }
 }
 
+async function updateProfile(token, profileDetails) {
+  try {
+    const url = API_URL + `/api/user/update-profile`;
+    const params = {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-type': 'application/json',
+        'Authorization': 'Bearer ' + token,
+      },
+      body: JSON.stringify(profileDetails)
+    };
+
+    const response = await fetch(NOCORS_URL + url, params);
+    const data = await response.json();
+
+    console.log('updateProfile', data);
+    return data;
+  } catch (e) {
+    throw e;
+  }
+}
+
+async function changeProfilePassword(token, passwordDetails) {
+  try {
+    const url = API_URL + `/api/user/change-pass`;
+    const params = {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-type': 'application/json',
+        'Authorization': 'Bearer ' + token,
+      },
+      body: JSON.stringify(passwordDetails)
+    };
+
+    const response = await fetch(NOCORS_URL + url, params);
+    const data = await response.json();
+
+    console.log('change password', data);
+    return data;
+  } catch (e) {
+    throw e;
+  }
+}
+
 
 // Epics
 function fetchProfileEpic(action$) {
@@ -113,6 +164,56 @@ function fetchProfileEpic(action$) {
       }),
       catchError(error => {
         return of(fetchProfileFailure(error));
+      })
+    )
+}
+
+function fetchProfileUpdateEpic(action$) {
+  console.log("profile update epic",action$);
+  return action$
+    .ofType(FETCH_PROFILE_UPDATE)
+    .pipe(
+      mergeMap((payload) => {
+        return from(updateProfile(payload.payload.token, payload.payload.profileDetails))
+      }),
+      map(response => {
+        console.log(response);
+        if (response.success) {
+          return fetchProfileUpdateSuccess(response);
+        } else if(response.data.status == 401) {
+          console.log('unauthorised');
+          cookie.remove('time-exchange-signin');
+          return signOutSuccess();
+        }
+        return fetchProfileUpdateFailure(response);
+      }),
+      catchError(error => {
+        return of(fetchProfileUpdateFailure(error));
+      })
+    )
+}
+
+function fetchProfileChangePassEpic(action$) {
+  console.log(action$);
+  return action$
+    .ofType(FETCH_PROFILE_CHANGE_PASS)
+    .pipe(
+      mergeMap((payload) => {
+        return from(changeProfilePassword(payload.payload.token, payload.payload.passwordDetails))
+      }),
+      map(response => {
+        console.log(response);
+        if (response.success) {
+          return fetchProfileChangePassSuccess(response);
+        } else if(response.data.status == 401) {
+          console.log('unauthorised');
+          cookie.remove('time-exchange-signin');
+          return signOutSuccess();
+        }
+        return fetchProfileChangePassFailure(response);
+      }),
+      catchError(error => {
+        return of(fetchProfileChangePassFailure(error));
       })
     )
 }
@@ -175,5 +276,7 @@ function fetchProfileTasksEpic(action$) {
 export const epics = combineEpics(
   fetchProfileEpic,
   fetchUserEpic,
-  fetchProfileTasksEpic
+  fetchProfileTasksEpic,
+  fetchProfileChangePassEpic,
+  fetchProfileUpdateEpic
 );
