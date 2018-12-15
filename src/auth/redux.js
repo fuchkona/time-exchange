@@ -4,6 +4,7 @@ import {
   VERIFY_USERNAME_PASSWORD, VERIFY_USERNAME_PASSWORD_SUCCESS, VERIFY_USERNAME_PASSWORD_FAILURE,
   REGISTER_NEWUSER, REGISTER_NEWUSER_SUCCESS, REGISTER_NEWUSER_FAILURE,
   SIGNOUT, SIGNOUT_SUCCESS, SIGNOUT_FAILURE,
+  CLEAR_AUTH_ERRORS,
 } from './actions';
 
 
@@ -29,6 +30,7 @@ function signIn(state = defaultSignInState, action) {
       return {
         ...state,
         verifying: true,
+        errors: null,
       };
 
     case VERIFY_USERNAME_PASSWORD_SUCCESS:
@@ -42,6 +44,7 @@ function signIn(state = defaultSignInState, action) {
       };
 
     case VERIFY_USERNAME_PASSWORD_FAILURE:
+      console.log(action.payload.errors);
       return {
         ...state,
         errors: action.payload.errors,
@@ -53,6 +56,7 @@ function signIn(state = defaultSignInState, action) {
       return {
         ...state,
         verifying: true,
+        errors: null,
       };
 
     case REGISTER_NEWUSER_SUCCESS:
@@ -94,6 +98,12 @@ function signIn(state = defaultSignInState, action) {
       return {
         ...state,
         signingOut: false,
+      };
+
+    case CLEAR_AUTH_ERRORS:
+      return {
+        ...state,
+        errors: null,
       };
 
     default:
