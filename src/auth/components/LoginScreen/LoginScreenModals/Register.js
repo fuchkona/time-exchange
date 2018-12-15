@@ -34,35 +34,35 @@ export default class Register extends Component {
 
   handleRegister = () => {
     const { userFullname, userLogin, userPassword, userPasswordCheck, userEmail } = this.state;
-    if (userFullname && userLogin && userPassword && userPassword === userPasswordCheck && userEmail ) {
-      this.setState({
-        userFullnameError: false,
-        userLoginError: false,
-        userPasswordError: false,
-        userPasswordCheckError: false,
-        userEmailError: false,
-        userFullname: '',
-        userLogin: '',
-        userPassword: '',
-        userPasswordCheck: '',
-        userEmail: '',
-      });
+    if (/* userFullname && userLogin && userPassword && */userPassword === userPasswordCheck/* && userEmail */) {
+      // this.setState({
+    //     userFullnameError: false,
+    //     userLoginError: false,
+    //     userPasswordError: false,
+    //     userPasswordCheckError: false,
+        // userEmailError: false,
+    //     userFullname: '',
+    //     userLogin: '',
+    //     userPassword: '',
+    //     userPasswordCheck: '',
+    //     userEmail: '',
+    //   });
       // редирект на Layout
       this.props.handleRegister(userFullname, userLogin, userPassword, userEmail);
     } else {
       this.setState({
-        userFullnameError: true,
-        userLoginError: true,
-        userPasswordError: true,
+    //     userFullnameError: true,
+    //     userLoginError: true,
+    //     userPasswordError: true,
         userPasswordCheckError: true,
-        userEmailError: true,
+        // userEmailError: true,
       });
       setTimeout(() => this.setState({
-        userFullnameError: false,
-        userLoginError: false,
-        userPasswordError: false,
+    //     userFullnameError: false,
+    //     userLoginError: false,
+    //     userPasswordError: false,
         userPasswordCheckError: false,
-        userEmailError: false,
+        // userEmailError: false,
       }), 2000);
     }
   }

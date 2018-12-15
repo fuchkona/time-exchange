@@ -5,6 +5,16 @@ export const TASKS_FILTER = {
   userWorker: 'USER_WORKER',
 };
 
+export const SORT_DIRECTION = {
+  up: 'UP',
+  down: 'DOWN',
+};
+
+export const TASKS_SORT = {
+  create: { value: 'created_at', label: 'Дата создания' },
+  deadline: { value: 'deadline', label: 'Дедлайн' },
+};
+
 export const COOKIE_LIFETIME = 600;
 
 export const TASKS_DEFAULT_START_PAGE = 1;

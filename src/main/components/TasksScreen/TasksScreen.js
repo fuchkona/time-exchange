@@ -8,22 +8,38 @@ import Pagination from "react-js-pagination";
 import Layout from '../../containers/Layout/Layout';
 import BriefTask from '../BriefTask/BriefTask';
 import Filter from '../Filter/Filter';
+import Sort from '../Sort/Sort';
 import {
   TASKS_FILTER,
   TASKS_DEFAULT_START_PAGE,
-  TASKS_DEFAULT_ITEMS_PER_PAGE
+  TASKS_DEFAULT_ITEMS_PER_PAGE,
+  TASKS_SORT,
+  SORT_DIRECTION,
 } from '../../../constants';
 import './TasksScreen.scss';
 import TEPagination from "../../../global/components/TEPagination/TEPagination";
 import WaitingModal from '../../../global/components/WaitingModal/WaitingModal';
 
 class TasksScreen extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      activePage: TASKS_DEFAULT_START_PAGE,
-      filter: TASKS_FILTER.all,
-    };
+  state = {
+    activePage: TASKS_DEFAULT_START_PAGE,
+    filter: TASKS_FILTER.all,
+    sort: { item: { label: TASKS_SORT.create.label, value: TASKS_SORT.create.value }, direction: SORT_DIRECTION.down },
+  };
+
+
+  applySort = (tasks) => {
+    const { item, direction } = this.state.sort;
+    console.log(item, direction);
+    return tasks.sort((taskA, taskB) => {
+      if (direction === SORT_DIRECTION.down) {
+        return taskB[item.value] - taskA[item.value]
+      } else if (direction === SORT_DIRECTION.up) {
+        return taskA[item.value] - taskB[item.value]
+      } else {
+        return 0;
+      }
+    });
   }
 
   applyFilter = (tasks, filter) => {
@@ -36,7 +52,7 @@ class TasksScreen extends Component {
 
       case TASKS_FILTER.userWorker:
         return tasks.filter((task) => !!task.worker && task.worker.id === this.props.signIn.id);
-      
+
       default:
         return tasks;
     }
@@ -63,6 +79,16 @@ class TasksScreen extends Component {
     this.props.deleteTask(this.props.signIn.token, taskId);
   }
 
+  handleSortItemChange = (item) => {
+    const currentSort = this.state.sort;
+    this.setState({ sort: { item, direction: currentSort.direction } });
+  }
+
+  handleSortDirectionChange = (direction) => {
+    const currentSort = this.state.sort;
+    this.setState({ sort: { direction, item: currentSort.item } });
+  }
+
   componentDidMount() {
     console.log('did mount');
     this.props.fetchTasks(this.props.signIn.token);
@@ -83,10 +109,14 @@ class TasksScreen extends Component {
         onChange={this.handleFilterChange}
       />
     );
+    const sortItems = [
+      { label: TASKS_SORT.create.label, value: TASKS_SORT.create.value },
+      { label: TASKS_SORT.deadline.label, value: TASKS_SORT.deadline.value },
+    ];
 
     const filteredTasks = this.applyFilter(tasks, this.state.filter);
     const totalTasks = filteredTasks.length;
-    const sortedTasks = filteredTasks.sort((taskA, taskB) => taskB.created_at - taskA.created_at)
+    const sortedTasks = this.applySort(filteredTasks);
     console.log('component', tasks, totalTasks);
     const tasksToDisplay = this.getItemsOnPage(sortedTasks);
     const tasksCountOnPage = tasksToDisplay ? tasksToDisplay.length : 0;
@@ -98,6 +128,14 @@ class TasksScreen extends Component {
         filter={FilterComponent}
       >
         <div className="tasks-screen">
+          <div className="tasks-screen_sort">
+            <Sort
+              sortItems={sortItems}
+              activeSort={this.state.sort}
+              onSortItemChange={this.handleSortItemChange}
+              onSortDirectionChange={this.handleSortDirectionChange}
+            />
+          </div>
           <div className="tasks-screen__tasks">
             {tasksToDisplay.map((task) => (
               <BriefTask

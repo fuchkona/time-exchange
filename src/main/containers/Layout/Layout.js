@@ -16,7 +16,7 @@ import { createTask, createTaskModalToggle } from '../../actions';
 import CreateTask from './LayoutModals/CreateTask';
 import WaitingModal from '../../../global/components/WaitingModal/WaitingModal';
 import './Layout.scss';
-import {ToastContainer} from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 const logo = require('../../../static/time-exchange-logo.png');

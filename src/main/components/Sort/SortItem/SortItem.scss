@@ -1,0 +1,15 @@
+@import '../../../../base.scss';
+
+.sort-item {
+  color: darken($blue, 10%);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 3px;
+  white-space: nowrap;
+  cursor: pointer;
+
+  &_active {
+    text-decoration: underline;
+    font-weight: 900;
+  }
+}

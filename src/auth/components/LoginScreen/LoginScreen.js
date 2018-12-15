@@ -15,7 +15,8 @@ import Login from './LoginScreenModals/Login';
 import Register from './LoginScreenModals/Register';
 import WaitingModal from '../../../global/components/WaitingModal/WaitingModal';
 import LoadingAnimation from "../../../global/components/LoadingAnimation/LoadingAnimation";
-
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 class LoginScreen extends Component {
 
   state = {
@@ -50,6 +51,7 @@ class LoginScreen extends Component {
         modalLoginOpen: !this.state.modalLoginOpen,
       });
     }
+    this.props.clearAuthErrors();
   };
 
   handleRegisterToggle = () => {
@@ -63,7 +65,12 @@ class LoginScreen extends Component {
         modalRegisterOpen: !this.state.modalRegisterOpen,
       });
     }
+    this.props.clearAuthErrors();
   };
+
+  displayErrors = (errors) => {
+    errors.map((error) => toast.error(error.message));
+  }
 
   render() {
     console.log(this.props);
@@ -72,8 +79,13 @@ class LoginScreen extends Component {
 
     if (redirectToReferrer) return <Redirect to={from} />;
 
+    if (this.props.signIn.errors) {
+      this.displayErrors(this.props.signIn.errors);
+    }
+
     return (
       <div className="login-screen">
+        <ToastContainer autoClose={1500} />
         <Container>
           <Row className="m-5">
             <Col md="12">

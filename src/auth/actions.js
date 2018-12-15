@@ -12,6 +12,7 @@ export const SIGNOUT = `${MODULE_NAME}/SIGNOUT`;
 export const SIGNOUT_SUCCESS = `${MODULE_NAME}/SIGNOUT_SUCCESS`;
 export const SIGNOUT_FAILURE = `${MODULE_NAME}/SIGNOUT_FAILURE`;
 
+export const CLEAR_AUTH_ERRORS = `${MODULE_NAME}/CLEAR_AUTH_ERRORS`;
 
 export function verifyUsernamePassword(username, password, rememberMe = false) {   // TODO - передавать rememberMe из LoginScreen
   return {
@@ -72,6 +73,12 @@ export function signOutFailure(response) {
   return {
     type: SIGNOUT_FAILURE,
     payload: { errors: response },
+  };
+}
+
+export function clearAuthErrors() {
+  return {
+    type: CLEAR_AUTH_ERRORS,
   };
 }
 
