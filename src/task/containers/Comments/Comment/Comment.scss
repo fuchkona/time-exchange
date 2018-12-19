@@ -1,0 +1,42 @@
+@import '../../../../base.scss';
+
+.comment {
+  border: solid 1px $grey;
+  margin: 5px;
+  padding: 5px;
+
+  &__body {
+    padding-bottom: 5px;
+  }
+
+  &__footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 12px;
+    font-style: italic;
+    font-weight: bold;
+
+    &_left {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+
+      & > div {
+        padding: 2px;
+      }
+    }
+
+    &_right {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+
+      & > div {
+        padding: 2px;
+        cursor: pointer;
+        color: $red;
+      }
+    }
+  }
+}

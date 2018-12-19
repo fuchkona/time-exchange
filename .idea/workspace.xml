@@ -1,0 +1,844 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="3ad4d4f1-dfc8-431f-bfca-76ea5d61f23d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/auth/actions.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/auth/epics.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/constants.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/errors/components/Error404/Error404.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/errors/components/Error404/Error404.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/global/components/LoadingAnimationMini/LoadingAnimationMini.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/global/components/LoadingAnimationMini/LoadingAnimationMini.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/global/components/TEDatetime/TEDatetime.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/global/components/TEDatetime/TEDatetime.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/global/components/TEPagination/TEPagination.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/global/components/TEPagination/TEPagination.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/global/components/WaitingModal/WaitingModal.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/global/components/WaitingModal/WaitingModal.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/actions.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/components/Filter/Filter.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/components/Filter/Filter.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/components/Filter/FilterItem/FilterItem.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/components/Filter/FilterItem/FilterItem.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/components/Sort/Sort.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/components/Sort/Sort.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/components/Sort/SortItem/SortItem.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/components/Sort/SortItem/SortItem.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/components/Task/Task.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/components/Task/Task.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/components/TaskScreen/TaskScreen.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/components/TaskScreen/TaskScreen.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/components/TaskScreen/TaskScreenModals/CreateRequest.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/components/TaskScreen/TaskScreenModals/CreateRequest.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/containers/Layout/Layout.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/containers/Layout/LayoutModals/CreateTask.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/containers/Layout/LayoutModals/CreateTask.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/containers/TaskScreen.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/epics.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/profile/actions.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/profile/components/ProfileInfo/ProfileInfo.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/profile/components/ProfileInfo/ProfileInfo.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/profile/components/ProfileScreen/ProfileScreen.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/profile/components/ProfileScreen/ProfileScreen.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/profile/components/UserInfo/UserInfo.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/profile/components/UserInfo/UserScreen.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/profile/components/UserScreen/UserScreen.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/profile/components/UserScreen/UserScreen.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/profile/containers/ProfileScreen.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/profile/containers/UserScreen.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/profile/epics.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/profile/redux.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/static/hands_PNG929.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/task/containers/Comments/Comment/Comment.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/task/containers/Comments/Comment/Comment.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/task/containers/Comments/Comments.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/task/containers/Comments/CreateComment/CreateComment.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/task/containers/Comments/CreateComment/CreateComment.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/task/containers/Files/File/File.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/task/containers/Files/Files.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/task/containers/Files/Files.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/task/containers/Requests/Request/Request.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/task/containers/Requests/Request/Request.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/task/containers/Requests/Requests.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/task/containers/Requests/Requests.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/task/redux/Comments/actions.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/task/redux/Comments/epics.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/task/redux/Comments/redux.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/task/redux/Files/actions.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/task/redux/Files/epics.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/task/redux/Files/redux.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/task/redux/Requests/actions.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/task/redux/Requests/epics.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/task/redux/Requests/redux.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auth/components/LoginScreen/LoginScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/components/LoginScreen/LoginScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auth/components/LoginScreen/LoginScreenModals/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/components/LoginScreen/LoginScreenModals/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auth/components/LoginScreen/LoginScreenModals/Register.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/components/LoginScreen/LoginScreenModals/Register.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auth/containers/LoginScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/containers/LoginScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auth/redux.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/redux.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/base.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/components/BriefTask/BriefTask.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/components/BriefTask/BriefTask.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/components/BriefTask/BriefTask.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/components/BriefTask/BriefTask.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/components/ProfileScreen/ProfileScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/components/ProfileScreen/ProfileScreen.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/components/TasksScreen/TasksScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/components/TasksScreen/TasksScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/components/TasksScreen/TasksScreen.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/components/TasksScreen/TasksScreen.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/containers/Layout/Layout.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/containers/Layout/Layout.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/containers/ProfileScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/containers/TasksScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/containers/TasksScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/redux.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/redux.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rxjs.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/task/containers/Comments/Comments.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/task/containers/Comments/Comments.scss" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/node_modules/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/components/TasksScreen/TasksScreen.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="15" column="1" lean-forward="true" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/containers/TasksScreen.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="16" column="9" lean-forward="true" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
+              <folding>
+                <element signature="e#0#38#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/redux.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="89" column="17" selection-start-line="89" selection-start-column="17" selection-end-line="89" selection-end-column="17" />
+              <folding>
+                <element signature="e#0#40#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/task/containers/Comments/Comments.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" selection-start-line="4" selection-end-line="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/containers/Layout/Layout.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="432">
+              <caret line="59" column="5" lean-forward="true" selection-start-line="59" selection-start-column="5" selection-end-line="59" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/auth/components/LoginScreen/LoginScreen.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="510">
+              <caret line="148" column="19" lean-forward="true" selection-start-line="148" selection-start-column="19" selection-end-line="148" selection-end-column="19" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/components/BriefTask/BriefTask.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="100" column="18" lean-forward="true" selection-start-line="100" selection-start-column="18" selection-end-line="100" selection-end-column="18" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/auth/containers/LoginScreen.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" column="15" selection-start-line="3" selection-start-column="15" selection-end-line="3" selection-end-column="15" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/components/BriefTask/BriefTask.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="245">
+              <caret line="46" column="26" lean-forward="true" selection-start-line="46" selection-start-column="26" selection-end-line="46" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/components/TasksScreen/TasksScreen.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-102">
+              <caret line="12" column="28" lean-forward="true" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>&lt;&lt;&lt;&lt;</find>
+      <find>&lt;&lt;&lt;</find>
+      <find>sort</find>
+      <find>Sort</find>
+      <find>.tasks-screen</find>
+    </findStrings>
+    <dirStrings>
+      <dir>D:\PHPprojects\time-exchange\src</dir>
+      <dir>D:\PHPprojects\time-exchange\node_modules</dir>
+      <dir>D:\PHPprojects\time-exchange</dir>
+    </dirStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/package-lock.json" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/src/global/components/LoadingAnimation/LoadinAnimation.js" />
+        <option value="$PROJECT_DIR$/src/global/components/LoadingAnimation/LoadingAnimation.scss" />
+        <option value="$PROJECT_DIR$/src/redux.js" />
+        <option value="$PROJECT_DIR$/src/task/containers/Comments/Comments.scss" />
+        <option value="$PROJECT_DIR$/src/profile/components/UserScreen/UserScreen.js" />
+        <option value="$PROJECT_DIR$/src/main/containers/Layout/LayoutModals/CreateTask.js" />
+        <option value="$PROJECT_DIR$/src/main/containers/TaskScreen.js" />
+        <option value="$PROJECT_DIR$/src/main/containers/TasksScreen.js" />
+        <option value="$PROJECT_DIR$/src/main/redux.js" />
+        <option value="$PROJECT_DIR$/src/main/containers/Layout/Layout.js" />
+        <option value="$PROJECT_DIR$/src/main/components/Sort/SortItem/SortItem.js" />
+        <option value="$PROJECT_DIR$/src/profile/components/ProfileScreen/ProfileScreen.js" />
+        <option value="$PROJECT_DIR$/src/main/components/Task/Task.js" />
+        <option value="$PROJECT_DIR$/src/task/containers/Requests/Request/Request.js" />
+        <option value="$PROJECT_DIR$/src/task/containers/Requests/Requests.js" />
+        <option value="$PROJECT_DIR$/src/task/containers/Comments/Comments.js" />
+        <option value="$PROJECT_DIR$/src/errors/components/Error404/Error404.js" />
+        <option value="$PROJECT_DIR$/src/main/components/Filter/Filter.js" />
+        <option value="$PROJECT_DIR$/src/main/components/TaskScreen/TaskScreen.js" />
+        <option value="$PROJECT_DIR$/src/auth/components/LoginScreen/LoginScreenModals/Login.js" />
+        <option value="$PROJECT_DIR$/src/main/components/TaskScreen/TaskScreenModals/CreateRequest.js" />
+        <option value="$PROJECT_DIR$/src/auth/components/LoginScreen/LoginScreenModals/Register.js" />
+        <option value="$PROJECT_DIR$/src/main/components/Sort/Sort.js" />
+        <option value="$PROJECT_DIR$/src/global/components/LoadingAnimationMini/LoadingAnimationMini.scss" />
+        <option value="$PROJECT_DIR$/src/task/redux/Comments/epics.js" />
+        <option value="$PROJECT_DIR$/src/auth/redux.js" />
+        <option value="$PROJECT_DIR$/src/main/components/BriefTask/BriefTask.js" />
+        <option value="$PROJECT_DIR$/src/auth/containers/LoginScreen.js" />
+        <option value="$PROJECT_DIR$/src/auth/components/LoginScreen/LoginScreen.js" />
+        <option value="$PROJECT_DIR$/src/main/components/BriefTask/BriefTask.scss" />
+        <option value="$PROJECT_DIR$/src/main/components/TasksScreen/TasksScreen.js" />
+        <option value="$PROJECT_DIR$/src/main/components/TasksScreen/TasksScreen.scss" />
+        <option value="$PROJECT_DIR$/src/main/containers/Layout/Layout.scss" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-7" />
+    <option name="y" value="2" />
+    <option name="width" value="2572" />
+    <option name="height" value="1045" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="time-exchange" type="b2602c69:ProjectViewProjectNode" />
+              <item name="time-exchange" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="time-exchange" type="b2602c69:ProjectViewProjectNode" />
+              <item name="time-exchange" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="time-exchange" type="b2602c69:ProjectViewProjectNode" />
+              <item name="time-exchange" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="auth" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="time-exchange" type="b2602c69:ProjectViewProjectNode" />
+              <item name="time-exchange" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="auth" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="time-exchange" type="b2602c69:ProjectViewProjectNode" />
+              <item name="time-exchange" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="auth" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="LoginScreen" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="time-exchange" type="b2602c69:ProjectViewProjectNode" />
+              <item name="time-exchange" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="auth" type="462c0819:PsiDirectoryNode" />
+              <item name="containers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="time-exchange" type="b2602c69:ProjectViewProjectNode" />
+              <item name="time-exchange" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="time-exchange" type="b2602c69:ProjectViewProjectNode" />
+              <item name="time-exchange" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="containers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="time-exchange" type="b2602c69:ProjectViewProjectNode" />
+              <item name="time-exchange" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="containers" type="462c0819:PsiDirectoryNode" />
+              <item name="Layout" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="time-exchange" type="b2602c69:ProjectViewProjectNode" />
+              <item name="time-exchange" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="profile" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="time-exchange" type="b2602c69:ProjectViewProjectNode" />
+              <item name="time-exchange" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="profile" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="time-exchange" type="b2602c69:ProjectViewProjectNode" />
+              <item name="time-exchange" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="profile" type="462c0819:PsiDirectoryNode" />
+              <item name="containers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="time-exchange" type="b2602c69:ProjectViewProjectNode" />
+              <item name="time-exchange" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="task" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="time-exchange" type="b2602c69:ProjectViewProjectNode" />
+              <item name="time-exchange" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="task" type="462c0819:PsiDirectoryNode" />
+              <item name="containers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="time-exchange" type="b2602c69:ProjectViewProjectNode" />
+              <item name="time-exchange" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="task" type="462c0819:PsiDirectoryNode" />
+              <item name="containers" type="462c0819:PsiDirectoryNode" />
+              <item name="Comments" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="D:\PHPprojects\time-exchange\node_modules\eslint" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\PhpStorm 2018.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3ad4d4f1-dfc8-431f-bfca-76ea5d61f23d" name="Default Changelist" comment="" />
+      <created>1545129462745</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1545129462745</updated>
+      <workItem from="1545129464046" duration="869000" />
+      <workItem from="1545226386665" duration="3463000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="4332000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-7" y="2" width="2572" height="1045" extended-state="0" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25199044" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="npm" order="2" side_tool="true" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="TypeScript" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Database Changes" order="9" />
+      <window_info anchor="bottom" id="Migrations" order="10" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="12" visible="true" weight="0.32894737" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/package-lock.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/global/components/LoadingAnimation/LoadingAnimation.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="500">
+          <caret line="106" column="1" selection-start-line="106" selection-start-column="1" selection-end-line="106" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/redux.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="39" selection-start-line="39" selection-end-line="39" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/task/containers/Comments/CreateComment/CreateComment.scss">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/task/containers/Comments/CreateComment/CreateComment.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/task/containers/Comments/Comment/Comment.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/task/containers/Comments/Comment/Comment.scss">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/react-dropzone/typings/react-dropzone.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="431">
+          <caret line="51" column="21" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/task/containers/Files/Files.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-78" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/global/components/LoadingAnimation/LoadingAnimation.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/profile/components/UserScreen/UserScreen.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="42" lean-forward="true" selection-start-line="12" selection-start-column="42" selection-end-line="12" selection-end-column="42" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/profile/components/UserScreen/UserScreen.scss">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/profile/components/UserInfo/UserInfo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/profile/components/UserInfo/UserScreen.scss">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/containers/Layout/LayoutModals/CreateTask.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1649">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/components/Filter/FilterItem/FilterItem.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/components/Filter/FilterItem/FilterItem.scss">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/components/Filter/Filter.scss">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="19" lean-forward="true" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/containers/TaskScreen.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="37" lean-forward="true" selection-start-line="19" selection-start-column="37" selection-end-line="19" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/containers/Layout/Layout.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="130" column="1" lean-forward="true" selection-start-line="130" selection-start-column="1" selection-end-line="130" selection-end-column="1" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/components/Sort/SortItem/SortItem.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="20" lean-forward="true" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/task/containers/Files/Files.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-697">
+          <caret line="1" column="10" selection-start-line="1" selection-start-column="10" selection-end-line="1" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/profile/components/ProfileScreen/ProfileScreen.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/components/Task/Task.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/task/containers/Requests/Request/Request.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/task/containers/Requests/Requests.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="45" selection-start-line="45" selection-end-line="45" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/task/containers/Comments/Comments.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="45" selection-start-line="45" selection-end-line="45" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/errors/components/Error404/Error404.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-119">
+          <caret line="8" column="21" lean-forward="true" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/components/Filter/Filter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="24" selection-start-line="1" selection-start-column="24" selection-end-line="1" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/components/TaskScreen/TaskScreen.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/components/TaskScreen/TaskScreenModals/CreateRequest.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/auth/components/LoginScreen/LoginScreenModals/Login.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/auth/components/LoginScreen/LoginScreenModals/Register.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/components/Sort/Sort.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="4" lean-forward="true" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rxjs.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="5" lean-forward="true" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/global/components/LoadingAnimationMini/LoadingAnimationMini.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="23" lean-forward="true" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/task/redux/Comments/epics.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="115" column="8" lean-forward="true" selection-start-line="115" selection-start-column="8" selection-end-line="115" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#48#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/auth/redux.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="100" column="8" lean-forward="true" selection-start-line="100" selection-start-column="8" selection-end-line="100" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/components/BriefTask/BriefTask.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="100" column="18" lean-forward="true" selection-start-line="100" selection-start-column="18" selection-end-line="100" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/auth/components/LoginScreen/LoginScreen.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="148" column="19" lean-forward="true" selection-start-line="148" selection-start-column="19" selection-end-line="148" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/auth/containers/LoginScreen.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="15" selection-start-line="3" selection-start-column="15" selection-end-line="3" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/components/ProfileScreen/ProfileScreen.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="7" lean-forward="true" selection-start-line="7" selection-start-column="7" selection-end-line="7" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/components/BriefTask/BriefTask.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="46" column="26" lean-forward="true" selection-start-line="46" selection-start-column="26" selection-end-line="46" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/components/TasksScreen/TasksScreen.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-102">
+          <caret line="12" column="28" lean-forward="true" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/components/TasksScreen/TasksScreen.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="1" lean-forward="true" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/containers/Layout/Layout.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="59" column="5" lean-forward="true" selection-start-line="59" selection-start-column="5" selection-end-line="59" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/containers/TasksScreen.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="9" lean-forward="true" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/redux.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="89" column="17" selection-start-line="89" selection-start-column="17" selection-end-line="89" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/task/containers/Comments/Comments.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

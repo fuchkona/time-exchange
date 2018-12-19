@@ -1,0 +1,73 @@
+@import '../../../base.scss';
+
+.task-screen {
+  padding: 20px;
+  width: 100%;
+
+  &__task_header {
+    font-weight: 600;
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+    & > div {
+      margin-left: 8px;
+      margin-right: 8px;
+    }
+  }
+
+  &__task_footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+
+    & > div:last-child {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+    }
+  }
+
+  &__task {
+    min-height: 200px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    background-color: white;
+  }
+
+  &__comments {
+    min-height: 300px;
+    // box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    font-size: 14px;
+    background-color: $lightGrey;
+
+    &_title {
+      font-size: 22px;
+      font-weight: 600;
+    }
+  }
+
+  &__files {
+    position: relative;
+    min-height: 150px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    background-color: white;
+
+    &_title {
+      font-size: 22px;
+      font-weight: 600;
+    }
+  }
+
+  &__requests {
+    min-height: 200px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    background-color: white;
+
+    &_title {
+      font-size: 22px;
+      font-weight: 600;
+    }
+  }
+}

@@ -15,8 +15,16 @@ import { rootReducer, rootEpic } from './redux';
 import PrivateRoute from './PrivateRoute';
 import LoginScreen from './auth/containers/LoginScreen';
 import TasksScreen from './main/containers/TasksScreen';
-import ProfileScreen from './main/containers/ProfileScreen';
+import TaskScreen from './main/containers/TaskScreen';
+import ProfileScreen from './profile/containers/ProfileScreen';
+import Error404 from "./errors/components/Error404/Error404";
+import moment from 'moment';
+import 'moment/locale/ru';
+import UserScreen from "./profile/containers/UserScreen";
 
+
+
+moment().locale('ru');
 const epicMiddleware = createEpicMiddleware();
 
 const composeEnhancers = (
@@ -41,8 +49,11 @@ class App extends Component {
         <Router>
           <Switch>
             <PrivateRoute path="/" exact component={TasksScreen} />
+            <PrivateRoute path="/task/:id" exact component={TaskScreen} />
             <PrivateRoute path="/profile" exact component={ProfileScreen} />
+            <PrivateRoute path="/user/:id" exact component={UserScreen}/>
             <Route path="/login" component={LoginScreen} />
+            <Route path="*" component={ Error404 }/>
           </Switch>
         </Router>
       </Provider>

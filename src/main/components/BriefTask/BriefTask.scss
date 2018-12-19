@@ -1,0 +1,62 @@
+@import '../../../base.scss';
+
+.brief-task {
+
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+  &__header {
+    background-color: lighten($blue, $amount: 60%);
+    font-weight: 600;
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    &_info {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+
+      & > div {
+        margin-left: 8px;
+        margin-right: 8px;
+      }
+    }
+
+  }
+
+  &__footer {
+    font-style: italic;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    &_info {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+
+      & > div {
+        margin-left: 8px;
+        margin-right: 8px;
+      }
+    }
+
+    &_controls {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+
+      & > div {
+        margin-left: 8px;
+        margin-right: 8px;
+        cursor: pointer;
+
+        & > span {
+          color: $red;
+        }
+      }
+    }
+  }
+
+}

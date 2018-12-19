@@ -1,0 +1,26 @@
+@import '../../../base.scss';
+
+.profile-screen {
+  margin: 20px;
+  padding: 20px;
+  width: 100%;
+  background-color: $blue;
+  opacity: 0.90;
+  border-radius: 5px;
+
+  &__pagination{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 8px;
+  }
+
+  &__info {
+    background-color: $grey;
+  }
+
+  &__pagination_totals{
+    color: #ffffff;
+  }
+
+}
